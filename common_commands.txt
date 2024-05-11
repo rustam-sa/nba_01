@@ -1,0 +1,41 @@
+docker exec -it postgressCont psql -U postgres -d nba_01TRUNCATE TABLE alembic_version;
+
+
+Viewing Tables in a Database:
+
+\dt or \dt+: Lists all the tables in the current database. The plus sign (+) gives detailed information.
+Describing a Table Structure:
+
+\d table_name: Shows the structure of a specific table, including column details, types, and constraints.
+
+
+Selecting Data:
+
+SELECT * FROM table_name;: Fetches all rows from a table.
+SELECT column1, column2 FROM table_name;: Fetches specific columns from a table.
+
+Filtering Data:
+
+SELECT * FROM table_name WHERE condition;: Fetches rows that meet the condition.
+
+
+Joining Tables:
+
+SELECT * FROM table1 JOIN table2 ON table1.column = table2.column;: Combines rows from two tables based on a related column.
+
+
+Aggregating Data:
+
+SELECT COUNT(*), AVG(column) FROM table_name GROUP BY column;: Shows count and average grouped by a column.
+
+
+Limiting and Sorting:
+
+SELECT * FROM table_name ORDER BY column ASC LIMIT 10;: Fetches the top 10 rows sorted by a column in ascending order.
+
+
+SELECT *
+FROM employees
+WHERE age >= 30 AND (department = 'Sales' OR department = 'IT')
+AND salary IS NOT NULL
+ORDER BY age DESC;
