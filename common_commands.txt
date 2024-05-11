@@ -1,4 +1,4 @@
-docker exec -it postgressCont psql -U postgres -d nba_01TRUNCATE TABLE alembic_version;
+docker exec -it postgresCont psql -U postgres -d nba_01
 
 
 Viewing Tables in a Database:
