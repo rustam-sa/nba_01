@@ -75,6 +75,7 @@ class Game(Base):
     home_team = relationship("Team", foreign_keys=[home_team_id])
     away_team = relationship("Team", foreign_keys=[away_team_id])
     team_stats = relationship("TeamStats", back_populates="game")
+    game_stats = relationship("GameStats", back_populates="game")
 
 class GameStats(Base):
     __tablename__ = 'game_stats'
@@ -100,6 +101,7 @@ class GameStats(Base):
     ft_percentage = Column(Float)
     plus_minus = Column(Integer)
     player = relationship("Player", back_populates="stats")
+    game = relationship("Game", back_populates="game_stats")
 
 engine = get_database_engine()  
 Base.metadata.create_all(engine)

@@ -26,42 +26,6 @@ def get_games_from_db():
     return games
 
 
-def fetch_player_game_log(player_name):
-    engine = get_database_engine()
-    session = get_session()
-    
-    try:
-        # Find the player by name
-        player = session.query(Player).filter(Player.name == player_name).one_or_none()
-        
-        if not player:
-            print(f"No player found with the name {player_name}.")
-            return None
-
-        # Build a SQL query to fetch the game stats and the corresponding game date
-        # We join GameStats with Game on game_id to fetch the date of each game
-        # and filter by season_type and player_id
-        query = (
-            select(
-            GameStats,
-                Game.date.label('game_date')  # This labels the column as 'game_date'
-            )
-            .select_from(
-                join(GameStats, Game, GameStats.game_id == Game.id)
-            )
-            .where(GameStats.player_id == player.id)
-            .where(Game.season_type == season_type_filter)  # Filter by season_type
-        )
-
-        # Use pandas to directly load SQL results into DataFrame
-        df = pd.read_sql(query, engine)
-
-        return df
-
-    finally:
-        session.close()
-
-
 def get_players_filtered_by_team_playoff_participation(season, playoffs=False):# Assuming get_database_engine returns an engine
     session = get_session()
     season_type = "Regular Season" if not playoffs else "Playoffs"
