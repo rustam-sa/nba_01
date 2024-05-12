@@ -1,5 +1,6 @@
 import time
 import pandas as pd
+from nba_api.stats.endpoints import scoreboard
 from nba_api.stats.endpoints import playergamelog
 from nba_api.stats.endpoints import leaguegamefinder
 from nba_api.stats.library.parameters import SeasonAll
@@ -29,6 +30,17 @@ def get_season_start_and_end(season):
     end_date = games['GAME_DATE'].max()
     print(f"{season} season's first game: {start_date.date()}")
     print(f"The {season} season's last game: {end_date.date()}")
-    start_date = start_date.strftime('%Y-%m-%d')
-    end_date = end_date.strftime('%Y-%m-%d')
+    start_date = start_date.strftime("%m/%d/%Y")
+    end_date = end_date.strftime("%m/%d/%Y")
     return start_date, end_date
+
+
+
+
+def get_scoreboard(date):
+    scoreboard_info = scoreboard.Scoreboard(game_date='2024-05-12')
+    line_score = scoreboard_info.line_score.get_data_frame()
+
+    # Display the games on that day
+    print(line_score[['GAME_DATE_EST', 'GAME_SEQUENCE', 'TEAM_ABBREVIATION', 'PTS']])
+    return scoreboard_info, line_score

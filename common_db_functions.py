@@ -43,7 +43,7 @@ def fetch_player_game_log(player_name):
         # and filter by season_type and player_id
         query = (
             select(
-                GameStats,
+            GameStats,
                 Game.date.label('game_date')  # This labels the column as 'game_date'
             )
             .select_from(

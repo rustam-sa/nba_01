@@ -8,14 +8,14 @@ metadata = Base.metadata
 
 
 class Team(Base):
-        __tablename__ = 'teams'
-        id = Column(Integer, primary_key=True)
-        nickname = Column(String)  
-        city = Column(String)
-        state = Column(String)
-        full_name = Column(String)  
-        abbreviation = Column(String)  
-        players = relationship("Player", back_populates="team")
+    __tablename__ = 'teams'
+    id = Column(Integer, primary_key=True)
+    nickname = Column(String)  
+    city = Column(String)
+    state = Column(String)
+    full_name = Column(String)  
+    abbreviation = Column(String)  
+    players = relationship("Player", back_populates="team")
 
 class Player(Base):
     __tablename__ = 'players'

@@ -1,3 +1,4 @@
 *.log
 config.ini
 temp.ipynb
+data_pile/*

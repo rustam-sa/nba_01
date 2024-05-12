@@ -8,6 +8,7 @@ sqlalchemy = "*"
 nba-api = "*"
 psycopg2-binary = "*"
 pandas = "*"
+openpyxl = "*"
 
 [dev-packages]
 
