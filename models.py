@@ -10,6 +10,7 @@ metadata = Base.metadata
 class Team(Base):
     __tablename__ = 'teams'
     id = Column(Integer, primary_key=True)
+    nba_team_id = Column(Integer, unique=True, nullable=False)
     nickname = Column(String)  
     city = Column(String)
     state = Column(String)
@@ -20,6 +21,7 @@ class Team(Base):
 class Player(Base):
     __tablename__ = 'players'
     id = Column(Integer, primary_key=True)
+    nba_player_id = Column(Integer, unique=True, nullable=False)
     name = Column(String)
     nickname = Column(String)
     player_slug = Column(String)
@@ -31,7 +33,6 @@ class Player(Base):
     age = Column(Integer)
     experience = Column(String)
     school = Column(String)
-    player_id = Column(Integer, unique=True)
     how_acquired = Column(String)
     team_id = Column(Integer, ForeignKey('teams.id'))
     team = relationship("Team", back_populates="players")

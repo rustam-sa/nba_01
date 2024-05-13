@@ -1,0 +1,31 @@
+,id,nickname,city,state,full_name,abbreviation
+0,1610612737,Hawks,Atlanta,Georgia,Atlanta Hawks,ATL
+1,1610612738,Celtics,Boston,Massachusetts,Boston Celtics,BOS
+2,1610612739,Cavaliers,Cleveland,Ohio,Cleveland Cavaliers,CLE
+3,1610612740,Pelicans,New Orleans,Louisiana,New Orleans Pelicans,NOP
+4,1610612741,Bulls,Chicago,Illinois,Chicago Bulls,CHI
+5,1610612742,Mavericks,Dallas,Texas,Dallas Mavericks,DAL
+6,1610612743,Nuggets,Denver,Colorado,Denver Nuggets,DEN
+7,1610612744,Warriors,Golden State,California,Golden State Warriors,GSW
+8,1610612745,Rockets,Houston,Texas,Houston Rockets,HOU
+9,1610612746,Clippers,Los Angeles,California,Los Angeles Clippers,LAC
+10,1610612747,Lakers,Los Angeles,California,Los Angeles Lakers,LAL
+11,1610612748,Heat,Miami,Florida,Miami Heat,MIA
+12,1610612749,Bucks,Milwaukee,Wisconsin,Milwaukee Bucks,MIL
+13,1610612750,Timberwolves,Minnesota,Minnesota,Minnesota Timberwolves,MIN
+14,1610612751,Nets,Brooklyn,New York,Brooklyn Nets,BKN
+15,1610612752,Knicks,New York,New York,New York Knicks,NYK
+16,1610612753,Magic,Orlando,Florida,Orlando Magic,ORL
+17,1610612754,Pacers,Indiana,Indiana,Indiana Pacers,IND
+18,1610612755,76ers,Philadelphia,Pennsylvania,Philadelphia 76ers,PHI
+19,1610612756,Suns,Phoenix,Arizona,Phoenix Suns,PHX
+20,1610612757,Trail Blazers,Portland,Oregon,Portland Trail Blazers,POR
+21,1610612758,Kings,Sacramento,California,Sacramento Kings,SAC
+22,1610612759,Spurs,San Antonio,Texas,San Antonio Spurs,SAS
+23,1610612760,Thunder,Oklahoma City,Oklahoma,Oklahoma City Thunder,OKC
+24,1610612761,Raptors,Toronto,Ontario,Toronto Raptors,TOR
+25,1610612762,Jazz,Utah,Utah,Utah Jazz,UTA
+26,1610612763,Grizzlies,Memphis,Tennessee,Memphis Grizzlies,MEM
+27,1610612764,Wizards,Washington,District of Columbia,Washington Wizards,WAS
+28,1610612765,Pistons,Detroit,Michigan,Detroit Pistons,DET
+29,1610612766,Hornets,Charlotte,North Carolina,Charlotte Hornets,CHA
