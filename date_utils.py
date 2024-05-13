@@ -11,3 +11,6 @@ def get_todays_date():
 
 def format_date(date_obj):
         return date_obj.strftime("%m/%d/%Y")
+
+def subtract_days(date, n):
+    return date - timedelta(days=n)

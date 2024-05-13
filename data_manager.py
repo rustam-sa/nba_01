@@ -1,3 +1,4 @@
+import time
 import pandas as pd
 from functools import wraps
 from sqlalchemy.orm import sessionmaker
@@ -5,10 +6,13 @@ from sqlalchemy.exc import SQLAlchemyError
 from sqlalchemy import func
 from sqlalchemy.orm import joinedload
 from sqlalchemy.dialects.postgresql import insert
+from requests.exceptions import HTTPError
 from datetime import datetime
 from nba_api.stats.static import teams
 from nba_api.stats.endpoints import playergamelog
 from nba_api.stats.endpoints import leaguegamefinder
+from nba_api.stats.endpoints import commonteamroster
+
 import date_utils as date_mng
 from models import Team, Player, Game, GameStats, TeamStats
 from db_config import get_database_engine, get_session
@@ -266,3 +270,32 @@ class DataManager:
     @session_management
     def query_player_game_stats(self, session):
         pass
+
+    def pull_players(self):
+        teams = self.query_teams()
+        rosters = []
+        for team in teams:
+            retries = 3
+            for attempt in range(retries):
+                try:
+                    roster = commonteamroster.CommonTeamRoster(team_id=team.nba_team_id)
+                    roster_df = roster.get_data_frames()[0]
+                        
+                except HTTPError as e:
+                    if e.response.status_code == 429:
+                        wait = (attempt + 1) * 2  # Exponential back-off
+                        print(f"Rate limit hit, retrying in {wait} seconds...")
+                        time.sleep(wait)
+                    else:
+                        print(f"HTTP error occurred: {e}")
+                        break
+                except Exception as e:
+                    print(f"An error occurred: {e}")
+                    break
+
+                roster_df["db_team_id"] = team.id
+                rosters.append(roster_df)
+
+        rosters = self.pull_players()
+        players = pd.concat(rosters, axis=0, ignore_index=True)
+        return players

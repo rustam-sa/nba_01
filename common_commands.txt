@@ -1,4 +1,4 @@
-docker exec -it postgresCont psql -U postgres -d nba_01
+qdocker exec -it postgresCont psql -U postgres -d nba_01
 
 
 Viewing Tables in a Database:
