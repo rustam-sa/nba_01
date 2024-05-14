@@ -22,12 +22,16 @@ from db_config import get_database_engine, get_session
 
 class DataManager:
     def __init__(self):
-        self.sync_all_team_and_player_records()
         self.nba_team_id_map, self.nba_player_id_map = self.create_id_maps()
         self.db_team_id_map = {v: k for k, v in self.nba_team_id_map.items()}
         self.db_player_id_map = {v: k for k, v in self.nba_player_id_map.items()}
 
-    def get_session(self):
+    @staticmethod
+    def get_engine():
+        return get_database_engine()
+    
+    @staticmethod
+    def get_session():
         return get_session()
 
     @staticmethod
@@ -116,6 +120,7 @@ class DataManager:
 
         insert_stmt = insert(Player).values(
             nba_player_id=player["PLAYER_ID"],
+            team_id = self.db_team_id_map[player['TeamID']],
             name=player['PLAYER'],
             nickname=player["NICKNAME"],
             player_slug=player['PLAYER_SLUG'],
@@ -133,6 +138,7 @@ class DataManager:
         do_update_stmt = insert_stmt.on_conflict_do_update(
             index_elements=['nba_player_id'],
             set_={
+                'team_id': self.db_team_id_map[player['TeamID']],
                 'name': player['PLAYER'],
                 'nickname': player["NICKNAME"],
                 'player_slug': player['PLAYER_SLUG'],
@@ -704,3 +710,11 @@ class DataManager:
             self.sync_trad_player_stats(trad_player_stats=trad_player_stats, db_game_id=db_game_id)
             self.sync_adv_player_stats(adv_player_stats=adv_player_stats, db_game_id=db_game_id)
         
+    @session_management
+    def query_games(self, session):
+        return session.query(Game).all()
+    
+    @session_management
+    def query_advanced_player_stats(self, session):
+        return session.query(AdvPlayerStats).all()
+
