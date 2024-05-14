@@ -1,7 +1,6 @@
 import time
 import pandas as pd
 from functools import wraps
-from sqlalchemy.orm import sessionmaker
 from sqlalchemy.exc import SQLAlchemyError
 from sqlalchemy import func
 from sqlalchemy.orm import joinedload
@@ -12,6 +11,9 @@ from nba_api.stats.static import teams
 from nba_api.stats.endpoints import playergamelog
 from nba_api.stats.endpoints import leaguegamefinder
 from nba_api.stats.endpoints import commonteamroster
+from nba_api.stats.endpoints import boxscoresummaryv2
+from nba_api.stats.endpoints import boxscoretraditionalv2
+from nba_api.stats.endpoints import boxscoreadvancedv2
 
 import date_utils as date_mng
 from models import Team, Player, Game, GameStats, TeamStats
@@ -343,3 +345,134 @@ class DataManager:
 
         session.execute(do_update_stmt)
         session.commit()
+
+    @staticmethod
+    def pull_game_advanced_stats():
+        pass
+
+    @staticmethod
+    def pull_games_by_team_and_season(team, season, season_type):
+        try:
+            gamefinder = leaguegamefinder.LeagueGameFinder(team_id_nullable=team.nba_team_id, season_nullable=season, season_type_nullable=season_type)
+            games_df = gamefinder.get_data_frames()[0]
+            return games_df
+
+        except Exception as e:
+            print(f"An error occurred: {e}")
+            print(gamefinder.get_json())
+
+    # @session_management
+    # xdef update_team_game_records(self, session, games):
+    #     for index, row in games.iterrows():
+    #         game_date = datetime.strptime(row['GAME_DATE'], '%Y-%m-%d')
+
+    #         # Upsert Game
+    #         insert_stmt = insert(Game).values(
+    #             nba_game_id = row["NBA_GAME_ID"],
+    #             date=game_date,
+    #             season=row['SEASON'],
+    #             season_type=row["SEASON_TYPE"],
+    #             home_team_id= row['TEAM_ID']if 'vs.' in row['MATCHUP'] else None,
+    #             away_team_id=row['TEAM_ID'] if '@' in row['MATCHUP'] else None
+    #         )
+
+    #         do_update_stmt = insert_stmt.on_conflict_do_update(
+    #             index_elements=['nba_game_id'],
+    #             set_={
+    #                 'date': game_date,
+    #                 'season': row['SEASON'],
+    #                 'season_type': row["SEASON_TYPE"],
+    #                 'home_team_id': row['TEAM_ID'] if 'vs.' in row['MATCHUP'] else None,
+    #                 'away_team_id': row['TEAM_ID'] if '@' in row['MATCHUP'] else None
+    #             }
+    #         )
+
+    #         result = session.execute(do_update_stmt)
+        
+    #         # If the game already exists, get its ID
+    #         game_id = result.inserted_primary_key[0] if result.is_insert else session.query(Game).filter_by(
+    #             date=game_date,
+    #             season=row['SEASON'],
+    #             season_type=row["SEASON_TYPE"],
+    #             home_team_id=row['TEAM_ID'] if 'vs.' in row['MATCHUP'] else None,
+    #             away_team_id=row['TEAM_ID'] if '@' in row['MATCHUP'] else None
+    #         ).first().id
+
+    #         # Upsert TeamStats
+    #         insert_stmt = insert(TeamStats).values(
+    #             game_id=game_id,
+    #             points=row['PTS'],
+    #             field_goals_made=row['FGM'],
+    #             field_goals_attempted=row['FGA'],
+    #             field_goal_percentage=row['FG_PCT'],
+    #             three_point_field_goals_made=row['FG3M'],
+    #             three_point_field_goals_attempted=row['FG3A'],
+    #             three_point_field_goal_percentage=row['FG3_PCT'],
+    #             free_throws_made=row['FTM'],
+    #             free_throws_attempted=row['FTA'],
+    #             free_throw_percentage=row['FT_PCT'],
+    #             offensive_rebounds=row['OREB'],
+    #             defensive_rebounds=row['DREB'],
+    #             total_rebounds=row['REB'],
+    #             assists=row['AST'],
+    #             steals=row['STL'],
+    #             blocks=row['BLK'],
+    #             turnovers=row['TOV'],
+    #             personal_fouls=row['PF'],
+    #             plus_minus=row['PLUS_MINUS']
+    #         )
+
+    #         do_update_stmt = insert_stmt.on_conflict_do_update(
+    #             index_elements=['game_id'],
+    #             set_={
+    #                 'points': row['PTS'],
+    #                 'field_goals_made': row['FGM'],
+    #                 'field_goals_attempted': row['FGA'],
+    #                 'field_goal_percentage': row['FG_PCT'],
+    #                 'three_point_field_goals_made': row['FG3M'],
+    #                 'three_point_field_goals_attempted': row['FG3A'],
+    #                 'three_point_field_goal_percentage': row['FG3_PCT'],
+    #                 'free_throws_made': row['FTM'],
+    #                 'free_throws_attempted': row['FTA'],
+    #                 'free_throw_percentage': row['FT_PCT'],
+    #                 'offensive_rebounds': row['OREB'],
+    #                 'defensive_rebounds': row['DREB'],
+    #                 'total_rebounds': row['REB'],
+    #                 'assists': row['AST'],
+    #                 'steals': row['STL'],
+    #                 'blocks': row['BLK'],
+    #                 'turnovers': row['TOV'],
+    #                 'personal_fouls': row['PF'],
+    #                 'plus_minus': row['PLUS_MINUS']
+    #             }
+    #         )
+
+    #         session.execute(do_update_stmt)
+
+    #     session.commit()
+    @staticmethod
+    def pull_game_summary(game_id):
+            game_summary = boxscoresummaryv2.BoxScoreSummaryV2(game_id=game_id)
+            game_summary_df = game_summary.game_summary.get_data_frame()
+            return game_summary_df
+
+    @staticmethod
+    def pull_traditional_stats_for_game(game_id):
+        boxscore_traditional = boxscoretraditionalv2.BoxScoreTraditionalV2(game_id=game_id)
+        
+        player_stats = boxscore_traditional.player_stats.get_data_frame()
+        team_stats = boxscore_traditional.team_stats.get_data_frame()
+        
+        return player_stats, team_stats
+    
+    @staticmethod
+    def pull_advanced_stats_for_game(game_id):
+
+        boxscore_advanced = boxscoreadvancedv2.BoxScoreAdvancedV2(game_id=game_id)
+        
+
+        player_stats = boxscore_advanced.player_stats.get_data_frame()
+        team_stats = boxscore_advanced.team_stats.get_data_frame()
+        
+        return player_stats, team_stats
+    

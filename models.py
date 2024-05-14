@@ -1,4 +1,4 @@
-from sqlalchemy import Column, Integer, String, ForeignKey, Date, Float
+from sqlalchemy import Column, Integer, String, ForeignKey, Date, Float, UniqueConstraint
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import relationship
 from db_config import get_database_engine
@@ -43,43 +43,53 @@ class TeamStats(Base):
     id = Column(Integer, primary_key=True)
     game_id = Column(Integer, ForeignKey('games.id'))
     team_id = Column(Integer, ForeignKey('teams.id'))
+    wl = Column(String)
     points = Column(Integer)
-    field_goals_made = Column(Integer)
-    field_goals_attempted = Column(Integer)
-    field_goal_percentage = Column(Float)
-    three_point_field_goals_made = Column(Integer)
-    three_point_field_goals_attempted = Column(Integer)
-    three_point_field_goal_percentage = Column(Float)
-    free_throws_made = Column(Integer)
-    free_throws_attempted = Column(Integer)
-    free_throw_percentage = Column(Float)
-    offensive_rebounds = Column(Integer)
-    defensive_rebounds = Column(Integer)
-    total_rebounds = Column(Integer)
-    assists = Column(Integer)
-    steals = Column(Integer)
-    blocks = Column(Integer)
-    turnovers = Column(Integer)
-    personal_fouls = Column(Integer)
+    fgm = Column(Integer)
+    fga = Column(Integer)
+    fg_pct = Column(Float)
+    fg3m = Column(Integer)
+    fg3a = Column(Integer)
+    fg3_pct = Column(Float)
+    ftm = Column(Integer)
+    fta = Column(Integer)
+    ft_pct = Column(Float)
+    oreb = Column(Integer)
+    dreb = Column(Integer)
+    reb = Column(Integer)
+    ast = Column(Integer)
+    stl = Column(Integer)
+    blk = Column(Integer)
+    tov = Column(Integer)
+    pf = Column(Integer)
     plus_minus = Column(Integer)
-    team = relationship("Team")
+    team = relationship("Team", back_populates="team_stats")
     game = relationship("Game", back_populates="team_stats")
+    __table_args__ = (
+        UniqueConstraint('game_id', 'team_id', name='_game_team_uc'),
+    )
 
 class Game(Base):
     __tablename__ = 'games'
     id = Column(Integer, primary_key=True)
+    nba_game_id = Column(Integer, unique=True, nullable=False)
+    nba_season_id = Column(Integer)
     date = Column(Date)
+    matchup = Column(String)
+    game_status_text = Column(String)
     season = Column(String)
     season_type = Column(String)
     home_team_id = Column(Integer, ForeignKey('teams.id'))
     away_team_id = Column(Integer, ForeignKey('teams.id'))
+    live_period = Column(Integer)
     home_team = relationship("Team", foreign_keys=[home_team_id])
     away_team = relationship("Team", foreign_keys=[away_team_id])
     team_stats = relationship("TeamStats", back_populates="game")
-    game_stats = relationship("GameStats", back_populates="game")
-
-class GameStats(Base):
-    __tablename__ = 'game_stats'
+    player_stats = relationship("PlayerStats", back_populates="game")
+    adv_team_stats = relationship("AdvTeamStats", back_populates="game")
+    adv_player_stats = relationship("AdvPlayerStats", back_populates="game")
+class PlayerStats(Base):
+    __tablename__ = 'player_stats'
     id = Column(Integer, primary_key=True)
     player_id = Column(Integer, ForeignKey('players.id'))
     game_id = Column(Integer, ForeignKey('games.id'))
@@ -101,8 +111,8 @@ class GameStats(Base):
     ft_attempts = Column(Integer)
     ft_percentage = Column(Float)
     plus_minus = Column(Integer)
-    player = relationship("Player", back_populates="stats")
-    game = relationship("Game", back_populates="game_stats")
+    player = relationship("Player", back_populates="player_stats")
+    game = relationship("Game", back_populates="player_stats")
 
 engine = get_database_engine()  
 Base.metadata.create_all(engine)
