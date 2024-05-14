@@ -221,10 +221,6 @@ class DataManager:
         nba_teams = teams.get_teams()
         return nba_teams
 
-
-
-        
-
     @session_management
     def update_team_record(self, session, team):
         insert_stmt = insert(Team).values(
@@ -254,7 +250,13 @@ class DataManager:
         teams = self.pull_teams()
         for team in teams:
             self.update_team_record(team)
-    
+
+    def update_all_player_records(self):
+        players = self.pull_players()
+        for _, player_row in players.iterrows():
+            player = player_row.to_dict()
+            self.update_player_record(player)
+        
     @session_management
     def query_players(self, session):
         return session.query(Player).all()
@@ -275,11 +277,12 @@ class DataManager:
         teams = self.query_teams()
         rosters = []
         for team in teams:
-            retries = 3
+            retries = 5
             for attempt in range(retries):
                 try:
                     roster = commonteamroster.CommonTeamRoster(team_id=team.nba_team_id)
                     roster_df = roster.get_data_frames()[0]
+                    time.sleep(0.5)
                         
                 except HTTPError as e:
                     if e.response.status_code == 429:
@@ -296,6 +299,47 @@ class DataManager:
                 roster_df["db_team_id"] = team.id
                 rosters.append(roster_df)
 
-        rosters = self.pull_players()
         players = pd.concat(rosters, axis=0, ignore_index=True)
         return players
+    
+    @session_management
+    def update_player_record(self, session, player):
+        if not isinstance(player, dict):
+            raise TypeError(f"Expected player to be a dictionary, got {type(player)} instead.")
+
+        insert_stmt = insert(Player).values(
+            nba_player_id=player["PLAYER_ID"],
+            name=player['PLAYER'],
+            nickname=player["NICKNAME"],
+            player_slug=player['PLAYER_SLUG'],
+            jersey_number=player['NUM'],
+            position=player['POSITION'],
+            height=player['HEIGHT'],
+            weight=player['WEIGHT'],
+            birth_date=player['BIRTH_DATE'],
+            age=player['AGE'],
+            experience=player['EXP'],
+            school=player['SCHOOL'],
+            how_acquired=player['HOW_ACQUIRED']
+        )
+
+        do_update_stmt = insert_stmt.on_conflict_do_update(
+            index_elements=['nba_player_id'],
+            set_={
+                'name': player['PLAYER'],
+                'nickname': player["NICKNAME"],
+                'player_slug': player['PLAYER_SLUG'],
+                'jersey_number': player['NUM'],
+                'position': player['POSITION'],
+                'height': player['HEIGHT'],
+                'weight': player['WEIGHT'],
+                'birth_date': player['BIRTH_DATE'],
+                'age': player['AGE'],
+                'experience': player['EXP'],
+                'school': player['SCHOOL'],
+                'how_acquired': player['HOW_ACQUIRED']
+            }
+        )
+
+        session.execute(do_update_stmt)
+        session.commit()
