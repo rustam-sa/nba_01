@@ -51,33 +51,33 @@ class DataManager:
         return nba_teams
 
     def pull_players(self):
-            teams = self.query_teams()
-            rosters = []
-            for team in teams:
-                retries = 5
-                for attempt in range(retries):
-                    try:
-                        roster = commonteamroster.CommonTeamRoster(team_id=team.nba_team_id)
-                        roster_df = roster.get_data_frames()[0]
-                        time.sleep(0.5)
-                            
-                    except HTTPError as e:
-                        if e.response.status_code == 429:
-                            wait = (attempt + 1) * 2  # Exponential back-off
-                            print(f"Rate limit hit, retrying in {wait} seconds...")
-                            time.sleep(wait)
-                        else:
-                            print(f"HTTP error occurred: {e}")
-                            break
-                    except Exception as e:
-                        print(f"An error occurred: {e}")
+        teams = self.query_teams()
+        rosters = []
+        for team in teams:
+            retries = 5
+            for attempt in range(retries):
+                try:
+                    roster = commonteamroster.CommonTeamRoster(team_id=team.nba_team_id)
+                    roster_df = roster.get_data_frames()[0]
+                    time.sleep(0.5)
+                        
+                except HTTPError as e:
+                    if e.response.status_code == 429:
+                        wait = (attempt + 1) * 2  # Exponential back-off
+                        print(f"Rate limit hit, retrying in {wait} seconds...")
+                        time.sleep(wait)
+                    else:
+                        print(f"HTTP error occurred: {e}")
                         break
+                except Exception as e:
+                    print(f"An error occurred: {e}")
+                    break
 
-                    roster_df["db_team_id"] = team.id
-                    rosters.append(roster_df)
+                roster_df["db_team_id"] = team.id
+                rosters.append(roster_df)
 
-            players = pd.concat(rosters, axis=0, ignore_index=True)
-            return players
+        players = pd.concat(rosters, axis=0, ignore_index=True)
+        return players
     
     @staticmethod
     def pull_games_by_team_and_season(team, season, season_type):
@@ -498,6 +498,8 @@ class DataManager:
         try:
             for _, stat_line in trad_player_stats.iterrows():
                 game_id = int(db_game_id)
+                if stat_line['PLAYER_ID'] not in self.db_player_id_map:
+                    continue
                 player_id = int(self.db_player_id_map[stat_line['PLAYER_ID']])
                 start_position = str(stat_line["START_POSITION"])
                 minutes = stat_line["MIN"].split(':')[0] 
@@ -598,6 +600,8 @@ class DataManager:
         try:
             for _, stat_line in adv_player_stats.iterrows():
                 game_id = int(db_game_id)
+                if stat_line['PLAYER_ID'] not in self.db_player_id_map:
+                    continue
                 player_id = int(self.db_player_id_map[stat_line['PLAYER_ID']])
                 minutes = float(stat_line["MIN"].split(':')[0])  # Extract the minutes part and convert to float
                 e_off_rating = float(stat_line["E_OFF_RATING"])
@@ -717,4 +721,10 @@ class DataManager:
     @session_management
     def query_advanced_player_stats(self, session):
         return session.query(AdvPlayerStats).all()
-
+    
+    @staticmethod
+    def convert_to_df(query_result, exclude_columns=['_sa_instance_state']):
+        if not query_result:
+            return pd.DataFrame()
+        data = [{key: value for key, value in vars(obj).items() if key not in exclude_columns} for obj in query_result]
+        return pd.DataFrame(data)

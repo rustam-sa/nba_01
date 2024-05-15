@@ -9,6 +9,10 @@ nba-api = "*"
 psycopg2-binary = "*"
 pandas = "*"
 openpyxl = "*"
+xgboost = "*"
+scikit-learn = "*"
+tensorflow = "*"
+optuna = "*"
 
 [dev-packages]
 
