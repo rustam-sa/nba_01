@@ -13,6 +13,9 @@ xgboost = "*"
 scikit-learn = "*"
 tensorflow = "*"
 optuna = "*"
+numpy = "*"
+scipy = "*"
+matplotlib = "*"
 
 [dev-packages]
 
