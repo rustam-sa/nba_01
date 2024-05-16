@@ -293,8 +293,11 @@ class DataManager:
             for _, stat_line in trad_team_stats.iterrows():
                 game_id = int(db_game_id)
                 team_id = int(self.db_team_id_map[stat_line['TEAM_ID']])
-                minutes = stat_line["MIN"].split(':')[0] 
-                minutes = float(minutes)
+                if stat_line["MIN"]:
+                    minutes = stat_line["MIN"].split(':')[0] 
+                    minutes = float(minutes)
+                else:
+                    minutes = 0
                 fgm = int(stat_line["FGM"])
                 fga = int(stat_line["FGA"])
                 fg_pct = float(stat_line["FG_PCT"])
