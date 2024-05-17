@@ -2,7 +2,7 @@ import time
 import pandas as pd
 from functools import wraps
 from sqlalchemy.exc import SQLAlchemyError
-from sqlalchemy import func
+from sqlalchemy import func, and_
 from sqlalchemy.orm import joinedload
 from sqlalchemy.dialects.postgresql import insert
 from requests.exceptions import HTTPError
@@ -84,6 +84,7 @@ class DataManager:
         try:
             gamefinder = leaguegamefinder.LeagueGameFinder(team_id_nullable=team.nba_team_id, season_nullable=season, season_type_nullable=season_type)
             games_df = gamefinder.get_data_frames()[0]
+            print(games_df)
             return games_df
 
         except Exception as e:
@@ -298,7 +299,8 @@ class DataManager:
                     minutes = float(minutes)
                 else:
                     minutes = 0
-                fgm = int(stat_line["FGM"])
+                print(stat_line)
+                fgm = 0 if stat_line['FGM'] is None else int(stat_line["FGM"])
                 fga = int(stat_line["FGA"])
                 fg_pct = float(stat_line["FG_PCT"])
                 fg3m = int(stat_line["FG3M"])
@@ -731,3 +733,55 @@ class DataManager:
             return pd.DataFrame()
         data = [{key: value for key, value in vars(obj).items() if key not in exclude_columns} for obj in query_result]
         return pd.DataFrame(data)
+    
+    @session_management
+    def get_player_id(self, session, player_name):
+        player = session.query(Player).filter(Player.name==player_name).all()[0]
+        player_id = player.id
+        return player_id
+    
+    @session_management
+    def get_and_save_player_data(self, session, player_id, player_name):
+        data = session.query(
+            Player,
+            TradPlayerStats,
+            AdvPlayerStats,
+            Game
+        ).join(Game, TradPlayerStats.game_id == Game.id)\
+        .join(Player, TradPlayerStats.player_id == Player.id)\
+        .join(AdvPlayerStats, and_(TradPlayerStats.game_id == AdvPlayerStats.game_id, 
+                                    TradPlayerStats.player_id == AdvPlayerStats.player_id))\
+        .filter(
+            (TradPlayerStats.player_id == player_id)# &
+            #  (Game.season_type == "Playoffs")
+        ).all()
+
+        # Convert the query result to a DataFrame
+        data_list = []
+        for player, trad_stats, adv_stats, game in data:
+            row = {
+                'player_name': player.name,
+                'player_position': player.position,
+                'minutes': trad_stats.minutes,
+                'points': trad_stats.pts,
+                'rebounds': trad_stats.reb,
+                'assists': trad_stats.ast,
+                'efg': adv_stats.efg_pct,
+                'fg3a': trad_stats.fg3a,
+                'fg3m': trad_stats.fg3m,
+                'fg3_pct': trad_stats.fg3_pct,
+                'fga': trad_stats.fga,
+                'fgm': trad_stats.fgm,
+                'fta': trad_stats.fta,
+                'ft_pct': trad_stats.ft_pct, 
+                'steals': trad_stats.stl,
+                'blocks': trad_stats.blk,
+                'date': game.date,
+
+            }
+            data_list.append(row)
+
+        data_df = pd.DataFrame(data_list)
+
+        data_df.to_csv(f"data_pile/{player_name}.csv")
+        return data_df
