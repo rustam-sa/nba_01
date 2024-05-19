@@ -973,6 +973,23 @@ class DataManager:
         data_df.to_csv(f"data_pile/{save_destination}.csv")
         return data_df
     
+    @staticmethod
+    def filter_props(analyzed_props, filter_players=None, n_props = 36):
+        print(len(analyzed_props))
+        analyzed_props = [prop for prop in analyzed_props if prop.ev > 0]
+        print(f"num of profitable props: {len(analyzed_props)}")
+        analyzed_props = pd.DataFrame.from_dict([prop.entry for prop in analyzed_props])
+        print(analyzed_props.head(5))
+        if filter_players:
+            for player in filter_players:
+                analyzed_props = analyzed_props[analyzed_props['PLAYER'] != player]
+        print(len(analyzed_props))
+        print(analyzed_props.head())
+        filtered_df = analyzed_props.sort_values(by="PROB", ascending=False).head(n_props)
+        filtered_df.to_csv(f"props_{date.today()}.csv")
+        return filtered_df
+
+
 class Prop:
     def __init__(self, name, team, stat, threshold, odds, bet_type):
         self.name = name
