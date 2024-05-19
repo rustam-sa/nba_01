@@ -1,5 +1,7 @@
 import time
+import itertools
 import pandas as pd
+from datetime import date
 from functools import wraps
 from sqlalchemy.exc import SQLAlchemyError
 from sqlalchemy import func, and_
@@ -15,6 +17,7 @@ from nba_api.stats.endpoints import boxscoresummaryv2
 from nba_api.stats.endpoints import boxscoretraditionalv2
 from nba_api.stats.endpoints import boxscoreadvancedv2
 
+import analyze
 import date_utils as date_mng
 from models import Team, Player, Game, TradTeamStats, AdvTeamStats, TradPlayerStats, AdvPlayerStats
 from db_config import get_database_engine, get_session
@@ -741,7 +744,7 @@ class DataManager:
         return player_id
     
     @session_management
-    def get_and_save_player_data(self, session, player_id, player_name):
+    def get_and_save_player_data(self, session, player_id, filename=None):
         data = session.query(
             Player,
             TradPlayerStats,
@@ -752,8 +755,8 @@ class DataManager:
         .join(AdvPlayerStats, and_(TradPlayerStats.game_id == AdvPlayerStats.game_id, 
                                     TradPlayerStats.player_id == AdvPlayerStats.player_id))\
         .filter(
-            (TradPlayerStats.player_id == player_id)# &
-            #  (Game.season_type == "Playoffs")
+            (TradPlayerStats.player_id == player_id) #&
+            #(Game.season_type == season_type)
         ).all()
 
         # Convert the query result to a DataFrame
@@ -782,6 +785,251 @@ class DataManager:
             data_list.append(row)
 
         data_df = pd.DataFrame(data_list)
-
-        data_df.to_csv(f"data_pile/{player_name}.csv")
+        data_df = data_df.sort_values(by="date", ascending=False)
+        save_destination = player.name if not filename else filename
+        data_df.to_csv(f"data_pile/{save_destination}.csv")
         return data_df
+    
+    @staticmethod
+    def extract_raw_data(file_path): # .csv
+    # gets input from A1
+    # Sample input text (use the content of your file here)
+        raw_input = pd.read_csv(file_path)
+        list_of_raw_input = list(raw_input.iloc[:, 0])
+        return list_of_raw_input
+    
+    def load_available_props(self): # hardrock bet 
+        raw_input = self.extract_raw_data("prop_lines/prop_lines.csv")
+        print("Received raw input.")
+        stat_names = {
+                 'PointsSGP': "points",
+                'AssistsSGP': "assists",
+            'Threes MadeSGP': "fg3m",
+               'ReboundsSGP': "rebounds",
+       'Field Goals MadeSGP': "fgm",
+                 'StealsSGP': "steals",
+                 'BlocksSGP': "blocks",
+            }
+        #debug stat_name_inputs = extract_raw_data("prop_lines/player_prop_categories.csv")
+        players = self.query_players()
+        player_names = [player.name for player in players]
+        teams = self.query_teams()
+        team_names = [team.nickname for team in teams]
+        row_of_interest = 0
+        current_category = None
+        current_player = None
+        current_team = None
+        records = []
+        for _, item in enumerate(raw_input):
+            if item is None: 
+                continue
+            if item in stat_names:
+                current_category = stat_names[item]
+                print(f"Loading {current_category} props.")
+            if item != current_team:
+                if item in team_names:
+                    current_team = item
+            if item in player_names:
+                current_player = item 
+                assert current_team
+                record = [current_player, current_team, current_category]
+                row_of_interest = 6
+
+
+            if row_of_interest:
+                row_of_interest -= 1
+                if row_of_interest < 5:
+                    record.append(item)
+                    if row_of_interest == 1:
+                        records.append(record)
+                        record = []
+        df = pd.DataFrame.from_records(records, columns=["player_name", "team", "stat", "over_threshold", "over_odds", "under_threshold", "under_odds"])
+        
+        df['player_name'] = df['player_name'].astype(str)
+        df['team'] = df['team'].astype(str)
+        df['stat'] = df['stat'].astype(str)
+        df['over_threshold'] = df['over_threshold'].str.extract(r'(\d+\.\d+)').astype(float)
+        df['under_threshold'] = df['under_threshold'].str.extract(r'(\d+\.\d+)').astype(float)
+        df['over_odds'] = df['over_odds'].astype(int)
+        df['under_odds'] = df['under_odds'].astype(int)
+        print(df)
+        return df
+    
+    def get_analyzed_props(self):
+
+        available_props = self.load_available_props()
+        props = []
+        for _, row in available_props.iterrows():
+            print(row)
+            for bet_type in ["over", "under"]:
+                prop = Prop(
+                        name=row["player_name"], 
+                        team=row["team"],
+                        stat=row["stat"], 
+                    threshold=row[f"{bet_type}_threshold"], 
+                        odds=row[f"{bet_type}_odds"], 
+                    bet_type=bet_type
+                    )
+                props.append(prop)    
+                print("Prop object created.")
+
+        return props
+    
+    def generate_heterogenous_combinations(df, n):
+
+        # Generate all combinations of n rows
+        combinations = list(itertools.combinations(df.index, n))
+
+        # Function to evaluate heterogeneity of a combination
+        def evaluate_heterogeneity(comb, df):
+            comb_list = list(comb)
+            players = df.loc[comb_list, 'PLAYER']
+            stats = df.loc[comb_list, 'STAT']
+            teams = df.loc[comb_list, 'TEAM']
+            # Calculate a simple heterogeneity score (you can define your own logic)
+            player_score = len(set(players))
+            stat_score = len(set(stats))
+            team_score = len(set(teams))
+            return player_score + stat_score + team_score
+
+        # Evaluate all combinations and sort them by heterogeneity score
+        comb_scores = [(comb, evaluate_heterogeneity(comb, df)) for comb in combinations]
+        comb_scores_sorted = sorted(comb_scores, key=lambda x: x[1], reverse=True)
+
+        # Select the most heterogeneous combinations (you can define how many you want)
+        top_combinations = comb_scores_sorted # Top 5 combinations for example
+
+        # Display the most heterogeneous combinations
+        for comb, score in top_combinations:
+            print(f"Combination: {comb}, Score: {score}")
+            print(df.loc[list(comb)])
+            print()
+
+        # Optional: Convert combinations to DataFrame
+        top_comb_dfs = [(df.loc[list(comb)], score) for comb, score in top_combinations]
+
+        return top_comb_dfs
+    
+    
+    @staticmethod
+    def filter_props(analyzed_props, filter_dict):
+        print(len(analyzed_props))
+        analyzed_props = [prop for prop in analyzed_props if prop.ev > 0]
+        print(f"num of profitable props: {len(analyzed_props)}")
+        analyzed_props = pd.DataFrame.from_dict([prop.entry for prop in analyzed_props])
+        for key in filter_dict.keys():
+            for filter_item, category in filter_dict[key]:
+                print(f'Filtering {filter_item}')
+                analyzed_props = analyzed_props[analyzed_props[category] != filter_item]
+        print(len(analyzed_props))
+        print(analyzed_props.head())
+        filtered_df = analyzed_props.sort_values(by="PROB", ascending=False).head(36)
+        filtered_df.to_csv(f"props_{date.today()}.csv")
+        return filtered_df
+    
+    @session_management
+    def get_and_save_team_data(self, session, team_id, filename=None):
+        data = session.query(
+            Team,
+            TradTeamStats,
+            AdvTeamStats,
+            Game
+        ).join(Game, TradTeamStats.game_id == Game.id)\
+        .join(Team, TradTeamStats.team_id == Team.id)\
+        .join(AdvTeamStats, and_(TradTeamStats.game_id == AdvTeamStats.game_id, 
+                                    TradTeamStats.team_id == AdvTeamStats.team_id))\
+        .filter(
+            (TradTeamStats.team_id == team_id) #&
+            #(Game.season_type == season_type)
+        ).all()
+
+        # Convert the query result to a DataFrame
+        data_list = []
+        for team, trad_stats, adv_stats, game in data:
+            row = {
+                'team_name': team.full_name,
+                'points': trad_stats.pts,
+                'rebounds': trad_stats.reb,
+                'assists': trad_stats.ast,
+                'efg': adv_stats.efg_pct,
+                'fg3a': trad_stats.fg3a,
+                'fg3m': trad_stats.fg3m,
+                'fg3_pct': trad_stats.fg3_pct,
+                'fga': trad_stats.fga,
+                'fgm': trad_stats.fgm,
+                'fta': trad_stats.fta,
+                'ft_pct': trad_stats.ft_pct, 
+                'steals': trad_stats.stl,
+                'blocks': trad_stats.blk,
+                'to': trad_stats.to, 
+                'date': game.date,
+
+            }
+            data_list.append(row)
+
+        data_df = pd.DataFrame(data_list)
+        data_df = data_df.sort_values(by="date", ascending=False)
+        save_destination = team.nickname if not filename else filename
+        data_df.to_csv(f"data_pile/{save_destination}.csv")
+        return data_df
+    
+class Prop:
+    def __init__(self, name, team, stat, threshold, odds, bet_type):
+        self.name = name
+        self.team = team
+        self.stat = stat
+        self.n = threshold
+        self.odds = odds
+        self.bet_type = bet_type
+        self.probability = self.get_prop_probability()
+        self.ev, self.house_prob = self.get_ev_and_implied_prob()
+        self.print_out = f"""
+            PLAYER: {self.name}
+            STAT: {self.stat}
+            THRESH: {self.n}
+            ODDS: {self.odds}
+            TYPE: {self.bet_type}
+            PROB: {self.probability}
+                EV: {self.ev}
+        HOUSE_PROB: {self.house_prob}
+            """
+        print(self.print_out)
+        self.entry = {
+            "PLAYER": self.name,
+            "TEAM": self.team,
+            "STAT": self.stat,
+            "THRESH": self.n,
+            "ODDS": self.odds,
+            "TYPE": self.bet_type,
+            "PROB": self.probability,
+                "EV": self.ev,
+        "HOUSE_PROB": self.house_prob
+        }
+    
+    def get_prop_probability(self, last_n_games=25):
+        dm = DataManager()
+        player_id = dm.get_player_id(self.name)
+        data = dm.get_and_save_player_data(player_id, self.name).sort_values(by='date', ascending=False).head(last_n_games).copy()
+        # print(data.head())
+        if self.bet_type == "over":
+            return analyze.estimate_probability_poisson_over(data, self.stat, self.n)
+        elif self.bet_type == "under":
+            return analyze.estimate_probability_poisson_under(data, self.stat, self.n)
+        else:
+            raise ValueError("Invalid bet type. Use 'over' or 'under'.")
+        
+    def get_ev_and_implied_prob(self):
+        odds = self.american_to_decimal(self.odds)
+        house_probability = analyze.estimate_implied_probability(odds)
+        ev = analyze.calculate_ev(self.probability, odds, 5)
+        return ev, house_probability
+    
+    @staticmethod
+    def american_to_decimal(american_odds):
+        """Convert American odds to decimal odds."""
+        if american_odds > 0:
+            return 1 + (american_odds / 100)
+        else:
+            return 1 + (100 / abs(american_odds))
+
+    

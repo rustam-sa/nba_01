@@ -16,6 +16,8 @@ optuna = "*"
 numpy = "*"
 scipy = "*"
 matplotlib = "*"
+statsmodels = "*"
+seaborn = "*"
 
 [dev-packages]
 
