@@ -923,7 +923,7 @@ class DataManager:
                 analyzed_props = analyzed_props[analyzed_props[category] != filter_item]
         print(len(analyzed_props))
         print(analyzed_props.head())
-        filtered_df = analyzed_props.sort_values(by="PROB", ascending=False).head(36)
+        filtered_df = analyzed_props.sort_values(by="PROB", ascending=False).head(40)
         filtered_df.to_csv(f"props_{date.today()}.csv")
         return filtered_df
     
