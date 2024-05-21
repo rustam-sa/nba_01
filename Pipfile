@@ -18,6 +18,7 @@ scipy = "*"
 matplotlib = "*"
 statsmodels = "*"
 seaborn = "*"
+beautifulsoup4 = "*"
 
 [dev-packages]
 

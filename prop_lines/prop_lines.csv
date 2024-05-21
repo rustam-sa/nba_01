@@ -1,185 +1,230 @@
 OFFENSE PLAYER PROPS
 PointsSGP
-Timberwolves
+Pacers
 OVER
 UNDER
-Rudy Gobert
-O 10.5
--105
-U 10.5
--130
-Jaden McDaniels
+Obi Toppin
+O 7.5
+-135
+U 7.5
+100
+Aaron Nesmith
 O 9.5
--130
-U 9.5
--105
-Anthony Edwards
-O 27.5
--130
-U 27.5
--105
-Naz Reid
-O 8.5
--110
-U 8.5
 -120
-Mike Conley
-O 11.5
--105
-U 11.5
--125
-Karl-Anthony Towns
-O 18.5
--115
-U 18.5
--115
-Nuggets
-OVER
-UNDER
-Kentavious Caldwell-Pope
-O 9.5
--105
 U 9.5
--130
-Jamal Murray
+-110
+T.J. McConnell
+O 9.5
+-140
+U 9.5
+105
+Tyrese Haliburton
 O 19.5
--120
+-110
 U 19.5
--110
-Michael Porter Jr.
-O 13.5
 -120
-U 13.5
--110
-Aaron Gordon
-O 14.5
-100
-U 14.5
+Andrew Nembhard
+O 10.5
 -130
-Nikola Jokic
-O 30.5
--105
-U 30.5
+U 10.5
+100
+Myles Turner
+O 15.5
 -125
-AssistsSGP
-Timberwolves
+U 15.5
+-105
+Pascal Siakam
+O 20.5
+-105
+U 20.5
+-125
+Celtics
 OVER
 UNDER
-Rudy Gobert
-O 1.5
-100
-U 1.5
--140
-Mike Conley
-O 5.5
--130
-U 5.5
--105
-Anthony Edwards
-O 5.5
-120
-U 5.5
--170
-Karl-Anthony Towns
+Jaylen Brown
+O 24.5
+-120
+U 24.5
+-110
+Jayson Tatum
+O 29.5
+-110
+U 29.5
+-120
+Al Horford
+O 9.5
+-115
+U 9.5
+-115
+Jrue Holiday
+O 12.5
+-110
+U 12.5
+-120
+Derrick White
+O 16.5
+-110
+U 16.5
+-120
+Payton Pritchard
+O 9.5
+-115
+U 9.5
+-110
+Luke Kornet
 O 3.5
-125
+-175
 U 3.5
--180
-Jaden McDaniels
-O 1.5
 130
-U 1.5
--185
-Naz Reid
-O 0.5
--210
-U 0.5
-145
-Nuggets
+AssistsSGP
+Pacers
 OVER
 UNDER
-Nikola Jokic
+Myles Turner
+O 1.5
+-125
+U 1.5
+-115
+T.J. McConnell
+O 4.5
+-135
+U 4.5
+-105
+Tyrese Haliburton
 O 8.5
--135
+105
 U 8.5
--105
-Kentavious Caldwell-Pope
-O 2.5
-100
-U 2.5
+-150
+Aaron Nesmith
+O 1.5
 -140
-Jamal Murray
-O 5.5
--135
-U 5.5
--105
-Aaron Gordon
+U 1.5
+100
+Pascal Siakam
+O 2.5
+-160
+U 2.5
+115
+Andrew Nembhard
 O 4.5
 105
 U 4.5
 -145
-Michael Porter Jr.
+Obi Toppin
 O 1.5
-145
+110
 U 1.5
--210
-Threes MadeSGP
-Timberwolves
+-155
+Celtics
 OVER
 UNDER
-Anthony Edwards
+Jaylen Brown
+O 2.5
+-150
+U 2.5
+105
+Derrick White
+O 4.5
+100
+U 4.5
+-140
+Jrue Holiday
+O 4.5
+-115
+U 4.5
+-120
+Payton Pritchard
 O 2.5
 -145
 U 2.5
-100
-Mike Conley
+105
+Al Horford
 O 2.5
-135
+-145
 U 2.5
--190
-Naz Reid
-O 1.5
-150
-U 1.5
--220
-Karl-Anthony Towns
-O 1.5
--195
-U 1.5
-135
-Jaden McDaniels
+105
+Jayson Tatum
+O 5.5
+-140
+U 5.5
+100
+Luke Kornet
 O 0.5
--250
+-115
 U 0.5
-170
-Nuggets
+-125
+Threes MadeSGP
+Pacers
 OVER
 UNDER
-Michael Porter Jr.
-O 2.5
--105
-U 2.5
--135
-Kentavious Caldwell-Pope
+Tyrese Haliburton
+O 3.5
+-125
+U 3.5
+-115
+Aaron Nesmith
 O 1.5
--150
+-115
 U 1.5
-105
-Jamal Murray
-O 2.5
-120
-U 2.5
--170
-Nikola Jokic
+-120
+Myles Turner
 O 1.5
-130
+-145
 U 1.5
--185
-Aaron Gordon
+100
+Pascal Siakam
 O 0.5
--210
+-195
 U 0.5
-145
+135
+Andrew Nembhard
+O 1.5
+170
+U 1.5
+-250
+T.J. McConnell
+O 0.5
+195
+U 0.5
+-300
+Obi Toppin
+O 1.5
+170
+U 1.5
+-250
+Celtics
+OVER
+UNDER
+Payton Pritchard
+O 1.5
+-125
+U 1.5
+-115
+Al Horford
+O 1.5
+-145
+U 1.5
+100
+Jayson Tatum
+O 2.5
+-130
+U 2.5
+-110
+Jrue Holiday
+O 1.5
+-165
+U 1.5
+115
+Derrick White
+O 3.5
+115
+U 3.5
+-165
+Jaylen Brown
+O 1.5
+-190
+U 1.5
+130
 Points + AssistsSGP
 ALTERNATE PLAYER PROPS
 To Record X PointsSGP
@@ -187,135 +232,160 @@ To Record X AssistsSGP
 To Record X ReboundsSGP
 GENERAL PLAYER PROPS
 ReboundsSGP
-Timberwolves
+Pacers
 OVER
 UNDER
-Anthony Edwards
-O 5.5
--115
-U 5.5
--125
-Naz Reid
-O 3.5
--120
-U 3.5
--115
-Karl-Anthony Towns
+Pascal Siakam
 O 7.5
--145
+-115
 U 7.5
-100
-Mike Conley
+-125
+Tyrese Haliburton
+O 4.5
+-115
+U 4.5
+-120
+Aaron Nesmith
+O 4.5
+-135
+U 4.5
+-105
+T.J. McConnell
 O 2.5
--165
+-125
 U 2.5
-115
-Rudy Gobert
-O 11.5
--140
-U 11.5
-100
-Jaden McDaniels
+-110
+Myles Turner
+O 6.5
+-155
+U 6.5
+110
+Andrew Nembhard
+O 2.5
+-150
+U 2.5
+105
+Obi Toppin
 O 3.5
-115
+-155
 U 3.5
--160
-Nuggets
+110
+Celtics
 OVER
 UNDER
-Nikola Jokic
-O 12.5
--120
-U 12.5
--120
-Aaron Gordon
+Payton Pritchard
+O 2.5
+-125
+U 2.5
+-115
+Jaylen Brown
 O 6.5
--130
-U 6.5
 -110
-Jamal Murray
+U 6.5
+-130
+Al Horford
+O 7.5
+100
+U 7.5
+-145
+Jayson Tatum
+O 10.5
+105
+U 10.5
+-145
+Jrue Holiday
+O 5.5
+100
+U 5.5
+-140
+Derrick White
+O 3.5
+-170
+U 3.5
+120
+Luke Kornet
 O 4.5
 105
 U 4.5
 -150
-Kentavious Caldwell-Pope
-O 2.5
--135
-U 2.5
--105
-Michael Porter Jr.
-O 6.5
--110
-U 6.5
--125
 Points + Assists + ReboundsSGP
 Field Goals MadeSGP
-Timberwolves
+Pacers
 OVER
 UNDER
-Anthony Edwards
-O 9.5
--120
-U 9.5
--110
-Mike Conley
-O 3.5
--125
-U 3.5
+Andrew Nembhard
+O 4.5
 -105
-Jaden McDaniels
+U 4.5
+-125
+Aaron Nesmith
 O 3.5
--130
+-105
 U 3.5
+-125
+T.J. McConnell
+O 4.5
 100
-Karl-Anthony Towns
+U 4.5
+-130
+Pascal Siakam
+O 8.5
+100
+U 8.5
+-135
+Tyrese Haliburton
 O 6.5
--110
+-145
 U 6.5
--115
-Rudy Gobert
-O 3.5
+110
+Myles Turner
+O 5.5
 -140
-U 3.5
+U 5.5
 105
-Naz Reid
+Obi Toppin
 O 3.5
 130
 U 3.5
--170
-Nickeil Alexander-Walker
-O 1.5
--180
-U 1.5
-135
-Nuggets
+-175
+Celtics
 OVER
 UNDER
-Jamal Murray
-O 7.5
--120
-U 7.5
--110
-Aaron Gordon
+Jayson Tatum
+O 9.5
+-130
+U 9.5
+-105
+Derrick White
 O 5.5
--110
+-125
 U 5.5
--120
-Kentavious Caldwell-Pope
+-105
+Payton Pritchard
 O 3.5
-120
+-120
 U 3.5
--155
-Nikola Jokic
-O 11.5
-105
-U 11.5
--135
-Michael Porter Jr.
+-110
+Jaylen Brown
+O 9.5
+-125
+U 9.5
+-105
+Al Horford
+O 3.5
+-125
+U 3.5
+-105
+Jrue Holiday
 O 4.5
--160
+-130
 U 4.5
-120
+100
+Luke Kornet
+O 1.5
+-130
+U 1.5
+100
 To Record 5+ Threes MadeSGP
 To Record 3+ Threes MadeSGP
 To Record 1+ Threes MadeSGP
@@ -329,126 +399,151 @@ Assists + ReboundsSGP
 DEFENSE PLAYER PROPS
 Steals + BlocksSGP
 StealsSGP
-Timberwolves
+Pacers
 OVER
 UNDER
-Karl-Anthony Towns
-O 0.5
--120
-U 0.5
--110
-Naz Reid
+Andrew Nembhard
 O 0.5
 -110
 U 0.5
 -120
-Anthony Edwards
-O 1.5
+Aaron Nesmith
+O 0.5
+-110
+U 0.5
+-120
+Myles Turner
+O 0.5
 -105
-U 1.5
+U 0.5
 -125
-Rudy Gobert
+T.J. McConnell
 O 0.5
--175
-U 0.5
-130
-Mike Conley
-O 1.5
-160
-U 1.5
--210
-Jaden McDaniels
-O 0.5
--230
-U 0.5
-175
-Nuggets
-OVER
-UNDER
-Jamal Murray
-O 1.5
-110
-U 1.5
--150
-Nikola Jokic
-O 1.5
 -155
-U 1.5
+U 0.5
 115
-Kentavious Caldwell-Pope
+Pascal Siakam
+O 0.5
+-165
+U 0.5
+125
+Obi Toppin
+O 0.5
+135
+U 0.5
+-175
+Tyrese Haliburton
 O 1.5
-150
+165
 U 1.5
--200
-Michael Porter Jr.
-O 0.5
--190
-U 0.5
-140
-Aaron Gordon
-O 0.5
 -220
-U 0.5
-160
-BlocksSGP
-Timberwolves
+Celtics
 OVER
 UNDER
-Rudy Gobert
-O 1.5
--120
-U 1.5
--110
-Anthony Edwards
+Al Horford
 O 0.5
--105
+-135
 U 0.5
--125
-Naz Reid
+100
+Payton Pritchard
+O 0.5
+120
+U 0.5
+-155
+Derrick White
+O 0.5
+-165
+U 0.5
+125
+Jrue Holiday
+O 1.5
+145
+U 1.5
+-195
+Jaylen Brown
+O 1.5
+175
+U 1.5
+-230
+Jayson Tatum
+O 1.5
+185
+U 1.5
+-250
+Luke Kornet
+O 0.5
+240
+U 0.5
+-325
+BlocksSGP
+Pacers
+OVER
+UNDER
+Myles Turner
+O 1.5
+-135
+U 1.5
+105
+Tyrese Haliburton
+O 0.5
+100
+U 0.5
+-130
+Aaron Nesmith
+O 0.5
+110
+U 0.5
+-150
+Pascal Siakam
+O 0.5
+145
+U 0.5
+-190
+Obi Toppin
+O 0.5
+185
+U 0.5
+-250
+Andrew Nembhard
+O 0.5
+350
+U 0.5
+-550
+T.J. McConnell
+O 0.5
+500
+U 0.5
+-850
+Celtics
+OVER
+UNDER
+Jaylen Brown
 O 0.5
 105
 U 0.5
--135
-Jaden McDaniels
+-140
+Jayson Tatum
+O 0.5
+-140
+U 0.5
+110
+Jrue Holiday
+O 0.5
+-150
+U 0.5
+115
+Derrick White
 O 0.5
 -180
 U 0.5
 135
-Karl-Anthony Towns
+Al Horford
 O 0.5
-160
-U 0.5
 -220
-Mike Conley
-O 0.5
-300
 U 0.5
--450
-Nuggets
-OVER
-UNDER
-Aaron Gordon
-O 0.5
-115
-U 0.5
--150
-Michael Porter Jr.
-O 0.5
--155
-U 0.5
-115
-Kentavious Caldwell-Pope
-O 0.5
-115
-U 0.5
--150
-Nikola Jokic
-O 0.5
--170
-U 0.5
-130
-Jamal Murray
-O 0.5
 160
+Luke Kornet
+O 0.5
+-125
 U 0.5
--210
+-105

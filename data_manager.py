@@ -1,6 +1,7 @@
 import time
 import itertools
 import pandas as pd
+import os
 from datetime import date
 from functools import wraps
 from sqlalchemy.exc import SQLAlchemyError
@@ -744,6 +745,12 @@ class DataManager:
         return player_id
     
     @session_management
+    def get_team_id(self, session, team_nickname):
+        team = session.query(Team).filter(Team.nickname==team_nickname).all()[0]
+        team_id = team.id
+        return team_id
+    
+    @session_management
     def get_and_save_player_data(self, session, player_id, filename=None):
         data = session.query(
             Player,
@@ -912,7 +919,7 @@ class DataManager:
     
     
     @staticmethod
-    def filter_props(analyzed_props, filter_dict):
+    def filter_props(analyzed_props, filter_dict, top_n):
         print(len(analyzed_props))
         analyzed_props = [prop for prop in analyzed_props if prop.ev > 0]
         print(f"num of profitable props: {len(analyzed_props)}")
@@ -923,7 +930,7 @@ class DataManager:
                 analyzed_props = analyzed_props[analyzed_props[category] != filter_item]
         print(len(analyzed_props))
         print(analyzed_props.head())
-        filtered_df = analyzed_props.sort_values(by="PROB", ascending=False).head(40)
+        filtered_df = analyzed_props.sort_values(by="PROB", ascending=False).head(top_n)
         filtered_df.to_csv(f"props_{date.today()}.csv")
         return filtered_df
     
@@ -988,6 +995,115 @@ class DataManager:
         filtered_df = analyzed_props.sort_values(by="PROB", ascending=False).head(n_props)
         filtered_df.to_csv(f"props_{date.today()}.csv")
         return filtered_df
+    
+    @session_management
+    def get_all_team_stats(self, session):
+        query = session.query(
+            Game.id.label('game_id'),
+            Game.date,
+            TradTeamStats.team_id,
+            Team.full_name.label('team_name'),
+            TradTeamStats.minutes.label('trad_minutes'),
+            TradTeamStats.fgm,
+            TradTeamStats.fga,
+            TradTeamStats.fg_pct,
+            TradTeamStats.fg3m,
+            TradTeamStats.fg3a,
+            TradTeamStats.fg3_pct,
+            TradTeamStats.ftm,
+            TradTeamStats.fta,
+            TradTeamStats.ft_pct,
+            TradTeamStats.oreb,
+            TradTeamStats.dreb,
+            TradTeamStats.reb,
+            TradTeamStats.ast,
+            TradTeamStats.stl,
+            TradTeamStats.blk,
+            TradTeamStats.to,
+            TradTeamStats.pf,
+            TradTeamStats.pts,
+            TradTeamStats.plus_minus,
+            AdvTeamStats.minutes.label('adv_minutes'),
+            AdvTeamStats.e_off_rating,
+            AdvTeamStats.off_rating,
+            AdvTeamStats.e_def_rating,
+            AdvTeamStats.def_rating,
+            AdvTeamStats.e_net_rating,
+            AdvTeamStats.net_rating,
+            AdvTeamStats.ast_pct,
+            AdvTeamStats.ast_tov,
+            AdvTeamStats.ast_ratio,
+            AdvTeamStats.oreb_pct,
+            AdvTeamStats.dreb_pct,
+            AdvTeamStats.reb_pct,
+            AdvTeamStats.e_tm_tov_pct,
+            AdvTeamStats.tm_tov_pct,
+            AdvTeamStats.efg_pct,
+            AdvTeamStats.ts_pct,
+            AdvTeamStats.usg_pct,
+            AdvTeamStats.e_usg_pct,
+            AdvTeamStats.e_pace,
+            AdvTeamStats.pace,
+            AdvTeamStats.pace_per40,
+            AdvTeamStats.poss,
+            AdvTeamStats.pie
+        ).join(TradTeamStats, Game.id == TradTeamStats.game_id
+        ).join(AdvTeamStats, (Game.id == AdvTeamStats.game_id) & (TradTeamStats.team_id == AdvTeamStats.team_id)
+        ).join(Team, TradTeamStats.team_id == Team.id)
+
+        df = pd.read_sql(query.statement, query.session.bind).sort_values(by=date, ascending=False)
+        
+        return df
+
+    @staticmethod
+    def get_team_averages(df):
+        # Extract numeric columns
+        numeric_df = df.select_dtypes(include='number')
+        
+        # Extract non-numeric columns (e.g., team_name)
+        non_numeric_df = df[['team_name']].drop_duplicates()
+        
+        # Group by team_id and calculate mean for each group
+        team_averages = numeric_df.groupby(df['team_name']).mean().reset_index()
+
+        # Merge non-numeric columns back into the result if needed
+        team_averages = team_averages.merge(non_numeric_df, left_on='team_name', right_on='team_name', how='left')
+        
+        return team_averages
+
+    def get_all_team_averages(self):
+        all_team_stats_df = self.get_all_team_stats()
+        team_averages_df = self.get_team_averages(all_team_stats_df)
+        return team_averages_df
+    
+    @staticmethod
+    def create_directory(folder_name):
+        """
+        Creates a new directory with the specified folder name.
+
+        Args:
+            folder_name (str): The name of the folder to be created.
+
+        Returns:
+            str: The path of the created directory.
+        """
+        try:
+            os.makedirs(folder_name, exist_ok=True)
+            print(f"Directory '{folder_name}' created successfully.")
+        except Exception as e:
+            print(f"An error occurred while creating the directory: {e}")
+        
+        return os.path.abspath(folder_name)
+    
+    @staticmethod
+    def save_as_excel_workbook(dataframes, file_name):
+        writer = pd.ExcelWriter(f'{file_name}.xlsx', engine='openpyxl')
+        for tag, df in dataframes.items():
+            print(tag, df)
+            df.to_excel(writer, sheet_name=tag)
+        writer.close()
+
+
 
 
 class Prop:
@@ -1049,4 +1165,3 @@ class Prop:
         else:
             return 1 + (100 / abs(american_odds))
 
-    

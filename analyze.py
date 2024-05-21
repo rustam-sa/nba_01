@@ -1,3 +1,4 @@
+import pandas as pd
 from scipy.stats import poisson
 
 
@@ -50,7 +51,7 @@ def calculate_combined_odds(american_odds_list):
 
 def analyze_parlay(probabilities, odds_list, bet_amount):
     """
-    Analyze a parlay bet and print the combined probability, combined odds, and expected value.
+    Analyze a parlay bet and print the combined probability, combined odds, expected value, and potential winnings.
 
     Args:
         probabilities (list of float): The probabilities of individual bets.
@@ -61,11 +62,14 @@ def analyze_parlay(probabilities, odds_list, bet_amount):
     combined_odds = calculate_combined_odds(odds_list)
     ev = calculate_ev(combined_probability, combined_odds, bet_amount)
     
+    potential_winnings = bet_amount * combined_odds
+
     print(f"Combined Probability: {combined_probability:.4f}")
     print(f"Combined Odds: {combined_odds:.2f}")
     print(f"Expected Value (EV): ${ev:.2f}")
+    print(f"Potential Winnings: ${potential_winnings:.2f}")
 
-    return ev
+    return ev, potential_winnings
 
 
 def american_to_decimal(american_odds):
@@ -74,3 +78,44 @@ def american_to_decimal(american_odds):
         return 1 + (american_odds / 100)
     else:
         return 1 + (100 / abs(american_odds))
+    
+
+def analyze_parlays(parlays):
+    result = []
+    remove_these = []
+    for i, parlay in enumerate(parlays):
+        probabilities = [prop['PROB'] for prop in parlay]
+        odds = [prop['ODDS'] for prop in parlay]
+        house_probabilities = [prop['HOUSE_PROB'] for prop in parlay]
+        combined_ev, potential_winnings = analyze_parlay(probabilities, odds, 1)
+        combined_prob = calculate_combined_probability(probabilities)
+        combined_house_prob = calculate_combined_probability(house_probabilities)
+        seen = {}
+
+
+        for prop in parlay:
+            if prop['STAT'] == 'points':
+                if prop['PLAYER'] in seen.keys():
+                    if seen[prop['PLAYER']] == 'fgm':
+                        remove_these.append(i)
+                        break
+            if prop['STAT'] == 'fgm':
+                if prop['PLAYER'] in seen.keys():
+                    if seen[prop['PLAYER']] == 'points':
+                        remove_these.append(i)
+                        break
+            seen[prop['PLAYER']] = prop['STAT']
+            prop['PARLAY_ID'] = i
+            prop['PARLAY_PROB'] = combined_prob
+            prop['HOUSE_PARLAY_PROB'] = combined_house_prob
+            prop['PARLAY_EV'] = combined_ev
+            prop['TO_WIN'] = potential_winnings
+        parlay_df = pd.DataFrame(parlay)
+        result.append(parlay_df)
+    
+
+    for index in sorted(remove_these, reverse=True):
+        del result[index]
+    parlays_df = pd.concat(result, ignore_index=True)
+    parlays_df = parlays_df.sort_values(by="TO_WIN", ascending=False)
+    return parlays_df
