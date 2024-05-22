@@ -61,7 +61,7 @@ def calculate_combined_odds(american_odds_list):
     combined_odds = 1
     for odds in decimal_odds_list:
         combined_odds *= odds
-    return combined_odds
+    return combined_odds    
 
 
 def analyze_parlay(probabilities, odds_list, bet_amount):
