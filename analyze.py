@@ -16,6 +16,21 @@ def estimate_implied_probability(decimal_odds):
     """Convert decimal odds to implied probability."""
     return 1 / decimal_odds
 
+# def calculate_ev(probability, decimal_odds, bet_amount):
+#     """Calculate the expected value (EV) of a bet.
+
+#     Args:
+#         probability (float): The probability of the event occurring (between 0 and 1).
+#         decimal_odds (float): The decimal odds for the bet.
+#         bet_amount (float): The amount wagered.
+
+#     Returns:
+#         float: The expected value (EV) of the bet.
+#     """
+#     payout = decimal_odds * bet_amount
+#     ev = (probability * payout) - bet_amount
+#     return ev
+
 def calculate_ev(probability, decimal_odds, bet_amount):
     """Calculate the expected value (EV) of a bet.
 
@@ -27,8 +42,8 @@ def calculate_ev(probability, decimal_odds, bet_amount):
     Returns:
         float: The expected value (EV) of the bet.
     """
-    payout = decimal_odds * bet_amount
-    ev = (probability * payout) - bet_amount
+    net_profit = (decimal_odds - 1) * bet_amount
+    ev = (probability * net_profit) - (1 - probability) * bet_amount
     return ev
 
 
@@ -62,7 +77,7 @@ def analyze_parlay(probabilities, odds_list, bet_amount):
     combined_odds = calculate_combined_odds(odds_list)
     ev = calculate_ev(combined_probability, combined_odds, bet_amount)
     
-    potential_winnings = bet_amount * combined_odds
+    potential_winnings = bet_amount * (combined_odds - 1)
 
     print(f"Combined Probability: {combined_probability:.4f}")
     print(f"Combined Odds: {combined_odds:.2f}")
@@ -117,5 +132,4 @@ def analyze_parlays(parlays):
     for index in sorted(remove_these, reverse=True):
         del result[index]
     parlays_df = pd.concat(result, ignore_index=True)
-    parlays_df = parlays_df.sort_values(by="TO_WIN", ascending=False)
     return parlays_df
