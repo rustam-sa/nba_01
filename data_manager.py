@@ -305,25 +305,24 @@ class DataManager:
                     minutes = 0
                 print(stat_line)
                 fgm = 0 if stat_line['FGM'] is None else int(stat_line["FGM"])
-                fga = int(stat_line["FGA"])
-                fg_pct = float(stat_line["FG_PCT"])
-                fg3m = int(stat_line["FG3M"])
-                fg3a = int(stat_line["FG3A"])
-                fg3_pct = float(stat_line["FG3_PCT"])
-                ftm = int(stat_line["FTM"])
-                fta = int(stat_line["FTA"])
-                ft_pct = float(stat_line["FT_PCT"])
-                oreb = int(stat_line["OREB"])
-                dreb = int(stat_line["DREB"])
-                reb = int(stat_line["REB"])
-                ast = int(stat_line["AST"])
-                stl = int(stat_line["STL"])
-                blk = int(stat_line["BLK"])
-                to = int(stat_line["TO"])
-                pf = int(stat_line["PF"])
-                pts = int(stat_line["PTS"])
-                plus_minus = int(stat_line["PLUS_MINUS"])
-
+                fga = 0 if stat_line['FGA'] is None else int(stat_line["FGA"])
+                fg_pct = 0.0 if stat_line['FG_PCT'] is None else float(stat_line["FG_PCT"])
+                fg3m = 0 if stat_line['FG3M'] is None else int(stat_line["FG3M"])
+                fg3a = 0 if stat_line['FG3A'] is None else int(stat_line["FG3A"])
+                fg3_pct = 0.0 if stat_line['FG3_PCT'] is None else float(stat_line["FG3_PCT"])
+                ftm = 0 if stat_line['FTM'] is None else int(stat_line["FTM"])
+                fta = 0 if stat_line['FTA'] is None else int(stat_line["FTA"])
+                ft_pct = 0.0 if stat_line['FT_PCT'] is None else float(stat_line["FT_PCT"])
+                oreb = 0 if stat_line['OREB'] is None else int(stat_line["OREB"])
+                dreb = 0 if stat_line['DREB'] is None else int(stat_line["DREB"])
+                reb = 0 if stat_line['REB'] is None else int(stat_line["REB"])
+                ast = 0 if stat_line['AST'] is None else int(stat_line["AST"])
+                stl = 0 if stat_line['STL'] is None else int(stat_line["STL"])
+                blk = 0 if stat_line['BLK'] is None else int(stat_line["BLK"])
+                to = 0 if stat_line['TO'] is None else int(stat_line["TO"])
+                pf = 0 if stat_line['PF'] is None else int(stat_line["PF"])
+                pts = 0 if stat_line['PTS'] is None else int(stat_line["PTS"])
+                plus_minus = 0 if stat_line['PLUS_MINUS'] is None else int(stat_line["PLUS_MINUS"])
                 # Create insert statement
                 insert_statement = insert(TradTeamStats).values(
                     game_id=game_id,
@@ -745,6 +744,12 @@ class DataManager:
         return player_id
     
     @session_management
+    def get_player_team_id(self, session, player_name):
+        player = session.query(Player).filter(Player.name==player_name).all()[0]
+        team_id = player.team_id
+        return team_id
+    
+    @session_management
     def get_team_id(self, session, team_nickname):
         team = session.query(Team).filter(Team.nickname==team_nickname).all()[0]
         team_id = team.id
@@ -787,6 +792,7 @@ class DataManager:
                 'steals': trad_stats.stl,
                 'blocks': trad_stats.blk,
                 'date': game.date,
+                'game_id': game.id
 
             }
             data_list.append(row)
@@ -919,20 +925,43 @@ class DataManager:
     
     
     @staticmethod
-    def filter_props(analyzed_props, filter_dict, top_n):
+    def filter_props(analyzed_props, filter_players=None, n_props = 36):
         print(len(analyzed_props))
         analyzed_props = [prop for prop in analyzed_props if prop.ev > 0]
         print(f"num of profitable props: {len(analyzed_props)}")
         analyzed_props = pd.DataFrame.from_dict([prop.entry for prop in analyzed_props])
-        for key in filter_dict.keys():
-            for filter_item, category in filter_dict[key]:
-                print(f'Filtering {filter_item}')
-                analyzed_props = analyzed_props[analyzed_props[category] != filter_item]
+        print(analyzed_props.head(5))
+        if filter_players:
+            for player in filter_players:
+                analyzed_props = analyzed_props[analyzed_props['PLAYER'] != player]
         print(len(analyzed_props))
-        print(analyzed_props.head())
-        filtered_df = analyzed_props.sort_values(by="PROB", ascending=False).head(top_n)
+        if analyzed_props.empty:
+            print("analyzed_props DataFrame is empty after filtering.")
+            raise RuntimeError("analyzed_props DataFrame is empty after filtering.")
+        
+        filtered_df = analyzed_props.sort_values(by="PROB", ascending=False).head(n_props)
         filtered_df.to_csv(f"props_{date.today()}.csv")
         return filtered_df
+    
+
+    # @staticmethod
+    # def filter_props(analyzed_props, filter_dict, top_n):
+    #     print(len(analyzed_props))
+    #     analyzed_props = [prop for prop in analyzed_props if prop.ev > 0]
+    #     print(f"num of profitable props: {len(analyzed_props)}")
+    #     analyzed_props = pd.DataFrame.from_dict([prop.entry for prop in analyzed_props])
+    #     for key in filter_dict.keys():
+    #         for filter_item, category in filter_dict[key]:
+    #             print(f'Filtering {filter_item}')
+    #             analyzed_props = analyzed_props[analyzed_props[category] != filter_item]
+
+    #     print(len(analyzed_props))
+    #     print(analyzed_props.head())
+    #     raise
+    #     filtered_df = analyzed_props.sort_values(by="PROB", ascending=False).head(top_n)
+
+    #     filtered_df.to_csv(f"props_{date.today()}.csv")
+    #     return filtered_df
     
     @session_management
     def get_and_save_team_data(self, session, team_id, filename=None):
@@ -946,7 +975,7 @@ class DataManager:
         .join(AdvTeamStats, and_(TradTeamStats.game_id == AdvTeamStats.game_id, 
                                     TradTeamStats.team_id == AdvTeamStats.team_id))\
         .filter(
-            (TradTeamStats.team_id == team_id) #&
+            (TradTeamStats.team_id == team_id)
             #(Game.season_type == season_type)
         ).all()
 
@@ -970,7 +999,11 @@ class DataManager:
                 'blocks': trad_stats.blk,
                 'to': trad_stats.to, 
                 'date': game.date,
-
+                'pace' : adv_stats.pace,
+                'def_rating': adv_stats.def_rating,
+                'e_def_rating': adv_stats.e_def_rating,
+                'off_rating': adv_stats.off_rating,
+                'e_off_rating': adv_stats.e_off_rating,
             }
             data_list.append(row)
 
@@ -981,20 +1014,12 @@ class DataManager:
         return data_df
     
     @staticmethod
-    def filter_props(analyzed_props, filter_players=None, n_props = 36):
-        print(len(analyzed_props))
-        analyzed_props = [prop for prop in analyzed_props if prop.ev > 0]
-        print(f"num of profitable props: {len(analyzed_props)}")
-        analyzed_props = pd.DataFrame.from_dict([prop.entry for prop in analyzed_props])
-        print(analyzed_props.head(5))
-        if filter_players:
-            for player in filter_players:
-                analyzed_props = analyzed_props[analyzed_props['PLAYER'] != player]
-        print(len(analyzed_props))
-        print(analyzed_props.head())
-        filtered_df = analyzed_props.sort_values(by="PROB", ascending=False).head(n_props)
-        filtered_df.to_csv(f"props_{date.today()}.csv")
-        return filtered_df
+    def create_pivot_table_for_tracking(df):
+        pivot_df = df.assign(value=1).pivot_table(index=['PROP_TAG', 'THRESH'], columns='PARLAY_ID', values='value', fill_value="")
+
+        # Reset index to move PROP_TAG and THRESH to columns
+        pivot_df = pivot_df.reset_index()
+        return pivot_df
     
     @session_management
     def get_all_team_stats(self, session):

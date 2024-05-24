@@ -3,203 +3,203 @@ PointsSGP
 Mavericks
 OVER
 UNDER
-Derrick Jones Jr.
-O 8.5
--115
-U 8.5
--115
-PJ Washington
-O 12.5
--105
-U 12.5
--125
 Luka Doncic
 O 28.5
--110
+-115
 U 28.5
+-115
+Derrick Jones Jr.
+O 8.5
+-110
+U 8.5
 -120
-Dereck Lively II
-O 7.5
-100
-U 7.5
--130
 Daniel Gafford
 O 8.5
 100
 U 8.5
--135
-Kyrie Irving
-O 21.5
 -130
-U 21.5
-100
+PJ Washington
+O 11.5
+-125
+U 11.5
+-105
+Dereck Lively II
+O 7.5
+-140
+U 7.5
+105
+Kyrie Irving
+O 23.5
+-105
+U 23.5
+-125
 Timberwolves
 OVER
 UNDER
+Jaden McDaniels
+O 12.5
+-110
+U 12.5
+-120
 Rudy Gobert
 O 12.5
 -115
 U 12.5
 -115
-Naz Reid
-O 9.5
+Karl-Anthony Towns
+O 20.5
 -125
-U 9.5
+U 20.5
 -105
+Mike Conley
+O 10.5
+-120
+U 10.5
+-110
+Naz Reid
+O 10.5
+-110
+U 10.5
+-120
 Anthony Edwards
 O 27.5
--125
+-105
 U 27.5
--105
-Jaden McDaniels
-O 10.5
 -125
-U 10.5
--105
-Nickeil Alexander-Walker
-O 6.5
-105
-U 6.5
--135
-Mike Conley
-O 11.5
--105
-U 11.5
--120
-Karl-Anthony Towns
-O 19.5
--125
-U 19.5
--105
 AssistsSGP
 Mavericks
 OVER
 UNDER
-Kyrie Irving
-O 4.5
--130
-U 4.5
--110
-Luka Doncic
-O 8.5
--115
-U 8.5
--125
 PJ Washington
-O 1.5
--105
-U 1.5
--135
-Dereck Lively II
-O 0.5
--165
-U 0.5
-115
-Daniel Gafford
-O 0.5
--170
-U 0.5
-120
-Derrick Jones Jr.
-O 0.5
--210
-U 0.5
-145
-Timberwolves
-OVER
-UNDER
-Rudy Gobert
-O 1.5
--120
-U 1.5
--120
-Karl-Anthony Towns
-O 3.5
-100
-U 3.5
--140
-Anthony Edwards
-O 5.5
--145
-U 5.5
-100
-Jaden McDaniels
 O 1.5
 110
 U 1.5
--155
+-160
+Luka Doncic
+O 8.5
+-120
+U 8.5
+-115
+Kyrie Irving
+O 4.5
+100
+U 4.5
+-140
+Daniel Gafford
+O 0.5
+-150
+U 0.5
+105
+Derrick Jones Jr.
+O 1.5
+155
+U 1.5
+-230
+Dereck Lively II
+O 1.5
+170
+U 1.5
+-250
+Timberwolves
+OVER
+UNDER
 Mike Conley
 O 6.5
-100
+110
 U 6.5
+-155
+Jaden McDaniels
+O 1.5
+115
+U 1.5
+-165
+Rudy Gobert
+O 1.5
+100
+U 1.5
 -140
+Karl-Anthony Towns
+O 3.5
+115
+U 3.5
+-165
+Kyle Anderson
+O 2.5
+-110
+U 2.5
+-130
+Anthony Edwards
+O 6.5
+110
+U 6.5
+-160
 Nickeil Alexander-Walker
 O 1.5
--190
+-150
 U 1.5
-130
+105
 Naz Reid
-O 0.5
--240
-U 0.5
-160
+O 1.5
+155
+U 1.5
+-230
 Threes MadeSGP
 Mavericks
 OVER
 UNDER
 Kyrie Irving
 O 2.5
--135
+100
 U 2.5
--105
+-145
+Luka Doncic
+O 2.5
+-190
+U 2.5
+130
+Derrick Jones Jr.
+O 0.5
+-185
+U 0.5
+130
 PJ Washington
 O 2.5
-130
+135
 U 2.5
--185
-Luka Doncic
-O 3.5
-130
-U 3.5
--185
-Derrick Jones Jr.
-O 1.5
-175
-U 1.5
--260
+-200
 Timberwolves
 OVER
 UNDER
-Nickeil Alexander-Walker
-O 1.5
-105
-U 1.5
--150
-Naz Reid
-O 1.5
-105
-U 1.5
--145
-Anthony Edwards
-O 2.5
--145
-U 2.5
-105
-Karl-Anthony Towns
-O 1.5
--190
-U 1.5
-130
 Jaden McDaniels
 O 1.5
-120
+-160
 U 1.5
--170
-Mike Conley
+110
+Karl-Anthony Towns
 O 2.5
-140
+115
 U 2.5
--200
+-165
+Naz Reid
+O 1.5
+-105
+U 1.5
+-135
+Mike Conley
+O 1.5
+-210
+U 1.5
+145
+Anthony Edwards
+O 2.5
+-185
+U 2.5
+130
+Nickeil Alexander-Walker
+O 1.5
+130
+U 1.5
+-185
 Points + AssistsSGP
 ALTERNATE PLAYER PROPS
 To Record X PointsSGP
@@ -212,145 +212,155 @@ OVER
 UNDER
 Luka Doncic
 O 8.5
--120
-U 8.5
--120
-PJ Washington
-O 5.5
 -125
-U 5.5
+U 8.5
 -115
-Dereck Lively II
-O 6.5
-105
-U 6.5
--150
+Daniel Gafford
+O 5.5
+-130
+U 5.5
+-110
 Derrick Jones Jr.
 O 3.5
-110
+105
 U 3.5
--160
+-145
 Kyrie Irving
 O 3.5
--145
+-140
 U 3.5
 100
-Daniel Gafford
+PJ Washington
+O 5.5
+-130
+U 5.5
+-105
+Dereck Lively II
 O 6.5
-110
+-150
 U 6.5
--155
+105
 Timberwolves
 OVER
 UNDER
 Rudy Gobert
 O 12.5
--120
+-110
 U 12.5
--120
-Jaden McDaniels
-O 3.5
--115
-U 3.5
--125
+-130
+Anthony Edwards
+O 6.5
+110
+U 6.5
+-155
 Karl-Anthony Towns
 O 8.5
--105
+105
 U 8.5
+-145
+Jaden McDaniels
+O 3.5
+-145
+U 3.5
+105
+Naz Reid
+O 4.5
+-105
+U 4.5
 -135
 Nickeil Alexander-Walker
 O 1.5
--135
+120
 U 1.5
--105
-Anthony Edwards
-O 5.5
--120
-U 5.5
--115
+-170
+Kyle Anderson
+O 2.5
+130
+U 2.5
+-185
 Mike Conley
 O 3.5
-110
+125
 U 3.5
--155
-Naz Reid
-O 3.5
--160
-U 3.5
-115
+-180
 Points + Assists + ReboundsSGP
 Field Goals MadeSGP
 Mavericks
 OVER
 UNDER
+Kyrie Irving
+O 8.5
+-115
+U 8.5
+-115
 Luka Doncic
 O 9.5
--110
-U 9.5
 -120
+U 9.5
+-110
 PJ Washington
 O 4.5
--105
+115
 U 4.5
--125
-Kyrie Irving
-O 7.5
--140
-U 7.5
-105
+-150
 Daniel Gafford
 O 3.5
-120
+105
 U 3.5
--160
+-135
 Dereck Lively II
-O 2.5
--150
-U 2.5
-115
-Derrick Jones Jr.
 O 3.5
-130
+100
 U 3.5
--170
+-135
+Derrick Jones Jr.
+O 2.5
+-180
+U 2.5
+135
 Timberwolves
 OVER
 UNDER
 Mike Conley
 O 3.5
--135
+-110
 U 3.5
-100
-Naz Reid
-O 3.5
+-120
+Jaden McDaniels
+O 4.5
 -115
-U 3.5
+U 4.5
+-115
+Rudy Gobert
+O 4.5
+-130
+U 4.5
+100
+Karl-Anthony Towns
+O 6.5
+-150
+U 6.5
+115
+Kyle Anderson
+O 1.5
+-115
+U 1.5
 -115
 Anthony Edwards
 O 9.5
--110
+100
 U 9.5
--120
-Rudy Gobert
-O 4.5
--125
-U 4.5
--105
+-135
 Nickeil Alexander-Walker
-O 2.5
-130
-U 2.5
--170
-Karl-Anthony Towns
-O 7.5
+O 1.5
+-155
+U 1.5
 115
-U 7.5
--150
-Jaden McDaniels
-O 4.5
-125
-U 4.5
--165
+Naz Reid
+O 3.5
+-140
+U 3.5
+105
 To Record 5+ Threes MadeSGP
 To Record 3+ Threes MadeSGP
 To Record 1+ Threes MadeSGP
@@ -367,143 +377,153 @@ StealsSGP
 Mavericks
 OVER
 UNDER
-Dereck Lively II
-O 0.5
-100
-U 0.5
--135
-Kyrie Irving
-O 1.5
-110
-U 1.5
--145
-Luka Doncic
-O 1.5
-100
-U 1.5
--130
 Derrick Jones Jr.
 O 0.5
 -140
 U 0.5
 105
-Daniel Gafford
-O 0.5
-110
-U 0.5
--140
-PJ Washington
-O 1.5
-165
-U 1.5
--225
-Timberwolves
-OVER
-UNDER
-Nickeil Alexander-Walker
-O 0.5
--105
-U 0.5
--130
-Naz Reid
-O 0.5
--115
-U 0.5
--115
-Anthony Edwards
+Luka Doncic
 O 1.5
 -105
 U 1.5
 -125
-Mike Conley
+Kyrie Irving
 O 1.5
-125
+130
 U 1.5
--165
+-170
+Daniel Gafford
+O 0.5
+130
+U 0.5
+-170
+Dereck Lively II
+O 0.5
+-115
+U 0.5
+-115
+PJ Washington
+O 0.5
+-250
+U 0.5
+180
+Timberwolves
+OVER
+UNDER
+Anthony Edwards
+O 1.5
+-120
+U 1.5
+-110
 Karl-Anthony Towns
 O 0.5
--175
+-165
 U 0.5
-130
+125
+Mike Conley
+O 1.5
+145
+U 1.5
+-195
 Rudy Gobert
 O 0.5
--200
+-220
 U 0.5
-150
+160
 Jaden McDaniels
 O 1.5
 170
 U 1.5
 -230
+Naz Reid
+O 0.5
+-120
+U 0.5
+-110
+Kyle Anderson
+O 0.5
+-125
+U 0.5
+-105
+Nickeil Alexander-Walker
+O 0.5
+105
+U 0.5
+-140
 BlocksSGP
 Mavericks
 OVER
 UNDER
-PJ Washington
-O 0.5
--155
-U 0.5
-115
 Luka Doncic
-O 0.5
-120
-U 0.5
--160
-Daniel Gafford
-O 1.5
-115
-U 1.5
--155
-Derrick Jones Jr.
-O 0.5
--160
-U 0.5
-120
-Kyrie Irving
-O 0.5
-145
-U 0.5
--195
-Dereck Lively II
-O 1.5
-170
-U 1.5
--230
-Timberwolves
-OVER
-UNDER
-Naz Reid
-O 0.5
--130
-U 0.5
-100
-Anthony Edwards
 O 0.5
 110
 U 0.5
--145
-Rudy Gobert
-O 1.5
 -150
-U 1.5
-115
-Jaden McDaniels
+PJ Washington
 O 0.5
--165
+-170
 U 0.5
 125
-Karl-Anthony Towns
+Daniel Gafford
+O 1.5
+120
+U 1.5
+-155
+Kyrie Irving
+O 0.5
+140
+U 0.5
+-190
+Derrick Jones Jr.
+O 0.5
+-185
+U 0.5
+140
+Dereck Lively II
+O 1.5
+115
+U 1.5
+-150
+Timberwolves
+OVER
+UNDER
+Jaden McDaniels
+O 0.5
+-135
+U 0.5
+105
+Rudy Gobert
+O 1.5
+-165
+U 1.5
+125
+Anthony Edwards
 O 0.5
 145
 U 0.5
 -195
+Karl-Anthony Towns
+O 0.5
+175
+U 0.5
+-240
 Mike Conley
 O 0.5
-275
+350
 U 0.5
--425
+-550
+Naz Reid
+O 0.5
+-135
+U 0.5
+105
+Kyle Anderson
+O 0.5
+230
+U 0.5
+-325
 Nickeil Alexander-Walker
 O 0.5
-300
+350
 U 0.5
--425
+-525

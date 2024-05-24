@@ -1,44 +1,96 @@
-,PARLAY,COMBINED_PROB,COMBINED_EV
-7866,"('Naz Reid_points_over', 'Nickeil Alexander-Walker_points_over', 'Naz Reid_fgm_over', 'Kyrie Irving_points_over', 'Anthony Edwards_points_under', 'Daniel Gafford_points_over')",0.19391384605587225,13.946264229566435
-6774,"('Naz Reid_points_over', 'Daniel Gafford_assists_over', 'Nickeil Alexander-Walker_points_over', 'Naz Reid_fgm_over', 'Kyrie Irving_points_over', 'Daniel Gafford_points_over')",0.22006967686238266,13.885670612953916
-7880,"('Naz Reid_points_over', 'Nickeil Alexander-Walker_points_over', 'Naz Reid_fgm_over', 'Kyrie Irving_points_over', 'Daniel Gafford_points_over', 'Mike Conley_points_over')",0.17827995608180047,13.782751983438999
-6795,"('Naz Reid_points_over', 'Daniel Gafford_assists_over', 'Nickeil Alexander-Walker_points_over', 'Naz Reid_fgm_over', 'Anthony Edwards_points_under', 'Daniel Gafford_points_over')",0.21485765529528011,13.726393527337002
-7944,"('Naz Reid_points_over', 'Nickeil Alexander-Walker_points_over', 'Naz Reid_fgm_over', 'Anthony Edwards_points_under', 'Daniel Gafford_points_over', 'Mike Conley_points_over')",0.17405766162793307,13.623474897822085
-6771,"('Naz Reid_points_over', 'Daniel Gafford_assists_over', 'Nickeil Alexander-Walker_points_over', 'Naz Reid_fgm_over', 'Kyrie Irving_points_over', 'Anthony Edwards_points_under')",0.2390353425554065,13.56704726579527
-6809,"('Naz Reid_points_over', 'Daniel Gafford_assists_over', 'Nickeil Alexander-Walker_points_over', 'Naz Reid_fgm_over', 'Daniel Gafford_points_over', 'Mike Conley_points_over')",0.19753521540099017,13.562881281209567
-7868,"('Naz Reid_points_over', 'Nickeil Alexander-Walker_points_over', 'Naz Reid_fgm_over', 'Kyrie Irving_points_over', 'Anthony Edwards_points_under', 'Mike Conley_points_over')",0.19364417206567178,13.464128636280353
-7879,"('Naz Reid_points_over', 'Nickeil Alexander-Walker_points_over', 'Naz Reid_fgm_over', 'Kyrie Irving_points_over', 'Daniel Gafford_points_over', 'Karl-Anthony Towns_points_under')",0.17840907588126215,13.42127010698201
-7764,"('Naz Reid_points_over', 'Nickeil Alexander-Walker_points_over', 'Naz Reid_fgm_over', 'Naz Reid_rebounds_over', 'Kyrie Irving_points_over', 'Daniel Gafford_points_over')",0.1997257661100256,13.41441057077979
-6776,"('Naz Reid_points_over', 'Daniel Gafford_assists_over', 'Nickeil Alexander-Walker_points_over', 'Naz Reid_fgm_over', 'Kyrie Irving_points_over', 'Mike Conley_points_over')",0.21976362822744142,13.403535019667835
-7943,"('Naz Reid_points_over', 'Nickeil Alexander-Walker_points_over', 'Naz Reid_fgm_over', 'Anthony Edwards_points_under', 'Daniel Gafford_points_over', 'Karl-Anthony Towns_points_under')",0.17418372341781735,13.261993021365097
-7785,"('Naz Reid_points_over', 'Nickeil Alexander-Walker_points_over', 'Naz Reid_fgm_over', 'Naz Reid_rebounds_over', 'Anthony Edwards_points_under', 'Daniel Gafford_points_over')",0.1949955596803479,13.255133485162876
-6797,"('Naz Reid_points_over', 'Daniel Gafford_assists_over', 'Nickeil Alexander-Walker_points_over', 'Naz Reid_fgm_over', 'Anthony Edwards_points_under', 'Mike Conley_points_over')",0.21455885496509688,13.244257934050921
-6808,"('Naz Reid_points_over', 'Daniel Gafford_assists_over', 'Nickeil Alexander-Walker_points_over', 'Naz Reid_fgm_over', 'Daniel Gafford_points_over', 'Karl-Anthony Towns_points_under')",0.19767828088047396,13.201399404752578
-6755,"('Naz Reid_points_over', 'Daniel Gafford_assists_over', 'Nickeil Alexander-Walker_points_over', 'Naz Reid_fgm_over', 'Naz Reid_rebounds_over', 'Daniel Gafford_points_over')",0.22129729609967738,13.194539868550358
-11608,"('Daniel Gafford_assists_over', 'Kyrie Irving_points_over', 'Anthony Edwards_points_under', 'Daniel Gafford_points_over', 'Karl-Anthony Towns_points_under', 'Mike Conley_points_over')",0.1364875954463899,9.124532852611042
-11140,"('Daniel Gafford_assists_over', 'Naz Reid_rebounds_over', 'Kyrie Irving_points_over', 'Anthony Edwards_points_under', 'Daniel Gafford_points_over', 'Mike Conley_points_over')",0.152795419349563,9.117673316408823
-11597,"('Daniel Gafford_assists_over', 'Kyrie Irving_points_over', 'Anthony Edwards_points_under', 'Anthony Edwards_blocks_under', 'Daniel Gafford_points_over', 'Mike Conley_points_over')",0.14186773227462263,8.897540958260748
-11610,"('Daniel Gafford_assists_over', 'Kyrie Irving_points_over', 'Anthony Edwards_points_under', 'Daniel Gafford_points_over', 'Mike Conley_points_over', 'Dereck Lively II_steals_under')",0.13630501892594665,8.829171968926685
-11142,"('Daniel Gafford_assists_over', 'Naz Reid_rebounds_over', 'Kyrie Irving_points_over', 'Anthony Edwards_points_under', 'Karl-Anthony Towns_points_under', 'Mike Conley_points_over')",0.1526934369813418,8.274055846665753
-11599,"('Daniel Gafford_assists_over', 'Kyrie Irving_points_over', 'Anthony Edwards_points_under', 'Anthony Edwards_blocks_under', 'Karl-Anthony Towns_points_under', 'Mike Conley_points_over')",0.14177304352431108,8.053923488517677
-11133,"('Daniel Gafford_assists_over', 'Naz Reid_rebounds_over', 'Kyrie Irving_points_over', 'Anthony Edwards_points_under', 'Anthony Edwards_blocks_under', 'Mike Conley_points_over')",0.1587123838390834,8.047063952315458
-11611,"('Daniel Gafford_assists_over', 'Kyrie Irving_points_over', 'Anthony Edwards_points_under', 'Karl-Anthony Towns_points_under', 'Mike Conley_points_over', 'Dereck Lively II_steals_under')",0.13621404297464076,7.985554499183614
-14291,"('Naz Reid_rebounds_over', 'Anthony Edwards_blocks_under', 'Derrick Jones Jr._blocks_over', 'Karl-Anthony Towns_points_under', 'Mike Conley_points_over', 'Dereck Lively II_steals_under')",0.1065881981193711,5.5110526222856855
-14036,"('Naz Reid_rebounds_over', 'Jaden McDaniels_steals_under', 'Anthony Edwards_blocks_under', 'Karl-Anthony Towns_points_under', 'Mike Conley_points_over', 'Dereck Lively II_steals_under')",0.11873066953857603,5.495040000952204
-14031,"('Naz Reid_rebounds_over', 'Jaden McDaniels_steals_under', 'Anthony Edwards_blocks_under', 'Derrick Jones Jr._blocks_over', 'Karl-Anthony Towns_points_under', 'Dereck Lively II_steals_under')",0.11925960647082763,4.566573514907467
-14227,"('Naz Reid_rebounds_over', 'Naz Reid_assists_over', 'Anthony Edwards_blocks_under', 'Derrick Jones Jr._blocks_over', 'Karl-Anthony Towns_points_under', 'Dereck Lively II_steals_under')",0.11812642282753671,4.3119840288782525
-13960,"('Naz Reid_rebounds_over', 'Jaden McDaniels_steals_under', 'Naz Reid_assists_over', 'Anthony Edwards_blocks_under', 'Karl-Anthony Towns_points_under', 'Dereck Lively II_steals_under')",0.13158332273150092,4.295971407544771
-14262,"('Naz Reid_rebounds_over', 'Derrick Jones Jr._fg3m_under', 'Anthony Edwards_blocks_under', 'Derrick Jones Jr._blocks_over', 'Karl-Anthony Towns_points_under', 'Dereck Lively II_steals_under')",0.11692180654554413,4.258921643953336
-13995,"('Naz Reid_rebounds_over', 'Jaden McDaniels_steals_under', 'Derrick Jones Jr._fg3m_under', 'Anthony Edwards_blocks_under', 'Karl-Anthony Towns_points_under', 'Dereck Lively II_steals_under')",0.1302414771968023,4.2429090226198545
-6275,"('Naz Reid_rebounds_over', 'Anthony Edwards_blocks_under', 'Derrick Jones Jr._blocks_over', 'Karl-Anthony Towns_points_under', 'Dereck Lively II_steals_under')",0.15891321104167824,4.108609467553143
-6064,"('Naz Reid_rebounds_over', 'Jaden McDaniels_steals_under', 'Anthony Edwards_blocks_under', 'Karl-Anthony Towns_points_under', 'Dereck Lively II_steals_under')",0.1770165203878654,4.092596846219662
-13955,"('Naz Reid_rebounds_over', 'Jaden McDaniels_steals_under', 'Naz Reid_assists_over', 'Anthony Edwards_blocks_under', 'Derrick Jones Jr._blocks_over', 'Dereck Lively II_steals_under')",0.1320738624501499,3.728986797957023
-14438,"('Jaden McDaniels_steals_under', 'Naz Reid_assists_over', 'Derrick Jones Jr._fg3m_under', 'Anthony Edwards_blocks_under', 'Derrick Jones Jr._blocks_over', 'Dereck Lively II_steals_under')",0.12932178724952467,2.8451972322838825
-6409,"('Jaden McDaniels_steals_under', 'Naz Reid_assists_over', 'Anthony Edwards_blocks_under', 'Derrick Jones Jr._blocks_over', 'Dereck Lively II_steals_under')",0.17576653215211477,2.69488505588369
-6444,"('Jaden McDaniels_steals_under', 'Derrick Jones Jr._fg3m_under', 'Anthony Edwards_blocks_under', 'Derrick Jones Jr._blocks_over', 'Dereck Lively II_steals_under')",0.17397412007874716,2.6418226709587733
-6384,"('Jaden McDaniels_steals_under', 'Naz Reid_assists_over', 'Derrick Jones Jr._fg3m_under', 'Derrick Jones Jr._blocks_over', 'Dereck Lively II_steals_under')",0.1853607216082581,2.0312278483586246
-2088,"('Jaden McDaniels_steals_under', 'Naz Reid_assists_over', 'Derrick Jones Jr._fg3m_under', 'Derrick Jones Jr._blocks_over')",0.2765257024678073,1.28562745376743
-407,"('Jaden McDaniels_steals_under', 'Naz Reid_assists_over', 'Derrick Jones Jr._blocks_over')",0.37583739606005656,1.1353152773672375
-414,"('Jaden McDaniels_steals_under', 'Derrick Jones Jr._fg3m_under', 'Derrick Jones Jr._blocks_over')",0.3720047239462431,1.082252892442321
-478,"('Naz Reid_assists_over', 'Derrick Jones Jr._fg3m_under', 'Derrick Jones Jr._blocks_over')",0.36847000099286875,0.8276634064131065
-404,"('Jaden McDaniels_steals_under', 'Naz Reid_assists_over', 'Derrick Jones Jr._fg3m_under')",0.4104459095346344,0.8116507850796248
+,team_name,points,rebounds,assists,efg,fg3a,fg3m,fg3_pct,fga,fgm,fta,ft_pct,steals,blocks,to,date,pace,def_rating,e_def_rating,off_rating,e_off_rating,rolling_e_def_rating
+0,Dallas Mavericks,126,48,24,0.551,47,15,0.319,99,47,23,0.739,6,3,12,2023-10-25,107.0,111.2,109.5,117.8,116.5,
+1,Dallas Mavericks,125,40,20,0.566,36,15,0.417,91,44,28,0.786,5,2,9,2023-10-27,101.5,117.6,117.2,123.8,119.8,
+2,Dallas Mavericks,125,48,24,0.637,47,23,0.489,84,42,24,0.75,4,7,15,2023-10-30,102.5,106.8,107.0,122.5,120.7,
+3,Dallas Mavericks,114,45,23,0.58,48,20,0.417,81,37,28,0.714,7,2,13,2023-11-01,95.0,110.5,110.7,120.0,119.6,
+4,Dallas Mavericks,114,34,27,0.576,42,17,0.405,86,41,17,0.882,12,6,15,2023-11-03,98.0,128.9,122.1,115.2,115.8,
+5,Dallas Mavericks,124,47,31,0.549,42,14,0.333,91,43,32,0.75,3,6,10,2023-11-05,103.5,113.5,110.0,120.4,115.8,
+6,Dallas Mavericks,117,31,21,0.591,40,15,0.375,82,41,28,0.714,9,6,14,2023-11-06,99.0,103.0,94.5,118.2,112.2,
+7,Dallas Mavericks,116,38,25,0.577,41,17,0.415,84,40,31,0.613,4,6,15,2023-11-08,105.0,122.1,117.7,109.4,107.8,
+8,Dallas Mavericks,144,41,30,0.617,42,19,0.452,98,51,26,0.885,7,1,8,2023-11-10,98.5,128.6,127.5,145.5,139.2,
+9,Dallas Mavericks,136,42,29,0.588,53,20,0.377,102,50,21,0.762,7,6,6,2023-11-12,108.0,114.8,116.2,125.9,124.5,
+10,Dallas Mavericks,110,45,25,0.5,42,14,0.333,90,38,26,0.769,4,3,20,2023-11-14,105.5,126.0,123.1,102.8,104.3,
+11,Dallas Mavericks,130,46,32,0.614,42,17,0.405,92,48,29,0.586,6,4,10,2023-11-15,103.5,112.5,113.5,126.2,122.9,
+12,Dallas Mavericks,125,49,27,0.573,47,16,0.34,103,51,10,0.7,1,2,12,2023-11-18,104.0,126.9,126.0,120.2,115.3,
+13,Dallas Mavericks,113,40,23,0.534,34,12,0.353,88,41,26,0.731,8,2,10,2023-11-19,97.5,134.4,131.3,114.1,114.8,
+14,Dallas Mavericks,104,48,21,0.479,50,16,0.32,96,38,16,0.75,5,4,4,2023-11-22,96.0,104.1,104.8,109.5,108.3,
+15,Dallas Mavericks,88,37,17,0.423,38,9,0.237,91,34,14,0.786,6,5,9,2023-11-25,92.5,115.1,109.6,95.7,91.5,115.40666666666667
+16,Dallas Mavericks,121,38,25,0.539,34,12,0.353,89,42,29,0.862,5,4,7,2023-11-28,96.5,118.6,115.3,126.0,121.3,115.41333333333334
+17,Dallas Mavericks,94,42,27,0.435,39,12,0.308,92,34,21,0.667,9,5,11,2023-12-01,95.0,112.5,111.5,100.0,93.8,115.28666666666666
+18,Dallas Mavericks,120,47,26,0.557,52,19,0.365,87,39,35,0.657,5,12,15,2023-12-02,103.5,122.3,118.1,115.4,116.1,115.58666666666666
+19,Dallas Mavericks,147,47,37,0.663,49,22,0.449,101,56,19,0.684,11,5,7,2023-12-06,104.0,93.3,94.2,141.3,138.2,116.07999999999998
+20,Dallas Mavericks,125,42,26,0.582,39,12,0.308,91,47,22,0.864,8,5,15,2023-12-08,103.5,107.7,101.9,121.4,117.2,114.22
+21,Dallas Mavericks,120,43,27,0.599,40,17,0.425,86,43,19,0.895,8,9,17,2023-12-11,99.5,114.1,108.6,120.0,118.4,113.68
+22,Dallas Mavericks,127,36,28,0.612,43,21,0.488,89,44,21,0.857,7,5,10,2023-12-12,96.5,130.2,120.3,130.9,132.0,114.61999999999999
+23,Dallas Mavericks,101,34,21,0.512,32,7,0.219,83,39,18,0.889,6,2,15,2023-12-14,101.0,117.8,114.4,100.0,98.1,114.79333333333332
+24,Dallas Mavericks,131,47,27,0.577,47,16,0.34,97,48,21,0.905,7,2,12,2023-12-16,104.0,115.4,114.6,126.0,121.0,113.92
+25,Dallas Mavericks,104,43,19,0.516,38,13,0.342,92,41,19,0.474,2,0,11,2023-12-18,97.0,135.4,134.5,106.1,107.9,113.81333333333332
+26,Dallas Mavericks,111,36,23,0.505,43,14,0.326,91,39,27,0.704,8,3,6,2023-12-20,94.5,126.3,126.3,118.1,113.4,114.57333333333332
+27,Dallas Mavericks,96,47,18,0.381,40,7,0.175,101,35,26,0.731,10,1,11,2023-12-22,108.5,113.0,110.8,88.1,86.9,115.42666666666668
+28,Dallas Mavericks,144,52,26,0.635,45,23,0.511,100,52,21,0.81,7,6,12,2023-12-23,109.5,108.2,107.6,132.1,129.4,114.41333333333334
+29,Dallas Mavericks,128,38,28,0.631,44,16,0.364,84,45,30,0.733,7,6,11,2023-12-25,101.5,111.8,110.7,126.7,127.7,112.83333333333333
+30,Dallas Mavericks,110,37,21,0.5,37,10,0.27,88,39,26,0.846,12,7,10,2023-12-27,99.5,113.0,112.9,111.1,107.4,113.22666666666667
+31,Dallas Mavericks,110,39,29,0.522,33,14,0.424,90,40,19,0.842,9,3,16,2023-12-28,101.0,116.8,112.4,108.9,106.4,113.44666666666667
+32,Dallas Mavericks,132,43,25,0.648,40,16,0.4,88,49,22,0.818,5,2,9,2023-12-30,100.5,122.0,117.6,130.7,131.1,113.25333333333333
+33,Dallas Mavericks,90,41,28,0.457,40,11,0.275,93,37,10,0.5,6,5,16,2024-01-01,103.0,123.3,115.5,87.4,85.4,113.66000000000001
+34,Dallas Mavericks,126,43,25,0.577,30,13,0.433,84,42,41,0.707,12,7,11,2024-01-03,104.0,93.3,89.3,121.2,117.7,113.48666666666668
+35,Dallas Mavericks,139,52,35,0.672,38,17,0.447,96,56,15,0.667,11,8,17,2024-01-05,109.0,94.5,92.4,127.5,126.8,113.16000000000001
+36,Dallas Mavericks,115,44,20,0.532,40,15,0.375,95,43,20,0.7,7,8,11,2024-01-07,95.0,113.7,109.9,121.1,115.2,112.52666666666666
+37,Dallas Mavericks,103,33,20,0.494,27,9,0.333,82,36,27,0.815,9,4,12,2024-01-09,98.5,121.2,120.9,105.1,104.2,112.61333333333333
+38,Dallas Mavericks,128,38,27,0.597,41,17,0.415,88,44,30,0.767,6,2,10,2024-01-11,99.5,125.3,118.9,128.0,127.7,112.65333333333335
+39,Dallas Mavericks,108,34,23,0.543,41,15,0.366,82,37,20,0.95,6,1,12,2024-01-13,92.0,128.3,127.9,117.4,115.1,112.95333333333333
+40,Dallas Mavericks,125,42,24,0.565,43,18,0.419,85,39,35,0.829,4,6,11,2024-01-15,99.0,120.0,118.8,127.6,125.8,113.84
+41,Dallas Mavericks,110,43,26,0.522,40,11,0.275,91,42,18,0.833,4,5,15,2024-01-17,101.5,125.7,122.6,107.8,106.9,112.79333333333334
+42,Dallas Mavericks,110,48,24,0.515,40,14,0.35,97,43,14,0.714,4,4,10,2024-01-22,100.0,119.0,116.4,110.0,106.6,112.54666666666665
+43,Dallas Mavericks,109,33,25,0.556,43,17,0.395,89,41,18,0.556,4,3,14,2024-01-24,99.5,133.3,132.4,109.0,108.0,112.92
+44,Dallas Mavericks,148,37,28,0.712,35,19,0.543,85,51,32,0.844,3,5,13,2024-01-26,106.5,133.6,135.9,139.6,139.5,114.57333333333334
+45,Dallas Mavericks,115,43,35,0.52,46,16,0.348,98,43,18,0.722,7,2,10,2024-01-27,100.0,120.0,118.6,115.0,111.7,116.25333333333333
+46,Dallas Mavericks,131,35,27,0.717,27,13,0.481,69,43,43,0.744,6,2,15,2024-01-29,99.0,130.3,128.6,132.3,131.1,116.63333333333334
+47,Dallas Mavericks,87,31,18,0.447,29,6,0.207,76,31,26,0.731,4,4,16,2024-01-31,94.5,127.4,128.5,92.6,91.2,117.71333333333334
+48,Dallas Mavericks,117,42,22,0.593,39,16,0.41,81,40,23,0.913,9,1,21,2024-02-03,105.5,122.9,121.7,110.4,112.4,118.44
+49,Dallas Mavericks,118,44,28,0.58,43,17,0.395,87,42,23,0.739,6,4,9,2024-02-05,96.5,105.2,104.3,122.9,119.0,118.85333333333332
+50,Dallas Mavericks,119,45,25,0.61,43,19,0.442,91,46,13,0.615,7,3,10,2024-02-06,100.0,107.0,107.4,119.0,117.0,119.85333333333332
+51,Dallas Mavericks,122,40,30,0.634,42,18,0.429,82,43,23,0.783,7,6,8,2024-02-08,95.5,113.7,109.3,127.1,128.3,120.85333333333334
+52,Dallas Mavericks,146,54,30,0.665,38,15,0.395,91,53,33,0.758,8,3,12,2024-02-10,106.0,104.7,105.5,137.7,137.1,120.81333333333333
+53,Dallas Mavericks,112,56,27,0.495,36,9,0.25,96,43,26,0.654,7,12,16,2024-02-12,109.5,95.4,89.2,101.8,100.5,119.78666666666666
+54,Dallas Mavericks,116,55,28,0.592,30,11,0.367,92,49,10,0.7,6,10,15,2024-02-14,103.5,90.3,88.1,111.5,111.1,117.80666666666667
+55,Dallas Mavericks,123,39,24,0.583,44,19,0.432,90,43,21,0.857,10,5,10,2024-02-22,96.0,117.7,114.7,128.1,123.9,115.15333333333334
+56,Dallas Mavericks,111,38,15,0.552,31,14,0.452,87,41,21,0.714,9,4,15,2024-02-25,105.5,126.7,121.5,104.7,106.5,114.88000000000001
+57,Dallas Mavericks,119,36,23,0.604,33,14,0.424,91,48,15,0.6,11,6,5,2024-02-27,97.5,124.7,123.6,121.4,121.9,114.80666666666667
+58,Dallas Mavericks,136,50,32,0.62,43,15,0.349,96,52,21,0.81,7,10,14,2024-02-28,107.0,116.8,112.4,127.1,123.4,115.28666666666666
+59,Dallas Mavericks,110,42,20,0.516,34,9,0.265,94,44,18,0.722,4,4,7,2024-03-01,100.0,138.0,138.4,110.0,110.1,113.95333333333333
+60,Dallas Mavericks,116,45,20,0.558,41,16,0.39,86,40,23,0.87,6,2,17,2024-03-03,98.0,122.4,122.9,118.4,114.7,114.12000000000002
+61,Dallas Mavericks,120,41,23,0.554,39,13,0.333,93,45,21,0.81,5,6,9,2024-03-05,100.5,135.6,132.3,120.0,117.4,114.40666666666667
+62,Dallas Mavericks,114,45,27,0.552,41,16,0.39,87,40,23,0.783,5,6,9,2024-03-07,95.5,113.7,108.6,118.8,117.4,114.65333333333334
+63,Dallas Mavericks,142,36,29,0.63,38,14,0.368,92,51,32,0.813,13,8,14,2024-03-09,110.0,112.7,112.7,129.1,122.3,113.32666666666667
+64,Dallas Mavericks,127,49,33,0.618,41,13,0.317,93,51,15,0.8,10,6,6,2024-03-11,94.5,97.9,94.2,133.7,132.8,112.72666666666667
+65,Dallas Mavericks,109,42,30,0.573,27,6,0.222,82,44,19,0.789,6,13,16,2024-03-13,97.5,102.1,96.7,111.2,110.8,112.05333333333333
+66,Dallas Mavericks,119,40,25,0.583,29,12,0.414,84,43,26,0.808,6,2,19,2024-03-14,100.5,124.8,124.6,119.0,113.9,111.33999999999999
+67,Dallas Mavericks,107,60,22,0.465,35,9,0.257,100,42,21,0.667,5,5,11,2024-03-17,95.5,109.4,109.7,112.6,107.8,112.36
+68,Dallas Mavericks,113,40,31,0.538,30,10,0.333,91,44,17,0.882,6,3,9,2024-03-19,103.5,103.9,101.7,108.7,108.2,112.64
+69,Dallas Mavericks,113,43,33,0.558,32,10,0.313,86,43,28,0.607,12,3,13,2024-03-21,101.5,96.0,92.9,110.8,112.6,113.47333333333333
+70,Dallas Mavericks,115,47,31,0.543,42,12,0.286,92,44,18,0.833,9,7,6,2024-03-25,96.5,109.4,106.4,118.6,119.9,113.79333333333334
+71,Dallas Mavericks,132,49,34,0.674,39,22,0.564,92,51,13,0.615,10,4,9,2024-03-26,101.5,95.0,94.7,129.4,129.8,113.24
+72,Dallas Mavericks,107,42,24,0.574,35,15,0.429,74,35,33,0.667,4,6,10,2024-03-29,94.0,109.6,104.8,113.8,115.7,111.45333333333333
+73,Dallas Mavericks,125,47,24,0.645,47,24,0.511,93,48,9,0.556,7,8,13,2024-03-31,97.5,110.3,106.6,127.6,123.8,110.2
+74,Dallas Mavericks,100,42,27,0.522,40,15,0.375,89,39,11,0.636,8,7,15,2024-04-02,101.0,103.0,105.0,99.0,99.2,109.81333333333333
+75,Dallas Mavericks,109,53,20,0.5,49,18,0.367,94,38,17,0.882,7,7,14,2024-04-04,104.0,91.3,91.1,104.8,104.3,107.58666666666667
+76,Dallas Mavericks,108,41,30,0.548,34,12,0.353,84,40,21,0.762,9,9,17,2024-04-05,102.5,102.9,101.0,105.9,104.6,105.46666666666667
+77,Dallas Mavericks,147,47,21,0.629,39,15,0.385,85,46,45,0.889,4,6,17,2024-04-07,101.89,120.4,117.9,131.3,126.9,103.38000000000001
+78,Dallas Mavericks,130,55,35,0.629,50,17,0.34,93,50,20,0.65,6,7,14,2024-04-09,100.5,103.0,101.7,130.0,129.0,104.0
+79,Dallas Mavericks,111,39,27,0.58,44,15,0.341,87,43,13,0.769,8,8,7,2024-04-10,91.0,101.1,99.2,122.0,121.0,103.26666666666667
+80,Dallas Mavericks,89,49,20,0.482,29,8,0.276,83,36,12,0.75,5,5,20,2024-04-12,100.0,107.0,107.0,89.0,89.6,103.6
+81,Dallas Mavericks,86,41,19,0.371,39,8,0.205,97,32,17,0.824,8,2,14,2024-04-14,105.5,127.4,125.0,81.9,80.0,104.28666666666666
+82,Dallas Mavericks,97,41,14,0.45,33,10,0.303,80,31,33,0.758,7,9,8,2024-04-21,93.0,117.2,112.7,104.3,102.6,104.31333333333332
+83,Dallas Mavericks,96,50,17,0.513,33,14,0.424,76,32,27,0.667,8,7,13,2024-04-23,92.0,101.1,99.5,104.3,105.6,104.51333333333334
+84,Dallas Mavericks,101,36,21,0.506,35,9,0.257,86,39,19,0.737,12,7,8,2024-04-26,89.5,101.1,100.2,112.2,109.4,104.36666666666666
+85,Dallas Mavericks,111,42,22,0.562,33,11,0.333,81,40,25,0.8,5,5,16,2024-04-28,93.5,126.1,120.9,116.8,116.8,104.85333333333332
+86,Dallas Mavericks,123,40,27,0.621,39,14,0.359,87,47,20,0.75,5,6,8,2024-05-01,94.0,98.9,95.6,130.9,127.1,105.82000000000001
+87,Dallas Mavericks,114,45,26,0.554,36,12,0.333,83,40,33,0.667,6,4,9,2024-05-03,90.0,112.2,110.9,126.7,127.3,105.88000000000001
+88,Dallas Mavericks,95,39,19,0.464,35,12,0.343,84,33,25,0.68,5,8,15,2024-05-07,95.5,121.9,121.5,100.0,95.0,106.28666666666668
+89,Dallas Mavericks,119,44,30,0.567,37,18,0.486,90,42,24,0.708,8,6,10,2024-05-09,96.0,115.8,111.7,122.7,120.7,107.28
+90,Dallas Mavericks,105,48,21,0.489,33,11,0.333,91,39,25,0.64,7,2,13,2024-05-11,97.0,104.1,103.7,108.2,104.0,107.72666666666667
+91,Dallas Mavericks,96,47,26,0.477,35,12,0.343,88,36,23,0.522,4,13,13,2024-05-13,96.0,103.1,101.5,101.1,95.9,108.56666666666666
+92,Dallas Mavericks,104,46,27,0.618,35,14,0.4,76,40,13,0.769,5,5,14,2024-05-15,88.5,104.5,101.8,116.9,119.9,108.6
+93,Dallas Mavericks,117,47,25,0.61,34,16,0.471,82,42,24,0.708,5,4,17,2024-05-18,95.5,120.8,113.2,123.2,121.2,107.52666666666667
+94,Dallas Mavericks,108,48,21,0.529,25,6,0.24,87,43,17,0.941,5,8,13,2024-05-22,95.0,110.5,108.3,113.7,111.9,108.29333333333332
