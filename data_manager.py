@@ -20,7 +20,7 @@ from nba_api.stats.endpoints import boxscoreadvancedv2
 
 import analyze
 import date_utils as date_mng
-from models import Team, Player, Game, TradTeamStats, AdvTeamStats, TradPlayerStats, AdvPlayerStats
+from models import Team, Player, Game, TradTeamStats, AdvTeamStats, TradPlayerStats, AdvPlayerStats, TeamRollingAverages
 from db_config import get_database_engine, get_session
 
 
@@ -721,6 +721,7 @@ class DataManager:
             self.sync_adv_team_stats(adv_team_stats=adv_team_stats, db_game_id=db_game_id)
             self.sync_trad_player_stats(trad_player_stats=trad_player_stats, db_game_id=db_game_id)
             self.sync_adv_player_stats(adv_player_stats=adv_player_stats, db_game_id=db_game_id)
+            self.update_all_team_rolling_averages()
         
     @session_management
     def query_games(self, session):
@@ -742,6 +743,11 @@ class DataManager:
         player = session.query(Player).filter(Player.name==player_name).all()[0]
         player_id = player.id
         return player_id
+    
+    @session_management
+    def get_player_object(self, session, player_name):
+        player = session.query(Player).filter(Player.name==player_name).all()[0]
+        return player
     
     @session_management
     def get_player_team_id(self, session, player_name):
@@ -796,7 +802,8 @@ class DataManager:
 
             }
             data_list.append(row)
-
+        if not data_list:
+            return None
         data_df = pd.DataFrame(data_list)
         data_df = data_df.sort_values(by="date", ascending=False)
         save_destination = player.name if not filename else filename
@@ -999,6 +1006,7 @@ class DataManager:
                 'blocks': trad_stats.blk,
                 'to': trad_stats.to, 
                 'date': game.date,
+                'game_id': game.id,
                 'pace' : adv_stats.pace,
                 'def_rating': adv_stats.def_rating,
                 'e_def_rating': adv_stats.e_def_rating,
@@ -1128,7 +1136,127 @@ class DataManager:
             df.to_excel(writer, sheet_name=tag)
         writer.close()
 
+    @session_management
+    def upsert_team_rolling_averages(self, session, record):
+        insert_stmt = insert(TeamRollingAverages).values(
+        points = record['points'],
+        rebounds = record['rebounds'],
+        assists = record['assists'],
+        efg = record['efg'],
+        fg3a = record['fg3a'],
+        fg3m = record['fg3m'],
+        fg3_pct = record['fg3_pct'],
+        fga = record['fga'],
+        fgm = record['fgm'],
+        fta = record['fta'],
+        ft_pct = record['ft_pct'],
+        steals = record['steals'],
+        blocks = record['blocks'],
+        to = record['to'],  # turnovers
+        pace = record['pace'],
+        def_rating = record['def_rating'],
+        e_def_rating = record['e_def_rating'],
+        off_rating = record['off_rating'],
+        e_off_rating = record['e_off_rating'],
+        date = record['date'],
+        game_id = record['game_id'],
+        team_id = record['team_id'],
+        )
 
+        update_stmt = insert_stmt.on_conflict_do_update(
+            index_elements=['game_id', 'team_id'],
+            set_={
+                "points" : record['points'],
+                "rebounds" : record['rebounds'],
+                "assists" : record['assists'],
+                "efg" : record['efg'],
+                "fg3a" : record['fg3a'],
+                "fg3m" : record['fg3m'],
+                "fg3_pct" :record['fg3_pct'],
+                "fga" : record['fga'],
+                "fgm" : record['fgm'],
+                "fta" : record['fta'],
+                "ft_pct" : record['ft_pct'],
+                "steals" : record['steals'],
+                "blocks" : record['blocks'],
+                "to" : record['to'],  # turnovers
+                "pace" : record['pace'],
+                'def_rating' : record['def_rating'],
+                "e_def_rating" : record['e_def_rating'],
+                "off_rating" : record['off_rating'],
+                "e_off_rating" : record['e_off_rating'],
+                "date" : record['date'],
+                "game_id" : record['game_id'],
+                "team_id" : record['team_id'],
+            }
+        )
+
+        session.execute(update_stmt)
+        session.commit()
+
+    def update_all_team_rolling_averages(self, average_method="median", window_size=10):
+        teams = self.query_teams()
+        team_ids = [team.id for team in teams]
+        for team_id in team_ids:
+            team_data = self.get_and_save_team_data(team_id)
+            features = team_data.sort_values(by='date', ascending=True)
+            feature_columns = ['points', 'rebounds', 'assists', 'efg', 'fg3a', 'fg3m', 'fg3_pct', 'fga', 'fgm', 'fta', 
+                            'ft_pct', 'steals', 'blocks', 'to', 'pace', 'def_rating', 'e_def_rating', 'off_rating', 'e_off_rating']
+            stats = features[feature_columns]
+            if average_method == "median":
+                rolling_averages = stats.shift(1).rolling(window=window_size).median()
+            elif average_method == "mean":
+                rolling_averages = stats.shift(1).rolling(window=window_size).mean()
+            rolling_averages['date'] = features['date']
+            rolling_averages['game_id'] = features['game_id']
+            rolling_averages['team_id'] = team_id
+            rolling_averages = rolling_averages.dropna()
+            rolling_averages.to_csv("rolling_averages.csv")
+            for _, record in rolling_averages.iterrows():
+                record = (dict(record))
+                self.upsert_team_rolling_averages(record)
+
+    @session_management
+    def count_records_in_table(self, session, model):
+        count = session.query(func.count(model.id)).scalar()
+        print(f'Total records: {count}')
+        return count
+    
+    @session_management
+    def get_team_rolling_stats(self, session, player_name):
+        player = self.get_player_object(player_name)
+        player_id = player.id
+        team_id = player.team_id
+        player_game_log = self.get_and_save_player_data(player_id)
+        if player_game_log is None or player_game_log.empty:
+            return None
+        include_team_columns = ["date", "efg", "fg3a", "fg3_pct", "fga", "fta", "ft_pct", "steals", "blocks", "to", "pace", "e_def_rating", "e_off_rating"]
+        include_opponent_columns = [col for col in include_team_columns if col != 'date']
+        
+        records = []
+        for game_id in player_game_log.game_id:
+            game_id = int(game_id)
+            game = session.query(Game).filter_by(id=game_id).first()
+            if team_id == game.home_team_id:
+                opponent_id = game.away_team_id
+            else:
+                opponent_id = game.home_team_id
+            team_rolling_averages = session.query(TeamRollingAverages).filter_by(game_id=game_id, team_id=team_id).first()
+            if not team_rolling_averages:
+                continue
+            team_rolling_averages = {column.name: getattr(team_rolling_averages, column.name) for column in team_rolling_averages.__table__.columns}
+            team_rolling_averages = pd.DataFrame([team_rolling_averages])
+            team_rolling_averages = team_rolling_averages[include_team_columns]
+            opponent_rolling_averages = session.query(TeamRollingAverages).filter_by(game_id=game_id, team_id=opponent_id).first()
+            if not opponent_rolling_averages:
+                continue
+            opponent_rolling_averages = {column.name: getattr(opponent_rolling_averages, column.name) for column in opponent_rolling_averages.__table__.columns}
+            opponent_rolling_averages = pd.DataFrame([opponent_rolling_averages])
+            opponent_rolling_averages = opponent_rolling_averages[include_opponent_columns]
+            opponent_rolling_averages.columns = ["opp_" + col for col in opponent_rolling_averages.columns]
+            team_stats = pd.concat([team_rolling_averages, opponent_rolling_averages], axis=1)
+            records.append(team_stats)
+        return records
 
 
 class Prop:

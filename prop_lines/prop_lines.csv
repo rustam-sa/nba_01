@@ -1,205 +1,245 @@
 OFFENSE PLAYER PROPS
 PointsSGP
+Timberwolves
+OVER
+UNDER
+Rudy Gobert
+O 12.5
+-105
+U 12.5
+-130
+Naz Reid
+O 11.5
+-110
+U 11.5
+-120
+Jaden McDaniels
+O 9.5
+-120
+U 9.5
+-110
+Anthony Edwards
+O 25.5
+-125
+U 25.5
+-105
+Mike Conley
+O 12.5
+-105
+U 12.5
+-125
+Karl-Anthony Towns
+O 19.5
+-115
+U 19.5
+-115
+Nickeil Alexander-Walker
+O 4.5
+-110
+U 4.5
+-120
+Kyle Anderson
+O 4.5
+110
+U 4.5
+-145
 Mavericks
 OVER
 UNDER
-Luka Doncic
-O 28.5
--115
-U 28.5
--115
+Kyrie Irving
+O 22.5
+-110
+U 22.5
+-120
 Derrick Jones Jr.
 O 8.5
--110
+-125
 U 8.5
--120
+-105
+Dereck Lively II
+O 8.5
+-105
+U 8.5
+-125
 Daniel Gafford
 O 8.5
-100
-U 8.5
 -130
+U 8.5
+100
 PJ Washington
 O 11.5
--125
+-130
 U 11.5
--105
-Dereck Lively II
-O 7.5
--140
-U 7.5
-105
-Kyrie Irving
-O 23.5
--105
-U 23.5
--125
-Timberwolves
-OVER
-UNDER
-Jaden McDaniels
-O 12.5
+100
+Luka Doncic
+O 30.5
 -110
-U 12.5
+U 30.5
 -120
-Rudy Gobert
-O 12.5
--115
-U 12.5
--115
-Karl-Anthony Towns
-O 20.5
--125
-U 20.5
--105
-Mike Conley
-O 10.5
+Josh Green
+O 4.5
 -120
-U 10.5
+U 4.5
 -110
-Naz Reid
-O 10.5
--110
-U 10.5
--120
-Anthony Edwards
-O 27.5
+Jaden Hardy
+O 4.5
 -105
-U 27.5
+U 4.5
 -125
 AssistsSGP
-Mavericks
-OVER
-UNDER
-PJ Washington
-O 1.5
-110
-U 1.5
--160
-Luka Doncic
-O 8.5
--120
-U 8.5
--115
-Kyrie Irving
-O 4.5
-100
-U 4.5
--140
-Daniel Gafford
-O 0.5
--150
-U 0.5
-105
-Derrick Jones Jr.
-O 1.5
-155
-U 1.5
--230
-Dereck Lively II
-O 1.5
-170
-U 1.5
--250
 Timberwolves
 OVER
 UNDER
 Mike Conley
-O 6.5
-110
-U 6.5
--155
+O 5.5
+-110
+U 5.5
+-125
 Jaden McDaniels
 O 1.5
-115
+-115
 U 1.5
--165
+-120
+Karl-Anthony Towns
+O 2.5
+-150
+U 2.5
+105
 Rudy Gobert
 O 1.5
-100
+125
 U 1.5
--140
-Karl-Anthony Towns
-O 3.5
-115
-U 3.5
--165
-Kyle Anderson
-O 2.5
--110
-U 2.5
--130
+-180
 Anthony Edwards
 O 6.5
-110
+115
 U 6.5
--160
+-165
 Nickeil Alexander-Walker
 O 1.5
--150
+-115
 U 1.5
-105
+-120
+Kyle Anderson
+O 2.5
+-135
+U 2.5
+-105
 Naz Reid
-O 1.5
-155
-U 1.5
--230
-Threes MadeSGP
+O 0.5
+-240
+U 0.5
+165
 Mavericks
 OVER
 UNDER
 Kyrie Irving
-O 2.5
+O 4.5
+-140
+U 4.5
 100
-U 2.5
--145
-Luka Doncic
-O 2.5
--190
-U 2.5
-130
-Derrick Jones Jr.
+Dereck Lively II
+O 1.5
+120
+U 1.5
+-175
+Daniel Gafford
 O 0.5
--185
+-170
 U 0.5
-130
+120
+Derrick Jones Jr.
+O 1.5
+165
+U 1.5
+-250
 PJ Washington
+O 1.5
+145
+U 1.5
+-210
+Luka Doncic
+O 9.5
+105
+U 9.5
+-150
+Jaden Hardy
+O 1.5
+135
+U 1.5
+-195
+Josh Green
+O 0.5
+-210
+U 0.5
+145
+Threes MadeSGP
+Timberwolves
+OVER
+UNDER
+Naz Reid
+O 1.5
+-150
+U 1.5
+105
+Anthony Edwards
+O 2.5
+-145
+U 2.5
+100
+Mike Conley
 O 2.5
 135
 U 2.5
--200
-Timberwolves
-OVER
-UNDER
+-190
 Jaden McDaniels
 O 1.5
--160
+165
 U 1.5
-110
+-240
 Karl-Anthony Towns
-O 2.5
-115
-U 2.5
--165
-Naz Reid
 O 1.5
--105
+-200
 U 1.5
--135
-Mike Conley
-O 1.5
--210
-U 1.5
-145
-Anthony Edwards
-O 2.5
--185
-U 2.5
-130
+140
 Nickeil Alexander-Walker
 O 1.5
-130
+160
 U 1.5
--185
+-240
+Mavericks
+OVER
+UNDER
+Luka Doncic
+O 3.5
+100
+U 3.5
+-145
+Kyrie Irving
+O 2.5
+110
+U 2.5
+-160
+PJ Washington
+O 1.5
+-200
+U 1.5
+140
+Derrick Jones Jr.
+O 0.5
+-240
+U 0.5
+165
+Jaden Hardy
+O 0.5
+-130
+U 0.5
+-110
+Josh Green
+O 0.5
+-180
+U 0.5
+125
 Points + AssistsSGP
 ALTERNATE PLAYER PROPS
 To Record X PointsSGP
@@ -207,160 +247,180 @@ To Record X AssistsSGP
 To Record X ReboundsSGP
 GENERAL PLAYER PROPS
 ReboundsSGP
+Timberwolves
+OVER
+UNDER
+Naz Reid
+O 4.5
+-120
+U 4.5
+-120
+Anthony Edwards
+O 5.5
+-125
+U 5.5
+-110
+Karl-Anthony Towns
+O 7.5
+-140
+U 7.5
+100
+Rudy Gobert
+O 11.5
+105
+U 11.5
+-150
+Mike Conley
+O 3.5
+115
+U 3.5
+-165
+Jaden McDaniels
+O 4.5
+105
+U 4.5
+-145
+Kyle Anderson
+O 2.5
+100
+U 2.5
+-145
+Nickeil Alexander-Walker
+O 1.5
+160
+U 1.5
+-240
 Mavericks
 OVER
 UNDER
-Luka Doncic
-O 8.5
--125
-U 8.5
+Dereck Lively II
+O 7.5
 -115
+U 7.5
+-125
 Daniel Gafford
 O 5.5
 -130
 U 5.5
 -110
-Derrick Jones Jr.
-O 3.5
-105
-U 3.5
--145
-Kyrie Irving
-O 3.5
--140
-U 3.5
-100
 PJ Washington
 O 5.5
--130
+-125
 U 5.5
--105
-Dereck Lively II
-O 6.5
--150
-U 6.5
-105
-Timberwolves
-OVER
-UNDER
-Rudy Gobert
-O 12.5
 -110
-U 12.5
--130
-Anthony Edwards
-O 6.5
-110
-U 6.5
--155
-Karl-Anthony Towns
-O 8.5
-105
-U 8.5
--145
-Jaden McDaniels
+Derrick Jones Jr.
 O 3.5
--145
+-115
 U 3.5
-105
-Naz Reid
-O 4.5
--105
-U 4.5
--135
-Nickeil Alexander-Walker
-O 1.5
-120
-U 1.5
--170
-Kyle Anderson
+-120
+Luka Doncic
+O 8.5
+-115
+U 8.5
+-120
+Kyrie Irving
+O 3.5
+-160
+U 3.5
+110
+Josh Green
 O 2.5
 130
 U 2.5
 -185
-Mike Conley
-O 3.5
-125
-U 3.5
--180
+Jaden Hardy
+O 1.5
+155
+U 1.5
+-225
 Points + Assists + ReboundsSGP
 Field Goals MadeSGP
-Mavericks
-OVER
-UNDER
-Kyrie Irving
-O 8.5
--115
-U 8.5
--115
-Luka Doncic
-O 9.5
--120
-U 9.5
--110
-PJ Washington
-O 4.5
-115
-U 4.5
--150
-Daniel Gafford
-O 3.5
-105
-U 3.5
--135
-Dereck Lively II
-O 3.5
-100
-U 3.5
--135
-Derrick Jones Jr.
-O 2.5
--180
-U 2.5
-135
 Timberwolves
 OVER
 UNDER
-Mike Conley
-O 3.5
--110
-U 3.5
--120
 Jaden McDaniels
-O 4.5
--115
-U 4.5
--115
+O 3.5
+-130
+U 3.5
+-105
 Rudy Gobert
 O 4.5
--130
+-110
 U 4.5
-100
+-120
+Anthony Edwards
+O 8.5
+-140
+U 8.5
+105
 Karl-Anthony Towns
 O 6.5
--150
+-135
 U 6.5
-115
+105
+Mike Conley
+O 4.5
+130
+U 4.5
+-170
+Naz Reid
+O 4.5
+125
+U 4.5
+-165
 Kyle Anderson
 O 1.5
--115
+-120
 U 1.5
--115
-Anthony Edwards
-O 9.5
-100
-U 9.5
--135
+-110
 Nickeil Alexander-Walker
 O 1.5
--155
+100
 U 1.5
-115
-Naz Reid
+-130
+Mavericks
+OVER
+UNDER
+Dereck Lively II
 O 3.5
--140
+-115
 U 3.5
+-115
+Daniel Gafford
+O 3.5
+-135
+U 3.5
+100
+PJ Washington
+O 4.5
 105
+U 4.5
+-135
+Luka Doncic
+O 10.5
+100
+U 10.5
+-130
+Kyrie Irving
+O 8.5
+115
+U 8.5
+-150
+Derrick Jones Jr.
+O 3.5
+115
+U 3.5
+-150
+Josh Green
+O 1.5
+-125
+U 1.5
+-105
+Jaden Hardy
+O 1.5
+-115
+U 1.5
+-115
 To Record 5+ Threes MadeSGP
 To Record 3+ Threes MadeSGP
 To Record 1+ Threes MadeSGP
@@ -374,156 +434,171 @@ Assists + ReboundsSGP
 DEFENSE PLAYER PROPS
 Steals + BlocksSGP
 StealsSGP
-Mavericks
-OVER
-UNDER
-Derrick Jones Jr.
-O 0.5
--140
-U 0.5
-105
-Luka Doncic
-O 1.5
--105
-U 1.5
--125
-Kyrie Irving
-O 1.5
-130
-U 1.5
--170
-Daniel Gafford
-O 0.5
-130
-U 0.5
--170
-Dereck Lively II
-O 0.5
--115
-U 0.5
--115
-PJ Washington
-O 0.5
--250
-U 0.5
-180
 Timberwolves
 OVER
 UNDER
 Anthony Edwards
 O 1.5
--120
+115
 U 1.5
--110
+-155
+Naz Reid
+O 0.5
+-145
+U 0.5
+110
 Karl-Anthony Towns
 O 0.5
 -165
 U 0.5
 125
-Mike Conley
-O 1.5
-145
-U 1.5
--195
+Jaden McDaniels
+O 0.5
+-210
+U 0.5
+155
 Rudy Gobert
 O 0.5
--220
+-190
 U 0.5
-160
-Jaden McDaniels
+145
+Mike Conley
 O 1.5
-170
+155
 U 1.5
--230
-Naz Reid
-O 0.5
--120
-U 0.5
--110
+-210
 Kyle Anderson
 O 0.5
--125
-U 0.5
 -105
+U 0.5
+-125
 Nickeil Alexander-Walker
 O 0.5
-105
+175
 U 0.5
--140
-BlocksSGP
+-240
 Mavericks
 OVER
 UNDER
 Luka Doncic
+O 1.5
+100
+U 1.5
+-135
+Dereck Lively II
 O 0.5
-110
+100
+U 0.5
+-130
+Kyrie Irving
+O 1.5
+130
+U 1.5
+-170
+Daniel Gafford
+O 0.5
+115
 U 0.5
 -150
-PJ Washington
-O 0.5
--170
-U 0.5
-125
-Daniel Gafford
-O 1.5
-120
-U 1.5
--155
-Kyrie Irving
-O 0.5
-140
-U 0.5
--190
 Derrick Jones Jr.
 O 0.5
--185
+-180
 U 0.5
-140
+135
+PJ Washington
+O 0.5
+-250
+U 0.5
+185
+Josh Green
+O 0.5
+-125
+U 0.5
+-105
+Jaden Hardy
+O 0.5
+170
+U 0.5
+-225
+BlocksSGP
+Timberwolves
+OVER
+UNDER
+Rudy Gobert
+O 1.5
+-130
+U 1.5
+100
+Naz Reid
+O 0.5
+-150
+U 0.5
+115
+Jaden McDaniels
+O 0.5
+-165
+U 0.5
+125
+Anthony Edwards
+O 0.5
+150
+U 0.5
+-200
+Karl-Anthony Towns
+O 0.5
+195
+U 0.5
+-260
+Mike Conley
+O 0.5
+300
+U 0.5
+-450
+Kyle Anderson
+O 0.5
+225
+U 0.5
+-325
+Nickeil Alexander-Walker
+O 0.5
+375
+U 0.5
+-575
+Mavericks
+OVER
+UNDER
+Daniel Gafford
+O 1.5
+-125
+U 1.5
+-105
 Dereck Lively II
 O 1.5
 115
 U 1.5
 -150
-Timberwolves
-OVER
-UNDER
-Jaden McDaniels
+Derrick Jones Jr.
 O 0.5
 -135
 U 0.5
 105
-Rudy Gobert
-O 1.5
--165
-U 1.5
+Luka Doncic
+O 0.5
+130
+U 0.5
+-170
+PJ Washington
+O 0.5
+-170
+U 0.5
 125
-Anthony Edwards
+Kyrie Irving
 O 0.5
-145
+165
 U 0.5
--195
-Karl-Anthony Towns
+-225
+Josh Green
 O 0.5
-175
+425
 U 0.5
--240
-Mike Conley
-O 0.5
-350
-U 0.5
--550
-Naz Reid
-O 0.5
--135
-U 0.5
-105
-Kyle Anderson
-O 0.5
-230
-U 0.5
--325
-Nickeil Alexander-Walker
-O 0.5
-350
-U 0.5
--525
+-700

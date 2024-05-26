@@ -3,12 +3,12 @@ from scipy.stats import poisson
 
 
 def estimate_probability_poisson_over(data, stat, n):
-    mean = data[stat].mean()
+    mean = data[stat].median()
     probability = 1 - poisson.cdf(n, mean)
     return probability
 
 def estimate_probability_poisson_under(data, stat, n):
-    mean = data[stat].mean()
+    mean = data[stat].median()
     probability = poisson.cdf(n, mean)  # Calculate P(X <= n)
     return probability
 

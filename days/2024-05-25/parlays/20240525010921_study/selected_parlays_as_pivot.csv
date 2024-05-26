@@ -1,0 +1,12 @@
+,PROP_TAG,THRESH,0,3,4,6,8,777,854,1776
+0,Jayson Tatum_points_under,29.5,,,,1.0,,1.0,,1.0
+1,Jayson Tatum_rebounds_under,10.5,,,,,1.0,,1.0,1.0
+2,Jayson Tatum_steals_under,1.5,,,,,,,,1.0
+3,Jrue Holiday_fgm_under,5.5,,,1.0,,,1.0,1.0,
+4,Jrue Holiday_points_under,14.5,1.0,1.0,,,,1.0,1.0,
+5,Jrue Holiday_steals_under,1.5,,,,,,1.0,1.0,
+6,Myles Turner_fg3m_over,1.5,,,,,,,,1.0
+7,Payton Pritchard_assists_over,2.5,1.0,1.0,1.0,1.0,1.0,,,
+8,Payton Pritchard_points_over,7.5,1.0,1.0,1.0,1.0,1.0,,,
+9,Sam Hauser_fgm_over,1.5,,1.0,,,,,,
+10,Sam Hauser_points_over,4.5,1.0,,1.0,1.0,1.0,,,

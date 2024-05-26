@@ -20,6 +20,7 @@ class Team(Base):
     players = relationship("Player", back_populates="team")
     trad_team_stats = relationship("TradTeamStats", back_populates="team")
     adv_team_stats = relationship("AdvTeamStats", back_populates="team")
+    team_rolling_averages = relationship("TeamRollingAverages", back_populates="team")
 
 class Player(Base):
     __tablename__ = 'players'
@@ -61,6 +62,8 @@ class Game(Base):
     trad_player_stats = relationship("TradPlayerStats", back_populates="game")
     adv_team_stats = relationship("AdvTeamStats", back_populates="game")
     adv_player_stats = relationship("AdvPlayerStats", back_populates="game")
+    team_rolling_averages = relationship("TeamRollingAverages", back_populates="game")
+
 
 class TradTeamStats(Base):
     __tablename__ = 'trad_team_stats'
@@ -95,6 +98,7 @@ class TradTeamStats(Base):
     game = relationship('Game', back_populates='trad_team_stats')
     team = relationship('Team', back_populates='trad_team_stats')
 
+
 class TradPlayerStats(Base):
     __tablename__ = 'trad_player_stats'
 
@@ -128,6 +132,7 @@ class TradPlayerStats(Base):
     # Relationships
     game = relationship('Game', back_populates='trad_player_stats')
     player = relationship('Player', back_populates='trad_player_stats')
+
 
 class AdvTeamStats(Base):
     __tablename__ = 'adv_team_stats'
@@ -166,6 +171,7 @@ class AdvTeamStats(Base):
     game = relationship('Game', back_populates='adv_team_stats')
     team = relationship('Team', back_populates='adv_team_stats')
 
+
 class AdvPlayerStats(Base):
     __tablename__ = 'adv_player_stats'
 
@@ -201,6 +207,42 @@ class AdvPlayerStats(Base):
     # Relationships
     game = relationship('Game', back_populates='adv_player_stats')
     player = relationship('Player', back_populates='adv_player_stats')
+
+
+class TeamRollingAverages(Base):
+    __tablename__ = 'team_rolling_averages'
+    
+    id = Column(Integer, primary_key=True)
+    points = Column(Float)
+    rebounds = Column(Float)
+    assists = Column(Float)
+    efg = Column(Float)
+    fg3a = Column(Float)
+    fg3m = Column(Float)
+    fg3_pct = Column(Float)
+    fga = Column(Float)
+    fgm = Column(Float)
+    fta = Column(Float)
+    ft_pct = Column(Float)
+    steals = Column(Float)
+    blocks = Column(Float)
+    to = Column(Float)  # turnovers
+    pace = Column(Float)
+    def_rating = Column(Float)
+    e_def_rating = Column(Float)
+    off_rating = Column(Float)
+    e_off_rating = Column(Float)
+    date = Column(String)
+    game_id = Column(Integer, ForeignKey('games.id'), nullable=False)
+    team_id = Column(Integer, ForeignKey('teams.id'), nullable=False)
+
+    __table_args__ = (UniqueConstraint('game_id', 'team_id', name='_rolling_game_team_uc'),)
+
+    game = relationship('Game', back_populates='team_rolling_averages')
+    team = relationship('Team', back_populates='team_rolling_averages')
+    
+
+
 
 engine = get_database_engine()  
 Base.metadata.create_all(engine)
