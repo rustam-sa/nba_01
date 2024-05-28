@@ -1,14 +1,24 @@
 import pandas as pd
+import numpy as np
+from scipy.stats import zscore
 from scipy.stats import poisson
 
 
 def estimate_probability_poisson_over(data, stat, n):
-    mean = data[stat].median()
+    z_scores = zscore(data[stat])
+    abs_z_scores = np.abs(z_scores)
+    filtered_entries = (abs_z_scores < 3)
+    df_z_filtered = data[filtered_entries]
+    mean = df_z_filtered[stat].mean()
     probability = 1 - poisson.cdf(n, mean)
     return probability
 
 def estimate_probability_poisson_under(data, stat, n):
-    mean = data[stat].median()
+    z_scores = zscore(data[stat])
+    abs_z_scores = np.abs(z_scores)
+    filtered_entries = (abs_z_scores < 3)
+    df_z_filtered = data[filtered_entries]
+    mean = df_z_filtered[stat].mean()
     probability = poisson.cdf(n, mean)  # Calculate P(X <= n)
     return probability
 

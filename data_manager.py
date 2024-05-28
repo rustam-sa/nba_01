@@ -6,12 +6,9 @@ from datetime import date
 from functools import wraps
 from sqlalchemy.exc import SQLAlchemyError
 from sqlalchemy import func, and_
-from sqlalchemy.orm import joinedload
 from sqlalchemy.dialects.postgresql import insert
 from requests.exceptions import HTTPError
-from datetime import datetime
 from nba_api.stats.static import teams
-from nba_api.stats.endpoints import playergamelog
 from nba_api.stats.endpoints import leaguegamefinder
 from nba_api.stats.endpoints import commonteamroster
 from nba_api.stats.endpoints import boxscoresummaryv2
@@ -721,7 +718,7 @@ class DataManager:
             self.sync_adv_team_stats(adv_team_stats=adv_team_stats, db_game_id=db_game_id)
             self.sync_trad_player_stats(trad_player_stats=trad_player_stats, db_game_id=db_game_id)
             self.sync_adv_player_stats(adv_player_stats=adv_player_stats, db_game_id=db_game_id)
-            self.update_all_team_rolling_averages()
+            # self.update_all_team_rolling_averages()
         
     @session_management
     def query_games(self, session):
@@ -1258,6 +1255,152 @@ class DataManager:
             records.append(team_stats)
         return records
 
+    @staticmethod
+    def generate_parlays(df, min_props, max_props):
+        parlays = []
+        for r in range(min_props, max_props + 1):
+            for combination in itertools.combinations(df.index, r):
+                prob_product = 1
+                house_prob_product = 1
+                odds_product = 1
+                ev_sum = 0
+                for idx in combination:
+                    prop_data = df[df.index == idx]
+                    prob_product *= prop_data['PROB'].values[0]
+                    odds_product *= analyze.american_to_decimal(prop_data['ODDS'].values[0])
+                    house_prob_product *= prop_data['HOUSE_PROB'].values[0]
+                    ev_sum += prop_data['EV'].values[0]
+                    potential_winnings = 1 * (odds_product - 1)
+                if ev_sum > min_props:
+                    parlays.append({
+                        'COMBO': combination,
+                        'COMBINED_PROB': prob_product,
+                        'COMBINED_HOUSE_PROB': house_prob_product,
+                        'COMBINED_EV': ev_sum,
+                        'TO_WIN': potential_winnings,
+
+                    })
+            if not parlays:
+                raise RuntimeError("parlays is empty")
+        return pd.DataFrame(parlays)
+
+    def select_optimal_parlays(self, prop_df, max_permeation_rate, player_permeation_rate, min_props, max_props):
+        """
+        Selects optimal parlays based on given constraints.
+        
+        Args:
+            prop_df (pd.DataFrame): DataFrame containing prop information with columns 'PLAYER', 'STAT', etc.
+            max_permeation_rate (float): Maximum rate at which a prop can be permeated.
+            player_permeation_rate (float): Maximum rate at which a player can be permeated.
+            min_props (int): Minimum number of props in a parlay.
+            max_props (int): Maximum number of props in a parlay.
+        
+        Returns:
+            list: List of selected parlays.
+        """
+        
+        # Generate all possible parlays
+        parlays_df = self.generate_parlays(prop_df, min_props, max_props)
+
+        # Sort parlays by combined expected value
+        parlays_df = parlays_df.sort_values(by="COMBINED_EV", ascending=False).reset_index(drop=True)
+        # Assign unique ID to each parlay
+        parlays_df['PARLAY_ID'] = parlays_df.index
+        
+        # Calculate the maximum number of parlays using the updated calculation
+        num_parlays = self.calculate_num_parlays(prop_df, max_permeation_rate, min_props, max_props)
+        
+        # Initialize counts
+        parlays_selected = []
+        prop_counts = {prop: 0 for prop in prop_df.index}
+        player_counts = {player: 0 for player in prop_df['PLAYER']}
+        
+        # Select parlays
+        for _, parlay in parlays_df.iterrows():
+            can_add_parlay = True
+            seen = {}
+            
+            for idx in parlay['COMBO']:
+                prop_row = prop_df.iloc[idx]
+                player = prop_row['PLAYER']
+                stat = prop_row['STAT']
+
+                # Check for conflicts in stat types
+                if stat == 'points':
+                    if player in seen and 'fgm' in seen[player]:
+                        can_add_parlay = False
+                        break
+                elif stat == 'fgm':
+                    if player in seen and 'points' in seen[player]:
+                        can_add_parlay = False
+                        break
+
+                # Check for prop permeation limit
+                if prop_counts[idx] >= num_parlays * max_permeation_rate:
+                    can_add_parlay = False
+                    break
+
+                # Check for player permeation limit
+                if player_counts[player] >= num_parlays * player_permeation_rate:
+                    can_add_parlay = False
+                    break
+
+                if player in seen:
+                    seen[player] += [stat]
+                else:
+                    seen[player] = [stat]
+            
+            if can_add_parlay:
+                parlays_selected.append(parlay)
+                for idx in parlay['COMBO']:
+                    prop_counts[idx] += 1
+                for player in seen:
+                    player_counts[player] += 1
+
+        return parlays_selected
+    
+    @staticmethod
+    def calculate_num_parlays(prop_df, max_permeation_rate, min_props, max_props):
+        """
+        Calculate the optimal number of parlays based on given constraints.
+        
+        Args:
+            prop_df (pd.DataFrame): DataFrame containing prop information.
+            max_permeation_rate (float): Maximum rate at which a prop can be permeated.
+            min_props (int): Minimum number of props in a parlay.
+            max_props (int): Maximum number of props in a parlay.
+            
+        Returns:
+            int: Optimal number of parlays.
+        """
+        
+        # Calculate the average parlay size
+        avg_parlay_size = (min_props + max_props) / 2
+        
+        # Adjust the calculation to consider the average parlay size
+        num_parlays = int(len(prop_df) / (avg_parlay_size * max_permeation_rate))
+        
+        return num_parlays
+    
+    @staticmethod
+    def get_prop_distribution(parlays):
+        appearance_counts = parlays['PROP_TAG'].value_counts()
+        parlay_count = len(parlays['PARLAY_ID'].unique())
+        percentages = pd.Series(appearance_counts/parlay_count)
+        parlay_distribution = pd.concat([appearance_counts, percentages], axis=1)
+        parlay_distribution.columns = ['COUNT', '%']
+        return parlay_distribution
+
+    @staticmethod
+    def get_player_distribution(parlays):
+        appearance_counts = parlays.groupby('PLAYER')['PARLAY_ID'].nunique().reset_index()
+        appearance_counts.columns = ['PLAYER', 'PARLAY_COUNT']
+        parlay_count = len(parlays['PARLAY_ID'].unique())
+        percentages = pd.Series(appearance_counts['PARLAY_COUNT']/parlay_count)
+        parlay_distribution = pd.concat([appearance_counts, percentages], axis=1)
+        parlay_distribution.columns = ['PLAYER', 'PARLAY_COUNTS', '%']
+        parlay_distribution = parlay_distribution.sort_values(by="PARLAY_COUNTS", ascending=False)
+        return parlay_distribution
 
 class Prop:
     def __init__(self, name, team, stat, threshold, odds, bet_type):
