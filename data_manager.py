@@ -388,6 +388,14 @@ class DataManager:
         
         return db_ids
 
+    @staticmethod
+    def safe_float(value):
+        return 0.0 if value is None else float(value)
+
+    @staticmethod
+    def safe_int(value):
+        return 0 if value is None else int(value)
+    
     @session_management
     def sync_adv_team_stats(self, session, adv_team_stats, db_game_id):
         db_ids = []
@@ -395,31 +403,30 @@ class DataManager:
             for _, stat_line in adv_team_stats.iterrows():
                 game_id = int(db_game_id)
                 team_id = int(self.db_team_id_map[stat_line['TEAM_ID']])
-                minutes = stat_line["MIN"].split(':')[0] 
-                minutes = float(minutes)
-                e_off_rating = float(stat_line["E_OFF_RATING"])
-                off_rating = float(stat_line["OFF_RATING"])
-                e_def_rating = float(stat_line["E_DEF_RATING"])
-                def_rating = float(stat_line["DEF_RATING"])
-                e_net_rating = float(stat_line["E_NET_RATING"])
-                net_rating = float(stat_line["NET_RATING"])
-                ast_pct = float(stat_line["AST_PCT"])
-                ast_tov = float(stat_line["AST_TOV"])
-                ast_ratio = float(stat_line["AST_RATIO"])
-                oreb_pct = float(stat_line["OREB_PCT"])
-                dreb_pct = float(stat_line["DREB_PCT"])
-                reb_pct = float(stat_line["REB_PCT"])
-                e_tm_tov_pct = float(stat_line["E_TM_TOV_PCT"])
-                tm_tov_pct = float(stat_line["TM_TOV_PCT"])
-                efg_pct = float(stat_line["EFG_PCT"])
-                ts_pct = float(stat_line["TS_PCT"])
-                usg_pct = float(stat_line["USG_PCT"])
-                e_usg_pct = float(stat_line["E_USG_PCT"])
-                e_pace = float(stat_line["E_PACE"])
-                pace = float(stat_line["PACE"])
-                pace_per40 = float(stat_line["PACE_PER40"])
-                poss = int(stat_line["POSS"])
-                pie = float(stat_line["PIE"])
+                minutes = self.safe_float(stat_line["MIN"].split(':')[0])
+                e_off_rating = self.safe_float(stat_line["E_OFF_RATING"])
+                off_rating = self.safe_float(stat_line["OFF_RATING"])
+                e_def_rating = self.safe_float(stat_line["E_DEF_RATING"])
+                def_rating = self.safe_float(stat_line["DEF_RATING"])
+                e_net_rating = self.safe_float(stat_line["E_NET_RATING"])
+                net_rating = self.safe_float(stat_line["NET_RATING"])
+                ast_pct = self.safe_float(stat_line["AST_PCT"])
+                ast_tov = self.safe_float(stat_line["AST_TOV"])
+                ast_ratio = self.safe_float(stat_line["AST_RATIO"])
+                oreb_pct = self.safe_float(stat_line["OREB_PCT"])
+                dreb_pct = self.safe_float(stat_line["DREB_PCT"])
+                reb_pct = self.safe_float(stat_line["REB_PCT"])
+                e_tm_tov_pct = self.safe_float(stat_line["E_TM_TOV_PCT"])
+                tm_tov_pct = self.safe_float(stat_line["TM_TOV_PCT"])
+                efg_pct = self.safe_float(stat_line["EFG_PCT"])
+                ts_pct = self.safe_float(stat_line["TS_PCT"])
+                usg_pct = self.safe_float(stat_line["USG_PCT"])
+                e_usg_pct = self.safe_float(stat_line["E_USG_PCT"])
+                e_pace = self.safe_float(stat_line["E_PACE"])
+                pace = self.safe_float(stat_line["PACE"])
+                pace_per40 = self.safe_float(stat_line["PACE_PER40"])
+                poss = self.safe_int(stat_line["POSS"])
+                pie = self.safe_float(stat_line["PIE"])
 
                 # Create insert statement
                 insert_statement = insert(AdvTeamStats).values(

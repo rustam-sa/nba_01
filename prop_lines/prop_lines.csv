@@ -1,484 +1,279 @@
-OFFENSE PLAYER PROPS
+Offense Player Props
 PointsSGP
-Timberwolves
+Grizzlies
 OVER
 UNDER
-Jaden McDaniels
-O 10.5
--105
-U 10.5
+Jaren Jackson Jr.
+O 19.5
 -125
-Anthony Edwards
-O 26.5
+U 19.5
+-105
+Santi Aldama
+O 11.5
+-125
+U 11.5
+-105
+Zach Edey
+O 8.5
+-105
+U 8.5
+-125
+Jaylen Wells
+O 11.5
+-120
+U 11.5
 -110
-U 26.5
--120
-Rudy Gobert
-O 11.5
-100
-U 11.5
+Ja Morant
+O 22.5
 -130
-Mike Conley
-O 12.5
+U 22.5
 100
-U 12.5
--130
-Karl-Anthony Towns
+76ers
+OVER
+UNDER
+Kelly Oubre Jr.
 O 18.5
--125
+-105
 U 18.5
--105
-Naz Reid
-O 12.5
--115
-U 12.5
--115
-Mavericks
-OVER
-UNDER
-Kyrie Irving
-O 23.5
--115
-U 23.5
--115
-Luka Doncic
-O 30.5
--115
-U 30.5
--115
-Derrick Jones Jr.
-O 9.5
--125
-U 9.5
--105
-PJ Washington
-O 12.5
--125
-U 12.5
--105
-Jaden Hardy
-O 5.5
--105
-U 5.5
 -130
-Josh Green
-O 4.5
--140
-U 4.5
-105
-Daniel Gafford
-O 11.5
--130
-U 11.5
-100
-AssistsSGP
-Timberwolves
-OVER
-UNDER
-Anthony Edwards
+Kyle Lowry
 O 6.5
--115
+100
 U 6.5
+-135
+Caleb Martin
+O 12.5
+-110
+U 12.5
+-120
+Andre Drummond
+O 10.5
 -125
-Rudy Gobert
-O 1.5
-110
-U 1.5
--160
-Karl-Anthony Towns
-O 2.5
--160
-U 2.5
-110
-Mike Conley
-O 5.5
-110
-U 5.5
--155
-Jaden McDaniels
-O 1.5
-130
-U 1.5
--185
-Naz Reid
-O 1.5
-160
-U 1.5
--230
-Mavericks
+U 10.5
+-105
+Tyrese Maxey
+O 30.5
+-110
+U 30.5
+-120
+AssistsSGP
+Grizzlies
 OVER
 UNDER
-Kyrie Irving
-O 4.5
+Santi Aldama
+O 2.5
 -120
-U 4.5
+U 2.5
 -120
-Luka Doncic
-O 9.5
-105
-U 9.5
--150
-PJ Washington
+Jaylen Wells
 O 1.5
-110
+-145
 U 1.5
--160
-Derrick Jones Jr.
+105
+Zach Edey
+O 0.5
+-200
+U 0.5
+135
+Jaren Jackson Jr.
+O 2.5
+135
+U 2.5
+-195
+Ja Morant
+O 8.5
+110
+U 8.5
+-155
+76ers
+OVER
+UNDER
+Andre Drummond
+O 0.5
+-120
+U 0.5
+-120
+Kelly Oubre Jr.
+O 1.5
+-120
+U 1.5
+-115
+Tyrese Maxey
+O 6.5
+100
+U 6.5
+-140
+Kyle Lowry
+O 2.5
+-140
+U 2.5
+100
+Caleb Martin
+O 2.5
+125
+U 2.5
+-175
+Threes MadeSGP
+Grizzlies
+OVER
+UNDER
+Ja Morant
+O 1.5
+105
+U 1.5
+-150
+Santi Aldama
+O 1.5
+-115
+U 1.5
+-120
+Jaren Jackson Jr.
 O 1.5
 125
 U 1.5
 -180
-Daniel Gafford
-O 1.5
-160
-U 1.5
--240
-Jaden Hardy
-O 1.5
-135
-U 1.5
--195
-Threes MadeSGP
-Timberwolves
-OVER
-UNDER
-Anthony Edwards
-O 2.5
--105
-U 2.5
--135
-Karl-Anthony Towns
+Jaylen Wells
 O 1.5
 -185
 U 1.5
 130
-Mike Conley
-O 2.5
-120
-U 2.5
--170
-Jaden McDaniels
-O 1.5
-150
-U 1.5
--220
-Naz Reid
-O 1.5
--150
-U 1.5
-105
-Mavericks
+76ers
 OVER
 UNDER
-Kyrie Irving
-O 2.5
--105
-U 2.5
--135
-Luka Doncic
+Tyrese Maxey
 O 3.5
--105
-U 3.5
--130
-PJ Washington
-O 1.5
--210
-U 1.5
-145
-Derrick Jones Jr.
-O 1.5
-145
-U 1.5
--210
-Jaden Hardy
-O 0.5
--130
-U 0.5
--110
-Points + AssistsSGP
-ALTERNATE PLAYER PROPS
-To Record X PointsSGP
-To Record X AssistsSGP
-To Record X ReboundsSGP
-GENERAL PLAYER PROPS
-ReboundsSGP
-Timberwolves
-OVER
-UNDER
-Anthony Edwards
-O 6.5
-100
-U 6.5
--140
-Rudy Gobert
-O 10.5
--140
-U 10.5
-100
-Mike Conley
-O 2.5
--175
-U 2.5
-120
-Jaden McDaniels
-O 4.5
-115
-U 4.5
--160
-Karl-Anthony Towns
-O 7.5
--145
-U 7.5
-105
-Naz Reid
-O 3.5
--170
-U 3.5
-120
-Mavericks
-OVER
-UNDER
-PJ Washington
-O 6.5
--115
-U 6.5
 -125
-Derrick Jones Jr.
-O 3.5
--135
 U 3.5
--105
-Kyrie Irving
-O 4.5
-115
-U 4.5
--165
-Daniel Gafford
-O 7.5
--135
-U 7.5
--105
-Jaden Hardy
+-115
+Kelly Oubre Jr.
 O 1.5
--105
+-120
 U 1.5
+-115
+Kyle Lowry
+O 1.5
+120
+U 1.5
+-170
+Caleb Martin
+O 1.5
+140
+U 1.5
+-200
+Points + AssistsSGP
+General Player Props
+ReboundsSGP
+Grizzlies
+OVER
+UNDER
+Zach Edey
+O 6.5
+-110
+U 6.5
+-130
+Jaren Jackson Jr.
+O 5.5
+-110
+U 5.5
+-130
+Santi Aldama
+O 7.5
+-110
+U 7.5
+-130
+Jaylen Wells
+O 4.5
+-120
+U 4.5
+-115
+Ja Morant
+O 5.5
+-105
+U 5.5
 -135
-Luka Doncic
-O 9.5
-100
-U 9.5
--145
-Josh Green
-O 2.5
--160
-U 2.5
+76ers
+OVER
+UNDER
+Andre Drummond
+O 12.5
+-130
+U 12.5
+-110
+Kelly Oubre Jr.
+O 5.5
+-105
+U 5.5
+-135
+Caleb Martin
+O 5.5
 115
+U 5.5
+-160
+Kyle Lowry
+O 2.5
+140
+U 2.5
+-200
+Tyrese Maxey
+O 3.5
+-175
+U 3.5
+125
 Points + Assists + ReboundsSGP
 Field Goals MadeSGP
-Timberwolves
+Grizzlies
 OVER
 UNDER
-Rudy Gobert
-O 4.5
-110
-U 4.5
--150
-Karl-Anthony Towns
-O 6.5
+Zach Edey
+O 3.5
 -125
-U 6.5
--105
-Anthony Edwards
-O 9.5
-105
-U 9.5
--135
-Jaden McDaniels
-O 3.5
--145
 U 3.5
-110
-Mike Conley
+-105
+Ja Morant
+O 7.5
+-130
+U 7.5
+100
+Santi Aldama
 O 4.5
-130
+100
 U 4.5
--170
-Naz Reid
+-130
+Jaren Jackson Jr.
+O 6.5
+-135
+U 6.5
+105
+Jaylen Wells
 O 4.5
--110
+120
 U 4.5
--120
-Mavericks
+-155
+76ers
 OVER
 UNDER
-Kyrie Irving
-O 8.5
--110
-U 8.5
--120
-PJ Washington
+Caleb Martin
 O 4.5
--120
+-110
 U 4.5
--110
-Derrick Jones Jr.
-O 3.5
--115
-U 3.5
--110
-Luka Doncic
+-120
+Andre Drummond
+O 4.5
+-105
+U 4.5
+-125
+Kelly Oubre Jr.
+O 6.5
+-105
+U 6.5
+-125
+Tyrese Maxey
 O 10.5
 105
 U 10.5
--140
-Daniel Gafford
-O 5.5
-120
-U 5.5
--160
-Jaden Hardy
-O 1.5
--165
-U 1.5
-125
-To Record 5+ Threes MadeSGP
-To Record 3+ Threes MadeSGP
-To Record 1+ Threes MadeSGP
-1st Quarter PointsSGP
-1st Quarter AssistsSGP
-1st Quarter ReboundsSGP
-Double DoubleSGP
-Triple DoubleSGP
-Points + ReboundsSGP
-Assists + ReboundsSGP
-DEFENSE PLAYER PROPS
-Steals + BlocksSGP
-StealsSGP
-Timberwolves
-OVER
-UNDER
-Anthony Edwards
-O 1.5
--110
-U 1.5
--120
-Karl-Anthony Towns
-O 0.5
--155
-U 0.5
-115
-Jaden McDaniels
-O 0.5
--180
-U 0.5
-135
-Rudy Gobert
-O 0.5
--190
-U 0.5
-140
-Mike Conley
-O 1.5
-165
-U 1.5
--220
-Naz Reid
-O 0.5
--165
-U 0.5
-125
-Mavericks
-OVER
-UNDER
-Daniel Gafford
-O 0.5
--110
-U 0.5
--120
-Luka Doncic
-O 1.5
--115
-U 1.5
--110
-Kyrie Irving
-O 1.5
-130
-U 1.5
--175
-Derrick Jones Jr.
-O 0.5
--150
-U 0.5
-115
-PJ Washington
-O 0.5
--240
-U 0.5
-180
-Jaden Hardy
-O 0.5
-155
-U 0.5
--210
-BlocksSGP
-Timberwolves
-OVER
-UNDER
-Rudy Gobert
-O 1.5
-115
-U 1.5
--155
-Jaden McDaniels
-O 0.5
--170
-U 0.5
-130
-Anthony Edwards
-O 0.5
-170
-U 0.5
--230
-Karl-Anthony Towns
-O 0.5
-195
-U 0.5
--275
-Mike Conley
-O 0.5
-325
-U 0.5
--475
-Naz Reid
-O 0.5
--150
-U 0.5
-115
-Mavericks
-OVER
-UNDER
-Derrick Jones Jr.
-O 0.5
--155
-U 0.5
-115
-Luka Doncic
-O 0.5
-105
-U 0.5
 -135
-PJ Washington
-O 0.5
--185
-U 0.5
-140
-Kyrie Irving
-O 0.5
-160
-U 0.5
--220
-Daniel Gafford
+Kyle Lowry
 O 2.5
-135
+145
 U 2.5
--175
+-195

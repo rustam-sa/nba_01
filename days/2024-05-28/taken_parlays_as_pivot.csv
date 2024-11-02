@@ -1,0 +1,11 @@
+,PROP_TAG,THRESH,0,2,4,5,6,7,102,117,126,289,294
+0,Daniel Gafford_points_under,11.5,1.0,1.0,1.0,1.0,1.0,1.0,,,,,
+1,Daniel Gafford_rebounds_under,7.5,1.0,1.0,1.0,1.0,1.0,1.0,,,,,
+2,Daniel Gafford_steals_under,0.5,,,,,1.0,,,,,,
+3,Derrick Jones Jr._steals_under,0.5,,1.0,,,,,1.0,1.0,1.0,1.0,1.0
+4,Jaden Hardy_points_under,5.5,1.0,,,,,,1.0,1.0,1.0,,
+5,Jaden Hardy_rebounds_under,1.5,,,,,,1.0,,,1.0,,
+6,Jaden Hardy_steals_under,0.5,,,,1.0,,,,1.0,,,
+7,Kyrie Irving_fg3m_over,2.5,,,,,,,,,,,1.0
+8,Naz Reid_points_over,12.5,,,,,,,,,,1.0,
+9,Rudy Gobert_fgm_over,4.5,,,1.0,,,,1.0,,,1.0,1.0

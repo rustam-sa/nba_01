@@ -19,6 +19,7 @@ matplotlib = "*"
 statsmodels = "*"
 seaborn = "*"
 beautifulsoup4 = "*"
+imblearn = "*"
 
 [dev-packages]
 
