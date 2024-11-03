@@ -954,6 +954,45 @@ class DataManager:
         filtered_df.to_csv(f"props_{date.today()}.csv")
         return filtered_df
     
+    @staticmethod
+    def filter_specific_props(analyzed_props, filter_players=None, filter_stat=None, filter_bet_type=None, n_props=36):
+        print(len(analyzed_props))
+        
+        # Filter out props with ev > 0
+        analyzed_props = [prop for prop in analyzed_props if prop.ev > 0]
+        print(f"num of profitable props: {len(analyzed_props)}")
+        
+        # Convert analyzed_props to DataFrame
+        analyzed_props = pd.DataFrame.from_dict([prop.entry for prop in analyzed_props])
+        print(analyzed_props.head(5))
+        
+        # Filter out specific players if provided
+        if filter_players:
+            for player in filter_players:
+                analyzed_props = analyzed_props[analyzed_props['PLAYER'] != player]
+        
+        # Filter based on stat and bet_type if provided
+        if filter_stat:
+            analyzed_props = analyzed_props[analyzed_props['STAT'] == filter_stat]
+        
+        if filter_bet_type:
+            analyzed_props = analyzed_props[analyzed_props['BET_TYPE'] == filter_bet_type]
+
+        print(len(analyzed_props))
+        
+        # Check if the DataFrame is empty after filtering
+        if analyzed_props.empty:
+            print("analyzed_props DataFrame is empty after filtering.")
+            raise RuntimeError("analyzed_props DataFrame is empty after filtering.")
+        
+        # Sort by probability and select top n_props
+        filtered_df = analyzed_props.sort_values(by="PROB", ascending=False).head(n_props)
+        
+        # Save filtered results to CSV
+        filtered_df.to_csv(f"props_{date.today()}.csv")
+        
+        return filtered_df
+    
 
     # @staticmethod
     # def filter_props(analyzed_props, filter_dict, top_n):

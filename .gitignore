@@ -1,3 +1,4 @@
 *.log
 config.ini
 data_pile/*
+*.xlsx*

@@ -5,6 +5,7 @@ from scipy.stats import poisson
 
 
 def estimate_probability_poisson_over(data, stat, n):
+    print(f"ESTIMATE TROUBLESHOOT: stat: {stat}")
     z_scores = zscore(data[stat])
     abs_z_scores = np.abs(z_scores)
     filtered_entries = (abs_z_scores < 3)

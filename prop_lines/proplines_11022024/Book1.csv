@@ -1,284 +1,329 @@
 Offense Player Props
 PointsSGP
-Kings
+Grizzlies
 OVER
 UNDER
-DeMar DeRozan
-O 22.5
+Santi Aldama
+O 11.5
 -120
-U 22.5
+U 11.5
 -110
-Domantas Sabonis
-O 18.5
--110
-U 18.5
--120
-Keegan Murray
-O 13.5
--120
-U 13.5
--110
-Malik Monk
-O 13.5
--105
-U 13.5
+Jaylen Wells
+O 11.5
+-115
+U 11.5
+-115
+Jaren Jackson Jr.
+O 19.5
 -125
-De'Aaron Fox
-O 24.5
--125
-U 24.5
+U 19.5
 -105
-Kevin Huerter
-O 9.5
-100
-U 9.5
--130
-Raptors
+Zach Edey
+O 8.5
+-105
+U 8.5
+-125
+Ja Morant
+O 23.5
+-110
+U 23.5
+-120
+76ers
 OVER
 UNDER
-Jakob Poeltl
-O 15.5
+Caleb Martin
+O 12.5
 -110
-U 15.5
+U 12.5
 -120
-RJ Barrett
-O 25.5
--110
-U 25.5
--120
-Gradey Dick
-O 18.5
--110
-U 18.5
--120
-Davion Mitchell
+Andre Drummond
 O 10.5
--115
+-120
 U 10.5
--115
-AssistsSGP
-Kings
-OVER
-UNDER
-Domantas Sabonis
-O 5.5
--145
-U 5.5
-105
-Malik Monk
-O 3.5
--145
-U 3.5
-105
-Kevin Huerter
-O 1.5
--140
-U 1.5
-100
-De'Aaron Fox
-O 5.5
-100
-U 5.5
--140
-DeMar DeRozan
-O 3.5
--150
-U 3.5
-105
-Keegan Murray
-O 1.5
-120
-U 1.5
--170
-Raptors
-OVER
-UNDER
-Davion Mitchell
-O 5.5
--125
-U 5.5
--115
-Gradey Dick
-O 1.5
--125
-U 1.5
 -110
-Jakob Poeltl
-O 3.5
--135
-U 3.5
+Tyrese Maxey
+O 30.5
 -105
-RJ Barrett
+U 30.5
+-125
+Kyle Lowry
 O 6.5
-110
+105
 U 6.5
--155
-Threes MadeSGP
-Kings
+-135
+Kelly Oubre Jr.
+O 17.5
+-125
+U 17.5
+-105
+Eric Gordon
+O 8.5
+-115
+U 8.5
+-115
+KJ Martin
+O 5.5
+-135
+U 5.5
+105
+AssistsSGP
+Grizzlies
 OVER
 UNDER
-DeMar DeRozan
-O 0.5
--105
-U 0.5
--140
-Malik Monk
+Santi Aldama
+O 2.5
+-120
+U 2.5
+-120
+Jaylen Wells
 O 1.5
 -130
 U 1.5
--105
-Kevin Huerter
-O 1.5
--150
-U 1.5
-105
-Domantas Sabonis
+-110
+Zach Edey
 O 0.5
-125
+-165
 U 0.5
--180
-De'Aaron Fox
-O 2.5
-105
-U 2.5
--145
-Keegan Murray
-O 2.5
-125
-U 2.5
--180
-Raptors
+115
+Ja Morant
+O 8.5
+-115
+U 8.5
+-125
+Jaren Jackson Jr.
+O 1.5
+-210
+U 1.5
+140
+76ers
 OVER
 UNDER
-Gradey Dick
-O 2.5
--135
-U 2.5
--105
-Davion Mitchell
+Andre Drummond
+O 0.5
+-115
+U 0.5
+-125
+Kelly Oubre Jr.
 O 1.5
--105
+-120
 U 1.5
--135
-RJ Barrett
+-115
+Tyrese Maxey
+O 6.5
+105
+U 6.5
+-150
+Kyle Lowry
+O 2.5
+-160
+U 2.5
+115
+Caleb Martin
+O 2.5
+120
+U 2.5
+-170
+KJ Martin
 O 1.5
--175
+110
+U 1.5
+-160
+Eric Gordon
+O 1.5
+130
+U 1.5
+-185
+Threes MadeSGP
+Grizzlies
+OVER
+UNDER
+Ja Morant
+O 1.5
+105
+U 1.5
+-150
+Santi Aldama
+O 1.5
+-110
+U 1.5
+-125
+Jaylen Wells
+O 1.5
+-180
 U 1.5
 125
+Jaren Jackson Jr.
+O 1.5
+130
+U 1.5
+-185
+76ers
+OVER
+UNDER
+Tyrese Maxey
+O 3.5
+-120
+U 3.5
+-120
+Kelly Oubre Jr.
+O 1.5
+-125
+U 1.5
+-115
+Kyle Lowry
+O 1.5
+125
+U 1.5
+-175
+Caleb Martin
+O 1.5
+145
+U 1.5
+-210
+Eric Gordon
+O 1.5
+-120
+U 1.5
+-120
+KJ Martin
+O 0.5
+260
+U 0.5
+-425
 Points + AssistsSGP
 General Player Props
 ReboundsSGP
-Kings
+Grizzlies
 OVER
 UNDER
-Domantas Sabonis
-O 13.5
--130
-U 13.5
--110
-Malik Monk
-O 3.5
--110
-U 3.5
--130
-DeMar DeRozan
-O 4.5
--110
-U 4.5
--125
-Kevin Huerter
-O 3.5
-110
-U 3.5
--155
-Keegan Murray
+Zach Edey
 O 6.5
--150
+-110
 U 6.5
-105
-De'Aaron Fox
+-130
+Ja Morant
 O 5.5
-115
+-135
 U 5.5
--165
-Raptors
+-105
+Santi Aldama
+O 7.5
+-110
+U 7.5
+-130
+Jaylen Wells
+O 4.5
+-120
+U 4.5
+-115
+Jaren Jackson Jr.
+O 5.5
+-105
+U 5.5
+-135
+76ers
 OVER
 UNDER
-Jakob Poeltl
-O 11.5
--130
-U 11.5
--110
-Davion Mitchell
-O 2.5
--130
-U 2.5
--110
-Gradey Dick
-O 3.5
-110
-U 3.5
--155
-RJ Barrett
+Kelly Oubre Jr.
 O 5.5
--155
+100
 U 5.5
-110
+-145
+Andre Drummond
+O 12.5
+-115
+U 12.5
+-125
+Kyle Lowry
+O 2.5
+140
+U 2.5
+-200
+Caleb Martin
+O 4.5
+-150
+U 4.5
+105
+Tyrese Maxey
+O 3.5
+-165
+U 3.5
+115
+KJ Martin
+O 3.5
+-150
+U 3.5
+105
+Eric Gordon
+O 1.5
+120
+U 1.5
+-175
 Points + Assists + ReboundsSGP
 Field Goals MadeSGP
-Kings
+Grizzlies
 OVER
 UNDER
-Kevin Huerter
+Zach Edey
 O 3.5
-100
-U 3.5
--135
-Malik Monk
-O 4.5
--110
-U 4.5
--120
-Domantas Sabonis
-O 7.5
-110
-U 7.5
--145
-DeMar DeRozan
-O 7.5
--150
-U 7.5
-110
-De'Aaron Fox
-O 9.5
-105
-U 9.5
--135
-Keegan Murray
-O 5.5
-120
-U 5.5
--160
-Raptors
-OVER
-UNDER
-Gradey Dick
-O 6.5
--115
-U 6.5
--115
-Jakob Poeltl
-O 6.5
--120
-U 6.5
--110
-RJ Barrett
-O 9.5
-100
-U 9.5
 -130
-Davion Mitchell
+U 3.5
+-105
+Jaren Jackson Jr.
+O 6.5
+-135
+U 6.5
+100
+Santi Aldama
+O 4.5
+100
+U 4.5
+-135
+Ja Morant
+O 7.5
+-145
+U 7.5
+110
+Jaylen Wells
 O 4.5
 125
 U 4.5
--170
+-165
+76ers
+OVER
+UNDER
+Caleb Martin
+O 4.5
+-110
+U 4.5
+-120
+Andre Drummond
+O 4.5
+-105
+U 4.5
+-125
+Tyrese Maxey
+O 10.5
+105
+U 10.5
+-140
+Kelly Oubre Jr.
+O 6.5
+-105
+U 6.5
+-125
+Kyle Lowry
+O 1.5
+-195
+U 1.5
+145
+Eric Gordon
+O 2.5
+-160
+U 2.5
+120
+KJ Martin
+O 2.5
+110
+U 2.5
+-145
