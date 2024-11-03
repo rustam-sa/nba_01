@@ -2,3 +2,4 @@
 config.ini
 data_pile/*
 *.xlsx*
+prop_lines/*

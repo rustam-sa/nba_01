@@ -935,27 +935,27 @@ class DataManager:
         return top_comb_dfs
     
     
-    @staticmethod
-    def filter_props(analyzed_props, filter_players=None, n_props = 36):
-        print(len(analyzed_props))
-        analyzed_props = [prop for prop in analyzed_props if prop.ev > 0]
-        print(f"num of profitable props: {len(analyzed_props)}")
-        analyzed_props = pd.DataFrame.from_dict([prop.entry for prop in analyzed_props])
-        print(analyzed_props.head(5))
-        if filter_players:
-            for player in filter_players:
-                analyzed_props = analyzed_props[analyzed_props['PLAYER'] != player]
-        print(len(analyzed_props))
-        if analyzed_props.empty:
-            print("analyzed_props DataFrame is empty after filtering.")
-            raise RuntimeError("analyzed_props DataFrame is empty after filtering.")
+    # @staticmethod
+    # def filter_props(analyzed_props, filter_players=None, n_props = 36):
+    #     print(len(analyzed_props))
+    #     analyzed_props = [prop for prop in analyzed_props if prop.ev > 0]
+    #     print(f"num of profitable props: {len(analyzed_props)}")
+    #     analyzed_props = pd.DataFrame.from_dict([prop.entry for prop in analyzed_props])
+    #     print(analyzed_props.head(5))
+    #     if filter_players:
+    #         for player in filter_players:
+    #             analyzed_props = analyzed_props[analyzed_props['PLAYER'] != player]
+    #     print(len(analyzed_props))
+    #     if analyzed_props.empty:
+    #         print("analyzed_props DataFrame is empty after filtering.")
+    #         raise RuntimeError("analyzed_props DataFrame is empty after filtering.")
         
-        filtered_df = analyzed_props.sort_values(by="PROB", ascending=False).head(n_props)
-        filtered_df.to_csv(f"props_{date.today()}.csv")
-        return filtered_df
+    #     filtered_df = analyzed_props.sort_values(by="PROB", ascending=False).head(n_props)
+    #     filtered_df.to_csv(f"props_{date.today()}.csv")
+    #     return filtered_df
     
     @staticmethod
-    def filter_specific_props(analyzed_props, filter_players=None, filter_stat=None, filter_bet_type=None, n_props=36):
+    def filter_props(analyzed_props, filters=None, n_props=36):
         print(len(analyzed_props))
         
         # Filter out props with ev > 0
@@ -966,18 +966,29 @@ class DataManager:
         analyzed_props = pd.DataFrame.from_dict([prop.entry for prop in analyzed_props])
         print(analyzed_props.head(5))
         
-        # Filter out specific players if provided
-        if filter_players:
-            for player in filter_players:
-                analyzed_props = analyzed_props[analyzed_props['PLAYER'] != player]
-        
-        # Filter based on stat and bet_type if provided
-        if filter_stat:
-            analyzed_props = analyzed_props[analyzed_props['STAT'] == filter_stat]
-        
-        if filter_bet_type:
-            analyzed_props = analyzed_props[analyzed_props['BET_TYPE'] == filter_bet_type]
+        # Apply filters based on the specific combinations in the filters DataFrame
+        if filters is not None:
+            # Replace empty strings with None in filters for easier comparison
+            filters = filters.replace({"": None})
+            
+            # Iterate over each row in filters to exclude matching rows in analyzed_props
+            for _, row in filters.iterrows():
+                player_name = row['name']
+                stat = row['stat']
+                bet_type = row['bet_type']
 
+                # Filter out the specific combination of player, stat, and bet_type
+                condition = (analyzed_props['PLAYER'] == player_name)
+                
+                if stat is not None:
+                    condition &= (analyzed_props['STAT'] == stat)
+                
+                if bet_type is not None:
+                    condition &= (analyzed_props['BET_TYPE'] == bet_type)
+                
+                # Exclude matching rows
+                analyzed_props = analyzed_props[~condition]
+        
         print(len(analyzed_props))
         
         # Check if the DataFrame is empty after filtering
