@@ -955,54 +955,90 @@ class DataManager:
     #     return filtered_df
     
     @staticmethod
-    def filter_props(analyzed_props, filters=None, n_props=36):
-        print(len(analyzed_props))
+    def filter_props(analyzed_props, filters=None, n_props=36, force_props=None):
         
-        # Filter out props with ev > 0
-        analyzed_props = [prop for prop in analyzed_props if prop.ev > 0]
-        print(f"num of profitable props: {len(analyzed_props)}")
-        
-        # Convert analyzed_props to DataFrame
-        analyzed_props = pd.DataFrame.from_dict([prop.entry for prop in analyzed_props])
-        print(analyzed_props.head(5))
-        
-        # Apply filters based on the specific combinations in the filters DataFrame
-        if filters is not None:
-            # Replace empty strings with None in filters for easier comparison
-            filters = filters.replace({"": None})
-            
-            # Iterate over each row in filters to exclude matching rows in analyzed_props
-            for _, row in filters.iterrows():
-                player_name = row['name']
-                stat = row['stat']
-                bet_type = row['bet_type']
+        def filter_force_props(instances, force_props):
+            # Initialize list to store matched instances
+            matched_instances = []
 
-                # Filter out the specific combination of player, stat, and bet_type
-                condition = (analyzed_props['PLAYER'] == player_name)
+            # Loop over each row in force_props DataFrame
+            for _, row in force_props.iterrows():
+                # Get the criteria for filtering
+                name, stat, bet_type = row['name'], row['stat'], row['bet_type']
+                
+                # Debug print to check what we're matching
+                print(f"Checking for: name={name}, stat={stat}, bet_type={bet_type}")
+                
+                # Find matching instances in the instances list
+                for instance in instances:
+                    # Debug print each instance's attributes
+                    print(f"Instance - name: {getattr(instance, 'name', None)}, "
+                        f"stat: {getattr(instance, 'stat', None)}, "
+                        f"bet_type: {getattr(instance, 'bet_type', None)}")
+                    
+                    if (getattr(instance, 'name', '').lower() == str(name).lower() and
+                        getattr(instance, 'stat', '').lower() == str(stat).lower() and
+                        getattr(instance, 'bet_type', '').lower() == str(bet_type).lower()):
+                        matched_instances.append(instance)
+            
+            # Debug print to check matched instances
+            print("Matched instances:", matched_instances)
+            
+            return matched_instances
+        
+        # Step 2: Process `force_props`
+        required_props = filter_force_props(analyzed_props, force_props)
+        required_props_df = pd.DataFrame.from_dict([prop.entry for prop in required_props])
+
+        # Step 1: Filter out props with ev > 0 and convert to DataFrame
+        analyzed_props = [prop for prop in analyzed_props if prop.ev > 0]
+        analyzed_props_df = pd.DataFrame.from_dict([prop.entry for prop in analyzed_props])
+        
+
+  
+        # Step 3: Apply filters from the `filters` DataFrame
+        if filters is not None:
+            filters = filters.replace({"": None})  # Replace empty strings with None for easier comparison
+            
+            for _, row in filters.iterrows():
+                player_name, stat, bet_type = row['name'], row['stat'], row['bet_type']
+                
+                # Create a condition to filter out matching rows
+                condition = (analyzed_props_df['PLAYER'] == player_name)
                 
                 if stat is not None:
-                    condition &= (analyzed_props['STAT'] == stat)
+                    condition &= (analyzed_props_df['STAT'] == stat)
                 
                 if bet_type is not None:
-                    condition &= (analyzed_props['BET_TYPE'] == bet_type)
+                    condition &= (analyzed_props_df['TYPE'] == bet_type)
                 
                 # Exclude matching rows
-                analyzed_props = analyzed_props[~condition]
+                analyzed_props_df = analyzed_props_df[~condition]
         
-        print(len(analyzed_props))
-        
-        # Check if the DataFrame is empty after filtering
-        if analyzed_props.empty:
+        # Step 4: Check if the DataFrame is empty
+        if analyzed_props_df.empty:
             print("analyzed_props DataFrame is empty after filtering.")
             raise RuntimeError("analyzed_props DataFrame is empty after filtering.")
         
-        # Sort by probability and select top n_props
-        filtered_df = analyzed_props.sort_values(by="PROB", ascending=False).head(n_props)
+        # Step 5: Sort `analyzed_props_df` by probability and select top `n_props`
+        filtered_df = analyzed_props_df.sort_values(by="PROB", ascending=False).head(n_props)
+
+        # Step 6: Merge `filtered_df` with `required_props_df` to ensure required props are included
+        merged_props = pd.concat([filtered_df, required_props_df]).drop_duplicates(subset=['PLAYER', 'STAT', 'TYPE'], keep='first')
+
+        # Step 7: Adjust row count without removing required props
+        if len(merged_props) > n_props:
+            # Calculate the number of non-required rows to keep
+            non_required_count = n_props - len(required_props_df)
+            # Keep only the top `non_required_count` rows from `filtered_df`, then re-merge
+            filtered_df = filtered_df.head(non_required_count)
+            # Re-merge to finalize output
+            merged_props = pd.concat([filtered_df, required_props_df]).drop_duplicates(subset=['PLAYER', 'STAT', 'TYPE'], keep='first')
+
+        # Step 8: Save the final merged DataFrame to CSV
+        merged_props.to_csv(f"props_{date.today()}.csv", index=False)
         
-        # Save filtered results to CSV
-        filtered_df.to_csv(f"props_{date.today()}.csv")
-        
-        return filtered_df
+        return merged_props
     
 
     # @staticmethod
