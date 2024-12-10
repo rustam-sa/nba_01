@@ -1,0 +1,32 @@
+,PROP_TAG,THRESH,1,2,3,4,5,6,7,8,9,10
+0,Caris LeVert_points_over,9.5,,,,1.0,,,,,,
+1,Chris Boucher_fg3m_over,0.5,,1.0,,1.0,,,,,,
+2,Darius Garland_points_over,18.5,,,,,,,1.0,,,
+3,Davion Mitchell_assists_over,3.5,,,,,,1.0,,1.0,,
+4,Davion Mitchell_points_over,5.5,,,,,,,,,1.0,
+5,Davion Mitchell_rebounds_over,1.5,,,,,,,1.0,,,
+6,Derrick White_points_over,15.5,1.0,,,,,,,,1.0,
+7,Duncan Robinson_assists_under,2.5,,,,,1.0,1.0,,,,1.0
+8,Duncan Robinson_points_under,11.5,,,,,,,1.0,,,
+9,Duncan Robinson_rebounds_under,2.5,,,,,,,1.0,,,
+10,Haywood Highsmith_fg3m_over,0.5,,,,,,,,,,1.0
+11,Haywood Highsmith_points_over,5.5,,,1.0,,,1.0,,1.0,,
+12,Haywood Highsmith_rebounds_under,3.5,1.0,,,,1.0,,,,,
+13,Isaac Okoro_rebounds_under,2.5,,,,1.0,1.0,,,,,
+14,Jaime Jaquez Jr._assists_over,1.5,1.0,,,,1.0,,,,,
+15,Jaime Jaquez Jr._points_over,9.5,,1.0,,,,,,,,
+16,Jakob Poeltl_assists_over,1.5,,,,,,,,,,1.0
+17,Jakob Poeltl_rebounds_over,10.5,,,1.0,,,1.0,,,,
+18,Jayson Tatum_rebounds_under,9.5,,,,,,,,,,1.0
+19,Jrue Holiday_assists_under,4.5,,,,1.0,,,,,,
+20,Jrue Holiday_points_over,10.5,1.0,,,,,,,,,
+21,Ochai Agbaji_points_over,9.5,,1.0,,,,,,1.0,,
+22,Ochai Agbaji_rebounds_over,3.5,,,,,,1.0,,,,
+23,Scottie Barnes_fg3m_under,1.5,,,1.0,,1.0,,,,,
+24,Scottie Barnes_points_under,21.5,1.0,1.0,,,,,,,,
+25,Terry Rozier_assists_over,2.5,,,,,,,,1.0,,
+26,Terry Rozier_points_over,10.5,,,,,,,,,1.0,
+27,Terry Rozier_rebounds_over,2.5,,,,,,,1.0,,1.0,
+28,Ty Jerome_fg3m_over,0.5,,,1.0,,,,,1.0,1.0,
+29,Ty Jerome_rebounds_under,2.5,,1.0,,,,,,,,
+30,Tyler Herro_rebounds_under,5.5,,,1.0,1.0,,,,,,1.0

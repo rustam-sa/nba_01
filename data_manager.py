@@ -1,6 +1,7 @@
 import time
 import itertools
 import pandas as pd
+from datetime import datetime
 import os
 from datetime import date
 from functools import wraps
@@ -20,12 +21,15 @@ import date_utils as date_mng
 from models import Team, Player, Game, TradTeamStats, AdvTeamStats, TradPlayerStats, AdvPlayerStats, TeamRollingAverages
 from db_config import get_database_engine, get_session
 
+def get_todays_date():
+    return datetime.today().strftime('%Y-%m-%d')
 
 class DataManager:
     def __init__(self):
         self.nba_team_id_map, self.nba_player_id_map = self.create_id_maps()
         self.db_team_id_map = {v: k for k, v in self.nba_team_id_map.items()}
         self.db_player_id_map = {v: k for k, v in self.nba_player_id_map.items()}
+        self.nba_team_id_abbreviation_map = self.create_nba_id_abbreviation_map()
 
     @staticmethod
     def get_engine():
@@ -85,6 +89,7 @@ class DataManager:
         try:
             gamefinder = leaguegamefinder.LeagueGameFinder(team_id_nullable=team.nba_team_id, season_nullable=season, season_type_nullable=season_type)
             games_df = gamefinder.get_data_frames()[0]
+            time.sleep(1)
             print(games_df)
             return games_df
 
@@ -218,9 +223,16 @@ class DataManager:
     def pull_all_games_from_season(self, season, season_type):
         teams = self.query_teams()
         all_games = []
+        today = get_todays_date()  # Get today's date as a string
+
         for team in teams:
             team_games = self.pull_games_by_team_and_season(team, season, season_type)
+            # Ensure GAME_DATE is in the same format for comparison
+            team_games['GAME_DATE'] = pd.to_datetime(team_games['GAME_DATE']).dt.strftime('%Y-%m-%d')
+            # Filter out games where GAME_DATE matches today's date
+            team_games = team_games[team_games['GAME_DATE'] != today]
             all_games.append(team_games)
+
         all_games = pd.concat(all_games, axis=0, ignore_index=True)
         return all_games
 
@@ -286,8 +298,9 @@ class DataManager:
         except Exception as e:
             # Rollback in case of exception and raise the error
             session.rollback()
+            print(game)
             raise RuntimeError(f"Error syncing game {game.loc['GAME_ID']}: {str(e)}")
-        
+
     @session_management
     def sync_trad_team_stats(self, session, trad_team_stats, db_game_id):
         db_ids = []
@@ -715,17 +728,20 @@ class DataManager:
     
     def sync_games(self, season, season_type):
         games = self.pull_all_games_from_season(season, season_type)
+        today = get_todays_date()
         for _, game in games.iterrows():
-            time.sleep(0.3)
-            nba_game_id = game['GAME_ID']
-            adv_player_stats, adv_team_stats = self.pull_advanced_stats_for_game(nba_game_id)
-            trad_player_stats, trad_team_stats = self.pull_traditional_stats_for_game(nba_game_id)
-            db_game_id = self.sync_game(game, season, season_type)
-            self.sync_trad_team_stats(trad_team_stats=trad_team_stats, db_game_id=db_game_id)
-            self.sync_adv_team_stats(adv_team_stats=adv_team_stats, db_game_id=db_game_id)
-            self.sync_trad_player_stats(trad_player_stats=trad_player_stats, db_game_id=db_game_id)
-            self.sync_adv_player_stats(adv_player_stats=adv_player_stats, db_game_id=db_game_id)
-            # self.update_all_team_rolling_averages()
+            if today != game['GAME_DATE']:
+                time.sleep(0.3)
+                nba_game_id = game['GAME_ID']
+                adv_player_stats, adv_team_stats = self.pull_advanced_stats_for_game(nba_game_id)
+                trad_player_stats, trad_team_stats = self.pull_traditional_stats_for_game(nba_game_id)
+                db_game_id = self.sync_game(game, season, season_type)
+                print(db_game_id)
+                self.sync_trad_team_stats(trad_team_stats=trad_team_stats, db_game_id=db_game_id)
+                self.sync_adv_team_stats(adv_team_stats=adv_team_stats, db_game_id=db_game_id)
+                self.sync_trad_player_stats(trad_player_stats=trad_player_stats, db_game_id=db_game_id)
+                self.sync_adv_player_stats(adv_player_stats=adv_player_stats, db_game_id=db_game_id)
+                # self.update_all_team_rolling_averages()
         
     @session_management
     def query_games(self, session):
@@ -744,8 +760,32 @@ class DataManager:
     
     @session_management
     def get_player_id(self, session, player_name):
-        player = session.query(Player).filter(Player.name==player_name).all()[0]
+        player = session.query(Player).filter(Player.name==player_name).all()
+        if player:
+            player = player[0]
+        else:
+            return None
         player_id = player.id
+        return player_id
+    
+    @session_management
+    def get_player_nba_id(self, session, player_name):
+        player = session.query(Player).filter(Player.name==player_name).all()
+        if player:
+            player = player[0]
+        else:
+            return None
+        player_id = player.nba_player_id
+        return player_id
+    
+    @session_management
+    def get_player_team(self, session, player_name):
+        player = session.query(Player).filter(Player.name==player_name).all()
+        if player:
+            player = player[0]
+        else:
+            return None
+        player_id = player.team_id
         return player_id
     
     @session_management
@@ -802,7 +842,8 @@ class DataManager:
                 'steals': trad_stats.stl,
                 'blocks': trad_stats.blk,
                 'date': game.date,
-                'game_id': game.id
+                'game_id': game.id,
+
 
             }
             data_list.append(row)
@@ -1222,7 +1263,6 @@ class DataManager:
     def save_as_excel_workbook(dataframes, file_name):
         writer = pd.ExcelWriter(f'{file_name}.xlsx', engine='openpyxl')
         for tag, df in dataframes.items():
-            print(tag, df)
             df.to_excel(writer, sheet_name=tag)
         writer.close()
 
@@ -1494,6 +1534,41 @@ class DataManager:
         parlay_distribution.columns = ['PLAYER', 'PARLAY_COUNTS', '%']
         parlay_distribution = parlay_distribution.sort_values(by="PARLAY_COUNTS", ascending=False)
         return parlay_distribution
+    
+
+    def get_players_in_teams(self, subject_teams):
+        teams = self.query_teams()
+        subject_id_map = {}
+        for team in teams:
+            if team.abbreviation in subject_teams:
+                subject_id_map[team.nba_team_id] = team.id
+        players = self.pull_players()
+        player_names = list(players["PLAYER"])
+        team_ids = list(players["TeamID"])
+        players_to_examine = []
+        for n in range(len(player_names)):
+            if team_ids[n] in subject_id_map.keys():
+                players_to_examine.append((player_names[n], team_ids[n])) 
+        return players_to_examine
+
+
+    def get_player_logs(self, players):
+        game_data_players = []
+        for player, team_id in players:
+            player_id = self.get_player_id(player)
+            player_game_data = self.get_and_save_player_data(player_id)
+            game_data_players.append(player_game_data)
+        return game_data_players
+    
+
+    def create_nba_id_abbreviation_map(self):
+        team_abbreviation_map = {}
+        teams = self.query_teams()
+        for team in teams:
+            nba_id = team.nba_team_id
+            abbreviation = team.abbreviation
+            team_abbreviation_map[nba_id] = abbreviation
+        return team_abbreviation_map
 
 class Prop:
     def __init__(self, name, team, stat, threshold, odds, bet_type):

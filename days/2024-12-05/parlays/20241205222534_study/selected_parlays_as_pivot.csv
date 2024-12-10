@@ -1,0 +1,23 @@
+,PROP_TAG,THRESH,1,2,3,4,5,6,7,8,9,10
+0,Alperen Sengun_assists_over,6.5,,,,1.0,,,,,,
+1,Alperen Sengun_fg3m_under,0.5,,,,,1.0,,,,,
+2,Alperen Sengun_points_under,22.5,,,,,,,,,1.0,1.0
+3,Alperen Sengun_rebounds_under,11.5,,,,1.0,1.0,,,,,
+4,Amen Thompson_fg3m_under,0.5,,1.0,,,,,,,1.0,
+5,Amen Thompson_points_under,13.5,,,,,,,1.0,,,
+6,Amen Thompson_rebounds_under,8.5,,,,,,,,1.0,,
+7,Andrew Wiggins_points_over,17.5,,,,,,,,1.0,,
+8,Andrew Wiggins_rebounds_under,4.5,,,1.0,,,,1.0,,,
+9,Brandin Podziemski_points_under,11.5,,,1.0,,,,,,,
+10,Dillon Brooks_points_under,13.5,,,,,,1.0,,,,
+11,Dillon Brooks_rebounds_under,3.5,,,,1.0,,,,,,
+12,Fred VanVleet_points_over,17.5,,,,,,,,,1.0,1.0
+13,Fred VanVleet_rebounds_over,3.5,,,,,,,,1.0,,
+14,Jabari Smith Jr._assists_under,0.5,,1.0,,,,,,,,1.0
+15,Jabari Smith Jr._points_under,13.5,1.0,,,,,,,,,
+16,Jabari Smith Jr._rebounds_under,7.5,1.0,,,,,1.0,,,,
+17,Jalen Green_fg3m_under,2.5,1.0,,1.0,,,,,,,
+18,Jalen Green_points_under,21.5,,,,,,1.0,,,,
+19,Jalen Green_rebounds_under,5.5,,,,,,,1.0,,,
+20,Jonathan Kuminga_points_under,17.5,,1.0,,,,,,,,
+21,Jonathan Kuminga_rebounds_under,5.5,,,,,1.0,,,,,

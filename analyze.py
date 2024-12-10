@@ -1,7 +1,55 @@
+import random
+import math
 import pandas as pd
 import numpy as np
 from scipy.stats import zscore
 from scipy.stats import poisson
+
+
+def estimate_probability_poisson_over_weighted(data, stat, n, time_column):
+    # Ensure the time column is datetime
+    data[time_column] = pd.to_datetime(data[time_column])
+    max_time = data[time_column].max()
+    
+    # Calculate weights as the inverse of recency (e.g., exponential decay)
+    recency = (max_time - data[time_column]).dt.total_seconds()  # Convert to seconds
+    data['weight'] = np.exp(-recency / recency.max())  # Normalize and invert
+
+    # Apply Z-score filtering
+    z_scores = zscore(data[stat])
+    abs_z_scores = np.abs(z_scores)
+    filtered_entries = (abs_z_scores < 3)
+    df_z_filtered = data[filtered_entries]
+
+    # Apply weights and calculate the weighted mean
+    weighted_mean = np.average(df_z_filtered[stat], weights=df_z_filtered['weight'])
+    
+    # Estimate the probability
+    probability = 1 - poisson.cdf(n, weighted_mean)
+    return probability
+
+def estimate_probability_poisson_under_weighted(data, stat, n, time_column):
+    # Ensure the time column is datetime
+    data[time_column] = pd.to_datetime(data[time_column])
+    max_time = data[time_column].max()
+    
+    # Calculate weights as the inverse of recency (e.g., exponential decay)
+    recency = (max_time - data[time_column]).dt.total_seconds()  # Convert to seconds
+    data['weight'] = np.exp(-recency / recency.max())  # Normalize and invert
+
+    # Apply Z-score filtering
+    z_scores = zscore(data[stat])
+    abs_z_scores = np.abs(z_scores)
+    filtered_entries = (abs_z_scores < 3)
+    df_z_filtered = data[filtered_entries]
+
+    # Apply weights and calculate the weighted mean
+    weighted_mean = np.average(df_z_filtered[stat], weights=df_z_filtered['weight'])
+    
+    # Estimate the probability
+    probability = poisson.cdf(n, weighted_mean)  # Calculate P(X <= n)
+    return probability
+
 
 
 def estimate_probability_poisson_over(data, stat, n):
@@ -143,3 +191,6 @@ def analyze_parlays(parlays):
         del result[index]
     parlays_df = pd.concat(result, ignore_index=True)
     return parlays_df
+
+
+
