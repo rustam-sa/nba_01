@@ -21,6 +21,7 @@ seaborn = "*"
 beautifulsoup4 = "*"
 imblearn = "*"
 python-dotenv = "*"
+hdbscan = "*"
 
 [dev-packages]
 
