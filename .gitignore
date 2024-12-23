@@ -4,3 +4,4 @@ data_pile/*
 *.xlsx*
 prop_lines/*
 *.env
+player_models/*
