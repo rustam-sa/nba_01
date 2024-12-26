@@ -9,7 +9,6 @@ nba-api = "*"
 psycopg2-binary = "*"
 pandas = "*"
 openpyxl = "*"
-xgboost = "*"
 scikit-learn = "*"
 tensorflow = "*"
 optuna = "*"
@@ -22,6 +21,7 @@ beautifulsoup4 = "*"
 imblearn = "*"
 python-dotenv = "*"
 hdbscan = "*"
+xgboost = "*"
 
 [dev-packages]
 

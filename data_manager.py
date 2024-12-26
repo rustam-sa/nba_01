@@ -8,6 +8,7 @@ from functools import wraps
 from sqlalchemy.exc import SQLAlchemyError
 from sqlalchemy import func, and_
 from sqlalchemy.dialects.postgresql import insert
+from sqlalchemy.orm import aliased
 from requests.exceptions import HTTPError
 from nba_api.stats.static import teams
 from nba_api.stats.endpoints import leaguegamefinder
@@ -800,60 +801,246 @@ class DataManager:
         return team_id
     
     @session_management
+    def get_nba_game_id(self, session, game_id):
+        """
+        Retrieves the NBA game ID for a given internal game ID.
+
+        Args:
+            session: SQLAlchemy session object.
+            game_id: Internal ID of the game (can be numpy.int64 or int).
+
+        Returns:
+            nba_game_id (int): The NBA game ID.
+
+        Raises:
+            ValueError: If the game with the given ID is not found.
+        """
+        # Ensure game_id is a native Python int
+        game_id = int(game_id)
+
+        # Query the database for the game
+        game = session.query(Game).filter(Game.id == game_id).first()
+
+        if not game:
+            raise ValueError(f"Game with ID {game_id} not found.")
+
+        return game.nba_game_id
+
+
+    
+    @session_management
     def get_team_id(self, session, team_nickname):
         team = session.query(Team).filter(Team.nickname==team_nickname).all()[0]
         team_id = team.id
         return team_id
     
     @session_management
+    def get_team_id_by_full_name(self, session, full_name):
+        team = session.query(Team).filter(Team.full_name==full_name).all()[0]
+        team_id = team.id
+        return team_id
+    
+    # @session_management
+    # def get_and_save_player_data(self, session, player_id, filename=None):
+    #     data = session.query(
+    #         Player,
+    #         TradPlayerStats,
+    #         AdvPlayerStats,
+    #         Game
+    #     ).join(Game, TradPlayerStats.game_id == Game.id)\
+    #     .join(Player, TradPlayerStats.player_id == Player.id)\
+    #     .join(AdvPlayerStats, and_(TradPlayerStats.game_id == AdvPlayerStats.game_id, 
+    #                                 TradPlayerStats.player_id == AdvPlayerStats.player_id))\
+    #     .filter(
+    #         (TradPlayerStats.player_id == player_id) #&
+    #         #(Game.season_type == season_type)
+    #     ).all()
+
+    #     # Convert the query result to a DataFrame
+    #     data_list = []
+    #     for player, trad_stats, adv_stats, game in data:
+    #         row = {
+    #             'player_name': player.name,
+    #             'player_position': player.position,
+    #             'minutes': trad_stats.minutes,
+    #             'points': trad_stats.pts,
+    #             'rebounds': trad_stats.reb,
+    #             'assists': trad_stats.ast,
+    #             'efg': adv_stats.efg_pct,
+    #             'fg3a': trad_stats.fg3a,
+    #             'fg3m': trad_stats.fg3m,
+    #             'fg3_pct': trad_stats.fg3_pct,
+    #             'fga': trad_stats.fga,
+    #             'fgm': trad_stats.fgm,
+    #             'fta': trad_stats.fta,
+    #             'ft_pct': trad_stats.ft_pct, 
+    #             'steals': trad_stats.stl,
+    #             'blocks': trad_stats.blk,
+    #             'date': game.date,
+    #             'game_id': game.id,
+
+
+    #         }
+    #         data_list.append(row)
+    #     if not data_list:
+    #         return None
+    #     data_df = pd.DataFrame(data_list)
+    #     data_df = data_df.sort_values(by="date", ascending=False)
+    #     save_destination = player.name if not filename else filename
+    #     data_df.to_csv(f"data_pile/{save_destination}.csv")
+    #     return data_df
+    
+
+    @session_management
     def get_and_save_player_data(self, session, player_id, filename=None):
+        """
+        Fetches player data along with related game, team, opponent, and stats information,
+        and saves it as a CSV file.
+
+        Parameters:
+            session (Session): SQLAlchemy session.
+            player_id (int): ID of the player.
+            filename (str): Optional filename for saving the data.
+
+        Returns:
+            pd.DataFrame: DataFrame containing player, game, team, and opponent stats information.
+        """
+        # Create aliases for opponent stats
+        opp_team_alias = aliased(Team)
+        opp_trad_stats_alias = aliased(TradTeamStats)
+        opp_adv_stats_alias = aliased(AdvTeamStats)
+
+        # Query the database to fetch player, game, team, and opponent stats
         data = session.query(
             Player,
             TradPlayerStats,
             AdvPlayerStats,
-            Game
+            Game,
+            Team,
+            TradTeamStats,
+            AdvTeamStats,
+            opp_team_alias,
+            opp_trad_stats_alias,
+            opp_adv_stats_alias
         ).join(Game, TradPlayerStats.game_id == Game.id)\
         .join(Player, TradPlayerStats.player_id == Player.id)\
-        .join(AdvPlayerStats, and_(TradPlayerStats.game_id == AdvPlayerStats.game_id, 
-                                    TradPlayerStats.player_id == AdvPlayerStats.player_id))\
+        .join(AdvPlayerStats, and_(
+            TradPlayerStats.game_id == AdvPlayerStats.game_id,
+            TradPlayerStats.player_id == AdvPlayerStats.player_id
+        ))\
+        .join(Team, Team.id == Game.home_team_id)\
+        .join(TradTeamStats, and_(
+            TradTeamStats.game_id == Game.id,
+            TradTeamStats.team_id == Game.home_team_id
+        ))\
+        .join(AdvTeamStats, and_(
+            AdvTeamStats.game_id == Game.id,
+            AdvTeamStats.team_id == Game.home_team_id
+        ))\
+        .join(opp_team_alias, opp_team_alias.id == Game.away_team_id)\
+        .join(opp_trad_stats_alias, and_(
+            opp_trad_stats_alias.game_id == Game.id,
+            opp_trad_stats_alias.team_id == Game.away_team_id
+        ), isouter=True)\
+        .join(opp_adv_stats_alias, and_(
+            opp_adv_stats_alias.game_id == Game.id,
+            opp_adv_stats_alias.team_id == Game.away_team_id
+        ), isouter=True)\
         .filter(
-            (TradPlayerStats.player_id == player_id) #&
-            #(Game.season_type == season_type)
+            TradPlayerStats.player_id == player_id
         ).all()
 
         # Convert the query result to a DataFrame
         data_list = []
-        for player, trad_stats, adv_stats, game in data:
+        for player, trad_stats, adv_stats, game, team, trad_team_stats, adv_team_stats, opp_team, opp_trad_stats, opp_adv_stats in data:
             row = {
+                # Player stats (all from TradPlayerStats and AdvPlayerStats)
                 'player_name': player.name,
                 'player_position': player.position,
                 'minutes': trad_stats.minutes,
                 'points': trad_stats.pts,
                 'rebounds': trad_stats.reb,
                 'assists': trad_stats.ast,
-                'efg': adv_stats.efg_pct,
-                'fg3a': trad_stats.fg3a,
-                'fg3m': trad_stats.fg3m,
-                'fg3_pct': trad_stats.fg3_pct,
-                'fga': trad_stats.fga,
-                'fgm': trad_stats.fgm,
-                'fta': trad_stats.fta,
-                'ft_pct': trad_stats.ft_pct, 
+                'turnovers': trad_stats.to,
+                'personal_fouls': trad_stats.pf,
                 'steals': trad_stats.stl,
                 'blocks': trad_stats.blk,
+                'fgm': trad_stats.fgm,
+                'fga': trad_stats.fga,
+                'fg_pct': trad_stats.fg_pct,
+                'fg3m': trad_stats.fg3m,
+                'fg3a': trad_stats.fg3a,
+                'fg3_pct': trad_stats.fg3_pct,
+                'ftm': trad_stats.ftm,
+                'fta': trad_stats.fta,
+                'ft_pct': trad_stats.ft_pct,
+                'plus_minus': trad_stats.plus_minus,
+                'off_rating': adv_stats.off_rating,
+                'def_rating': adv_stats.def_rating,
+                'net_rating': adv_stats.net_rating,
+                'efg_pct': adv_stats.efg_pct,
+                'ts_pct': adv_stats.ts_pct,
+                'usg_pct': adv_stats.usg_pct,
+                'ast_ratio': adv_stats.ast_ratio,
+                'pace': adv_stats.pace,
+                'possessions': adv_stats.poss,
+                'pie': adv_stats.pie,
                 'date': game.date,
                 'game_id': game.id,
 
+                # Team stats (all from TradTeamStats and AdvTeamStats)
+                'team_name': team.full_name,
+                'team_abbreviation': team.abbreviation,
+                'team_city': team.city,
+                'team_points': trad_team_stats.pts,
+                'team_rebounds': trad_team_stats.reb,
+                'team_assists': trad_team_stats.ast,
+                'team_turnovers': trad_team_stats.to,
+                'team_personal_fouls': trad_team_stats.pf,
+                'team_efg_pct': adv_team_stats.efg_pct,
+                'team_ts_pct': adv_team_stats.ts_pct,
+                'team_usg_pct': adv_team_stats.usg_pct,
+                'team_off_rating': adv_team_stats.off_rating,
+                'team_def_rating': adv_team_stats.def_rating,
+                'team_net_rating': adv_team_stats.net_rating,
+                'team_pace': adv_team_stats.pace,
 
+                # Opponent stats (all from opponent TradTeamStats and AdvTeamStats)
+                'opponent_team_name': opp_team.full_name if opp_team else None,
+                'opponent_team_abbreviation': opp_team.abbreviation if opp_team else None,
+                'opponent_points': opp_trad_stats.pts if opp_trad_stats else None,
+                'opponent_rebounds': opp_trad_stats.reb if opp_trad_stats else None,
+                'opponent_assists': opp_trad_stats.ast if opp_trad_stats else None,
+                'opponent_turnovers': opp_trad_stats.to if opp_trad_stats else None,
+                'opponent_personal_fouls': opp_trad_stats.pf if opp_trad_stats else None,
+                'opponent_efg_pct': opp_adv_stats.efg_pct if opp_adv_stats else None,
+                'opponent_ts_pct': opp_adv_stats.ts_pct if opp_adv_stats else None,
+                'opponent_usg_pct': opp_adv_stats.usg_pct if opp_adv_stats else None,
+                'opponent_off_rating': opp_adv_stats.off_rating if opp_adv_stats else None,
+                'opponent_def_rating': opp_adv_stats.def_rating if opp_adv_stats else None,
+                'opponent_net_rating': opp_adv_stats.net_rating if opp_adv_stats else None,
+                'opponent_pace': opp_adv_stats.pace if opp_adv_stats else None
             }
             data_list.append(row)
+
         if not data_list:
             return None
+        
+        # Convert list of dictionaries to a DataFrame
         data_df = pd.DataFrame(data_list)
+
+        # Sort the DataFrame by game date in descending order
         data_df = data_df.sort_values(by="date", ascending=False)
+
+        # Save the DataFrame to a CSV file
         save_destination = player.name if not filename else filename
-        data_df.to_csv(f"data_pile/{save_destination}.csv")
+        data_df.to_csv(f"data_pile/{save_destination}.csv", index=False)
+
         return data_df
+
+
+
+
     
     @staticmethod
     def extract_raw_data(file_path): # .csv
@@ -1103,6 +1290,10 @@ class DataManager:
     
     @session_management
     def get_and_save_team_data(self, session, team_id, filename=None):
+        """
+        Fetch and save all available team data.
+        """
+        # Query the database
         data = session.query(
             Team,
             TradTeamStats,
@@ -1110,48 +1301,91 @@ class DataManager:
             Game
         ).join(Game, TradTeamStats.game_id == Game.id)\
         .join(Team, TradTeamStats.team_id == Team.id)\
-        .join(AdvTeamStats, and_(TradTeamStats.game_id == AdvTeamStats.game_id, 
-                                    TradTeamStats.team_id == AdvTeamStats.team_id))\
+        .join(AdvTeamStats, and_(
+            TradTeamStats.game_id == AdvTeamStats.game_id,
+            TradTeamStats.team_id == AdvTeamStats.team_id
+        ))\
         .filter(
-            (TradTeamStats.team_id == team_id)
-            #(Game.season_type == season_type)
+            TradTeamStats.team_id == team_id
         ).all()
 
         # Convert the query result to a DataFrame
         data_list = []
         for team, trad_stats, adv_stats, game in data:
             row = {
+                # Team information
                 'team_name': team.full_name,
-                'points': trad_stats.pts,
-                'rebounds': trad_stats.reb,
-                'assists': trad_stats.ast,
-                'efg': adv_stats.efg_pct,
-                'fg3a': trad_stats.fg3a,
-                'fg3m': trad_stats.fg3m,
-                'fg3_pct': trad_stats.fg3_pct,
-                'fga': trad_stats.fga,
-                'fgm': trad_stats.fgm,
-                'fta': trad_stats.fta,
-                'ft_pct': trad_stats.ft_pct, 
-                'steals': trad_stats.stl,
-                'blocks': trad_stats.blk,
-                'to': trad_stats.to, 
-                'date': game.date,
+                'team_city': team.city,
+                'team_state': team.state,
+                'team_abbreviation': team.abbreviation,
+
+                # Game information
                 'game_id': game.id,
-                'pace' : adv_stats.pace,
-                'def_rating': adv_stats.def_rating,
-                'e_def_rating': adv_stats.e_def_rating,
-                'off_rating': adv_stats.off_rating,
+                'game_date': game.date,
+                'season': game.season,
+                'season_type': game.season_type,
+
+                # Traditional team stats
+                'trad_minutes': trad_stats.minutes,
+                'fgm': trad_stats.fgm,
+                'fga': trad_stats.fga,
+                'fg_pct': trad_stats.fg_pct,
+                'fg3m': trad_stats.fg3m,
+                'fg3a': trad_stats.fg3a,
+                'fg3_pct': trad_stats.fg3_pct,
+                'ftm': trad_stats.ftm,
+                'fta': trad_stats.fta,
+                'ft_pct': trad_stats.ft_pct,
+                'oreb': trad_stats.oreb,
+                'dreb': trad_stats.dreb,
+                'reb': trad_stats.reb,
+                'ast': trad_stats.ast,
+                'stl': trad_stats.stl,
+                'blk': trad_stats.blk,
+                'to': trad_stats.to,  # Turnovers
+                'pf': trad_stats.pf,
+                'pts': trad_stats.pts,
+                'plus_minus': trad_stats.plus_minus,
+
+                # Advanced team stats
+                'adv_minutes': adv_stats.minutes,
                 'e_off_rating': adv_stats.e_off_rating,
+                'off_rating': adv_stats.off_rating,
+                'e_def_rating': adv_stats.e_def_rating,
+                'def_rating': adv_stats.def_rating,
+                'e_net_rating': adv_stats.e_net_rating,
+                'net_rating': adv_stats.net_rating,
+                'ast_pct': adv_stats.ast_pct,
+                'ast_tov': adv_stats.ast_tov,
+                'ast_ratio': adv_stats.ast_ratio,
+                'oreb_pct': adv_stats.oreb_pct,
+                'dreb_pct': adv_stats.dreb_pct,
+                'reb_pct': adv_stats.reb_pct,
+                'e_tm_tov_pct': adv_stats.e_tm_tov_pct,
+                'tm_tov_pct': adv_stats.tm_tov_pct,
+                'efg_pct': adv_stats.efg_pct,
+                'ts_pct': adv_stats.ts_pct,
+                'usg_pct': adv_stats.usg_pct,
+                'e_usg_pct': adv_stats.e_usg_pct,
+                'e_pace': adv_stats.e_pace,
+                'pace': adv_stats.pace,
+                'pace_per40': adv_stats.pace_per40,
+                'poss': adv_stats.poss,
+                'pie': adv_stats.pie,
             }
             data_list.append(row)
 
+        # Convert list of dictionaries to DataFrame
         data_df = pd.DataFrame(data_list)
-        data_df = data_df.sort_values(by="date", ascending=False)
+        data_df = data_df.sort_values(by="game_date", ascending=False)
+
+        # Save to CSV
         save_destination = team.nickname if not filename else filename
-        data_df.to_csv(f"data_pile/{save_destination}.csv")
+        data_df.to_csv(f"data_pile/{save_destination}.csv", index=False)
+
         return data_df
-    
+
+
     @staticmethod
     def create_pivot_table_for_tracking(df):
         pivot_df = df.assign(value=1).pivot_table(index=['PROP_TAG', 'THRESH'], columns='PARLAY_ID', values='value', fill_value="")

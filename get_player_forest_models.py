@@ -9,6 +9,7 @@ from sklearn.ensemble import RandomForestRegressor
 from sklearn.metrics import root_mean_squared_error
 
 
+
 def prepare_player_data(player_data):
     """
     Prepares data for regression modeling for an individual player, avoiding target leakage.
@@ -85,7 +86,7 @@ def train_player_model(features, target):
 
     # Evaluate the model
     predictions = model.predict(X_test)
-    rmse = np.sqrt(root_mean_squared_error(y_test, predictions))
+    rmse = root_mean_squared_error(y_test, predictions)
 
     return model, rmse
 
@@ -206,9 +207,14 @@ def predict_player_performance(player, features, model_dir='player_models'):
     return model.predict(features)
 
 
+
+# %% Initialize DataManager
 dm = DataManager()
+
+# %% Fetch all players
 players = dm.query_players()  # Assuming this returns a list of player names
 
+# %% Function to process and train models for all players
 def process_all_players(players, dm, output_dir='player_models'):
     """
     Process data, train models, and save results for all players.
